@@ -40,7 +40,7 @@ function main() {
     });
     figure.init();
 
-    document.getElementById("someButton").addEventListener("click", figure.transformLayers.bind(figure, 100));
+    document.getElementById("someButton").addEventListener("click", figure.transformLayers.bind(figure, 100), {once: true});
     
 }
 
@@ -203,7 +203,7 @@ Figure.prototype.drawLayer2Part2 = function() {
 
     let gradient1 = this.ctx.createRadialGradient(50,-50,150, 50,-50,250);
     gradient1.addColorStop(0, `rgba(${params.colorR}, ${params.colorG}, ${params.colorB}, ${params.colorA})`);
-    gradient1.addColorStop(1, `rgba(${params.colorR}, ${params.colorG}, ${params.colorB}, 0.1)`);
+    gradient1.addColorStop(1, `rgba(${params.colorR}, ${params.colorG}, ${params.colorB}, 0)`);
 
     this.ctx.beginPath();
     this.ctx.moveTo(params.centerX - params.radius, params.centerY);
