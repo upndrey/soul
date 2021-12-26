@@ -15,6 +15,8 @@ function Figure(canvasId = "canvas", buttonId = "someButton") {
     this.layer2ParamsTemp = null;
     this.layer3Params = null;
     this.layer3ParamsTemp = null;
+    this.smallCircleParams = null;
+    this.smallCircleParamsTemp = null;
 }
 
 Figure.prototype.init = function() {
@@ -55,6 +57,16 @@ Figure.prototype.init = function() {
             moveSizeY: 0,
             lineWidth: 1,
         });
+        this.setSmallCircleParams({
+            c1x: 0,
+            c1y: 0,
+            c2x: 0,
+            c2y: 0,
+            c3x: 0,
+            c3y: 0,
+            opacity: 0,
+            radius: 10
+        });
         this.setTemporaryParams();
         this.ctx.translate(500, 550);
         this.drawLayers();
@@ -66,6 +78,7 @@ Figure.prototype.setTemporaryParams = function() {
         this.layer1ParamsTemp = JSON.parse(JSON.stringify(this.layer1Params));
         this.layer2ParamsTemp = JSON.parse(JSON.stringify(this.layer2Params));
         this.layer3ParamsTemp = JSON.parse(JSON.stringify(this.layer3Params));
+        this.smallCircleParamsTemp = JSON.parse(JSON.stringify(this.smallCircleParams));
     }
 }
 
@@ -99,6 +112,16 @@ Figure.prototype.setLayer3Params = function(params) {
         this.layer3Params = params;
 };
 
+Figure.prototype.setSmallCircleParams = function(params) {
+    if(this.smallCircleParams) {
+        Object.keys(params).forEach((elem) => {
+            this.smallCircleParams[elem] = params[elem];
+        });
+    }
+    else
+        this.smallCircleParams = params;
+};
+ 
 Figure.prototype.drawLayers = function() {
     if(this.layer1Params && this.layer2Params && this.layer3Params) {
         this.ctx.clearRect(-500, -500, this.canvas.width, this.canvas.height);
@@ -109,6 +132,7 @@ Figure.prototype.drawLayers = function() {
         this.drawLayer2Part2();
         this.drawLayer1();
         this.drawLayer3Part1();
+        this.drawSmallCircles();
     }
 };
 
@@ -175,7 +199,7 @@ Figure.prototype.drawLayer2Transformed = function() {
     this.ctx.closePath();
     this.ctx.beginPath();
     this.ctx.moveTo(params.centerX - params.radius, params.centerY);
-    this.ctx.ellipse(params.centerX, params.centerY, params.radius - 125, params.radius - 200, 0, 0, 2*Math.PI);    
+    this.ctx.ellipse(params.centerX, params.centerY, params.radius - 90, params.radius - 190, 0, 0, 2*Math.PI);    
     this.ctx.lineTo(params.centerX - params.radius, params.centerY);
     this.ctx.fillStyle = "#5373c8";
     this.ctx.fill();
@@ -214,6 +238,29 @@ Figure.prototype.drawLayer3Part2 = function() {
     }
 };
 
+Figure.prototype.drawSmallCircles = function() {
+    params = this.smallCircleParams;
+    console.log(params.c3x);
+    //arc 1
+    this.ctx.beginPath();
+    this.ctx.arc(params.c1x, params.c1y, params.radius, 0, 2 * Math.PI, false);
+    this.ctx.fillStyle = `rgba(164, 195, 242, ${params.opacity})`;
+    this.ctx.fill();
+    this.ctx.closePath();
+    //arc 2
+    this.ctx.beginPath();
+    this.ctx.arc(params.c2x, params.c2y, params.radius, 0, 2 * Math.PI, false);
+    this.ctx.fillStyle = `rgba(164, 195, 242, ${params.opacity})`;
+    this.ctx.fill();
+    this.ctx.closePath();
+    //arc 3
+    this.ctx.beginPath();
+    this.ctx.arc(params.c3x, params.c3y, params.radius, 0, 2 * Math.PI, false);
+    this.ctx.fillStyle = `rgba(164, 195, 242, ${params.opacity})`;
+    this.ctx.fill();
+    this.ctx.closePath();
+};
+
 Figure.prototype.transformLayers = function(stepsCount) {
     if(this.layer1Params && this.layer2Params && this.layer3Params) {
         this.domModification();
@@ -237,21 +284,18 @@ Figure.prototype.domModification = function() {
     document.getElementById("calc__transformed").classList.remove("hidden");
     document.getElementById("calc__wrapper").classList.add("transformed");
     document.getElementById("calc__container").classList.add("transformed");
-    
-    
 };
 
 Figure.prototype.transformationHandler = function(stepsCount) {
-    
     this.layer1Transform(stepsCount, {
         centerX: 0,
-        centerY: -60,
-        radius: 100
+        centerY: -80,
+        radius: 106
     });
     this.layer2Transform(stepsCount, {
         centerX: 0,
         centerY: 0,
-        radius: 250,
+        radius: 230,
         colorA: 0
     });
     let list = [];
@@ -271,26 +315,37 @@ Figure.prototype.transformationHandler = function(stepsCount) {
         lineWidth: 3,
         list: list
     });
+    this.smallCircleTransform(stepsCount, {
+        c1x: -230,
+        c1y: 0,
+        c2x: 90,
+        c2y: -140,
+        c3x: -200,
+        c3y: 200,
+        opacity: 1
+    });
     this.drawLayers();
     this.transformationStep += 1;
 };
 
 Figure.prototype.layer1Transform = function(stepsCount, endParams) {
     let tempParam = this.layer1ParamsTemp;
+    let tFunc = this.transformationFormulaGenerator(tempParam, endParams, stepsCount);
     this.setLayer1Params({
-        radius: tempParam.radius + (endParams.radius - tempParam.radius) * this.transformationStep / stepsCount,
-        centerX: tempParam.centerX + (endParams.centerX - tempParam.centerX) * this.transformationStep / stepsCount,
-        centerY: tempParam.centerY + (endParams.centerY - tempParam.centerY) * this.transformationStep / stepsCount
+        radius: tFunc("radius"),
+        centerX: tFunc("centerX"),
+        centerY: tFunc("centerY")
     });
 };
 
 Figure.prototype.layer2Transform = function(stepsCount, endParams) {
     let tempParam = this.layer2ParamsTemp;
+    let tFunc = this.transformationFormulaGenerator(tempParam, endParams, stepsCount);
     this.setLayer2Params({
-        radius: tempParam.radius + (endParams.radius - tempParam.radius) * this.transformationStep / stepsCount,
-        centerX: tempParam.centerX + (endParams.centerX - tempParam.centerX) * this.transformationStep / stepsCount,
-        centerY: tempParam.centerY + (endParams.centerY - tempParam.centerY) * this.transformationStep / stepsCount,
-        colorA: tempParam.colorA + (endParams.colorA - tempParam.colorA) * this.transformationStep / stepsCount
+        radius: tFunc("radius"),
+        centerX: tFunc("centerX"),
+        centerY: tFunc("centerY"),
+        colorA: tFunc("colorA"),
     });
 };
 
@@ -299,16 +354,38 @@ Figure.prototype.layer3Transform = function(stepsCount, endParams) {
     this.layer3Params.list = this.layer3Params.list.map((listElem, i) => {
         return tempParam.list[i] + (endParams.list[i] - tempParam.list[i]) * this.transformationStep / stepsCount;
     });
+    let tFunc = this.transformationFormulaGenerator(tempParam, endParams, stepsCount);
     this.setLayer3Params({
-        minRadiusX: tempParam.minRadiusX + (endParams.minRadiusX - tempParam.minRadiusX) * this.transformationStep / stepsCount,
-        minRadiusY: tempParam.minRadiusY + (endParams.minRadiusY - tempParam.minRadiusY) * this.transformationStep / stepsCount,
-        rotation: tempParam.rotation + (endParams.rotation - tempParam.rotation) * this.transformationStep / stepsCount,
-        centerX: tempParam.centerX + (endParams.centerX - tempParam.centerX) * this.transformationStep / stepsCount,
-        centerY: tempParam.centerY + (endParams.centerY - tempParam.centerY) * this.transformationStep / stepsCount,
-        moveSizeX: tempParam.moveSizeX + (endParams.moveSizeX - tempParam.moveSizeX) * this.transformationStep / stepsCount,
-        moveSizeY: tempParam.moveSizeY + (endParams.moveSizeY - tempParam.moveSizeY) * this.transformationStep / stepsCount,
-        radiusSizeX: tempParam.radiusSizeX + (endParams.radiusSizeX - tempParam.radiusSizeX) * this.transformationStep / stepsCount,
-        radiusSizeY: tempParam.radiusSizeY + (endParams.radiusSizeY - tempParam.radiusSizeY) * this.transformationStep / stepsCount,
-        lineWidth: tempParam.lineWidth + (endParams.lineWidth - tempParam.lineWidth) * this.transformationStep / stepsCount,
+        minRadiusX: tFunc("minRadiusX"),
+        minRadiusY: tFunc("minRadiusY"),
+        rotation: tFunc("rotation"),
+        centerX: tFunc("centerX"),
+        centerY: tFunc("centerY"),
+        moveSizeX: tFunc("moveSizeX"),
+        moveSizeY: tFunc("moveSizeY"),
+        radiusSizeX: tFunc("radiusSizeX"),
+        radiusSizeY: tFunc("radiusSizeY"),
+        lineWidth: tFunc("lineWidth"),
     });
+};
+
+Figure.prototype.smallCircleTransform = function(stepsCount, endParams) {
+    let tempParam = this.smallCircleParamsTemp;
+    console.log();
+    let tFunc = this.transformationFormulaGenerator(tempParam, endParams, stepsCount);
+    this.setSmallCircleParams({
+        opacity: tFunc('opacity'),
+        c1x: tFunc('c1x'),
+        c1y: tFunc('c1y'),
+        c2x: tFunc('c2x'),
+        c2y: tFunc('c2y'),
+        c3x: tFunc('c3x'),
+        c3y: tFunc('c3y'),
+    });
+};
+
+Figure.prototype.transformationFormulaGenerator = function(tempParam, endParams, stepsCount) {
+    return (paramName) => {
+        return tempParam[paramName] + (endParams[paramName] - tempParam[paramName]) * this.transformationStep / stepsCount;
+    };
 };
