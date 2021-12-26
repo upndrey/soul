@@ -1,6 +1,9 @@
 .calc {
     position: relative;
     z-index: 3;
+    &.transformed {
+        z-index: 10;
+    }
     &__wrapper {
         position: relative;
         height: 770px;
@@ -59,6 +62,7 @@
         transition: 2s ease-in-out;
         &.hidden {
             opacity: 0;
+            z-index: 1;
         }
     }
     &__inputs {

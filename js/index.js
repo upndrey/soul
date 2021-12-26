@@ -236,6 +236,8 @@ Figure.prototype.domModification = function() {
     document.getElementById("calc__block").classList.add("hidden");
     document.getElementById("calc__transformed").classList.remove("hidden");
     document.getElementById("calc__wrapper").classList.add("transformed");
+    document.getElementById("calc__container").classList.add("transformed");
+    
     
 };
 
