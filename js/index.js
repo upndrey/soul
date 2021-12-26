@@ -371,7 +371,6 @@ Figure.prototype.layer3Transform = function(stepsCount, endParams) {
 
 Figure.prototype.smallCircleTransform = function(stepsCount, endParams) {
     let tempParam = this.smallCircleParamsTemp;
-    console.log();
     let tFunc = this.transformationFormulaGenerator(tempParam, endParams, stepsCount);
     this.setSmallCircleParams({
         opacity: tFunc('opacity'),
