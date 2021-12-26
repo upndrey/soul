@@ -8,10 +8,87 @@
     <title>Document</title>
 </head>
 <body>
-    <button id="someButton">Кнопка</button>
+    <nav class="nav container">
+        <div class="nav__logo"></div>
+        <ul class="nav__menu">
+            <li><a href="#">Калькулятор</a></li>
+            <li><a href="#">О системе</a></li>
+            <li><a href="#">Материи</a></li>
+            <li><a href="#">Почему мы</a></li>
+            <li><a href="#">Уникальность метода</a></li>
+            <li><a href="#">Об авторе</a></li>
+            <li><a href="#">Тарифы</a></li>
+            <li><a href="#">Обратная связь</a></li>
+        </ul>
+        <div class="nav__social social">
+            <a href="#"><div class="social__inst inst"></div></a>
+            <a href="#"><div class="social__login login"></div></a>
+        </div>
+    </nav>
+    <header class="header__wrapper wrapper">
+        <div class="header__imgWrapper">
+            <div class="header__img header__circle1"></div>
+            <div class="header__img header__circle2"></div>
+            <div class="header__img header__circle3"></div>
+            <div class="header__img header__circle4"></div>
+            <div class="header__earth"></div>
+            <div class="header__mars"></div>
+        </div>
+        <div class="header container">
+            <div class="header container"></div>
+            <h1>Узнай свою уникальность и действуй исполняя свой путь героя</h1>
+        </div>
+    </header>
+    <div class="calc__wrapper wrapper " id="calc__wrapper">
+        <div class="calc container">
+            <canvas width="1100px" height="1000px" id="calc__canvas"></canvas>
+            <div class="calc__block " id="calc__block">
+                <h2>Рассчитать карту</h2>
+                <div class="calc__inputs">
+                    <input type="text" value="Дата рождения">
+                    <input type="text" value="Место рождения">
+                    <input type="text" value="Время рождения">
+                    <select>
+                        <option >Женский</option>
+                        <option>Мужской</option>
+                    </select>
+                </div>
+                <button id="calc__process">Рассчитать</button>
+            </div>
+            <div class="calc__transformed hidden" id="calc__transformed">
+                <h2>Данные которые вы указали</h2>
+                <div class="calc__data">
+                    <div>28.12.1981</div>
+                    <div>Мужчина</div>
+                    <div>4:15AM</div>
+                    <div>Москва</div>
+                </div>
+                <div class="calc__stamp stamp">
+                    <div class="stamp__links">
+                        <p>1 Печать</p>
+                        <p class="active">1 шаг - Трамва Души: Страх</p>
+                        <p>2 шаг - Архетип: Ведьма</p>
+                        <p>3 шаг - Призвание: Создатель/Творец</p>
+                        <a href="#">Пройти диагностику</a>
+                    </div>
+                    <div class="stamp__text">
+                        <p>Травма Души: Чувство Страха</p>
+                        <p>Каждая Душа приходит в этот мир с определённой травмой, которая спрятана в соответствующем чувстве. Ваше глубинное чувство - это Страх. Ощущение сжатия и скованности сопровождает Вас всю жизнь. Это часто является «эхом» из детства, проведённого под чрезмерным контролем родителей и их ожиданием реализации своих проекций, а не Вашей истинной природы. Подавленность, закрытость и неуверенность — все это Вы подучили в наследство. Страх высоты, страх одиночества, страх бедности.. Не так важно чего конкретно Вы боитесь, ведь если размотать эти клубки, за каждым из них стоит страх смерти. Научиться справляться со страхом Вам поможет Архетип Души.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="details__wrapper">
+        <div class="details container">
+            <h2>Узнай о системе подробнее</h2>
+            <p>За 3 минуты мы расскажем, как сложилась эта система, и почему стоит ей доверять</p>
+        </div>
+    </div>
+    <!-- <button id="someButton">Кнопка</button>
     <div>
         <canvas width="1500px" height="1500px" id="canvas"></canvas>
-    </div>
+    </div> -->
 </body>
 <script src="./js/index.js"></script>
 </html>

@@ -1,0 +1,64 @@
+.nav {
+    margin-top: 30px;
+    padding-bottom: 30px;
+    position: fixed;
+    top:0;
+    left:0;
+    right:0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 10; 
+
+    &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        @include image("nav__line.png");
+    }
+
+    &__logo {
+        width: 170px;
+        height: 52px;
+        @include image("nav__logo.png");
+    }
+
+    &__menu {
+        width: 100%;
+        max-width: 1120px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        &>li {
+            font-family: Lato-Medium;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 16px;
+            text-align: center;
+            list-style: none;
+        }
+    }
+
+    &__social {
+        width: 100%;
+        max-width: 75px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .inst {
+            width: 24px;
+            height: 24px;
+            @include image("nav__inst.png");
+        }
+        .login {
+            width: 21px;
+            height: 24px;
+            @include image("nav__login.png");
+        }
+    }
+}

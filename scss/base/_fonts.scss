@@ -1,3 +1,23 @@
 // -----------------------------------------------------------------------------
 // This file contains all @font-face declarations, if any.
 // -----------------------------------------------------------------------------
+
+@font-face {
+    font-family: Lato-Light;
+    src: font("Lato-Light.ttf");
+}
+
+@font-face {
+    font-family: Lato-Regular;
+    src: font("Lato-Regular.ttf");
+}
+
+@font-face {
+    font-family: Lato-Medium;
+    src: font("Lato-Medium.ttf");
+}
+
+@font-face {
+    font-family: Philosopher;
+    src: font("Philosopher-Regular.ttf");
+}

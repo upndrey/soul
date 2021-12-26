@@ -1,12 +1,13 @@
 document.addEventListener("DOMContentLoaded", main);
 function main() {
-    const figure = new Figure();
+    const figure = new Figure("calc__canvas", "calc__process");
     figure.init();
 }
 
-function Figure(canvas = document.getElementById("canvas")) {
-    this.canvas = canvas;
-    this.ctx = canvas.getContext('2d');
+function Figure(canvasId = "canvas", buttonId = "someButton") {
+    this.canvas = document.getElementById(canvasId);
+    this.eventButton = document.getElementById(buttonId);
+    this.ctx = this.canvas.getContext('2d');
     this.rotation = 0;
     this.layer1Params = null;
     this.layer1ParamsTemp = null;
@@ -42,7 +43,7 @@ Figure.prototype.init = function() {
         this.setLayer3Params({
             centerX: 0,
             centerY: 0,
-            color: "#6c6598",
+            color: "#ffffff55",
             count: 11,
             list: list,
             minRadiusX: 250,
@@ -57,7 +58,7 @@ Figure.prototype.init = function() {
         this.setTemporaryParams();
         this.ctx.translate(500, 550);
         this.drawLayers();
-        document.getElementById("someButton").addEventListener("click", this.transformLayers.bind(this, 100), {once: true});
+        this.eventButton.addEventListener("click", this.transformLayers.bind(this, 100), {once: true});
 };
 
 Figure.prototype.setTemporaryParams = function() {
@@ -183,13 +184,15 @@ Figure.prototype.drawLayer2Transformed = function() {
 
 Figure.prototype.drawLayer3Part1 = function() {
     params = this.layer3Params;
-    
+    var gradient = this.ctx.createLinearGradient(0, 0, 0, 900);
+    gradient.addColorStop(0, "rgb(98, 102, 165)");
+    gradient.addColorStop(1, "rgb(189, 159, 211)");
     for(let i = 0; i < params.count; i++) {
         this.ctx.beginPath();
         this.ctx.moveTo(params.centerX - params.radius, params.centerY);
         this.ctx.ellipse(params.centerX + params.moveSizeX * i, params.centerY + params.moveSizeY * i * 2, params.minRadiusX + i * params.list[i], params.minRadiusY + params.radiusSizeY * i, params.rotation, 0, Math.PI);
         this.ctx.lineWidth = params.lineWidth;
-        this.ctx.strokeStyle = params.color;
+        this.ctx.strokeStyle = gradient;
         this.ctx.stroke();
         this.ctx.closePath();
     }
@@ -197,12 +200,15 @@ Figure.prototype.drawLayer3Part1 = function() {
 
 Figure.prototype.drawLayer3Part2 = function() {
     params = this.layer3Params;
+    var gradient = this.ctx.createLinearGradient(0, 0, 0, 900);
+    gradient.addColorStop(0, "rgb(98, 102, 165)");
+    gradient.addColorStop(1, "rgb(189, 159, 211)");
     for(let i = 0; i < params.count; i++) {
         this.ctx.beginPath();
         this.ctx.moveTo(params.centerX - params.radius, params.centerY);
         this.ctx.ellipse(params.centerX + params.moveSizeX * i, params.centerY + params.moveSizeY * i * 2, params.minRadiusX + i * params.list[i], params.minRadiusY + params.radiusSizeY * i, params.rotation, Math.PI, 2*Math.PI);
         this.ctx.lineWidth = params.lineWidth;
-        this.ctx.strokeStyle = params.color;
+        this.ctx.strokeStyle = gradient;
         this.ctx.stroke();
         this.ctx.closePath();
     }
@@ -210,8 +216,9 @@ Figure.prototype.drawLayer3Part2 = function() {
 
 Figure.prototype.transformLayers = function(stepsCount) {
     if(this.layer1Params && this.layer2Params && this.layer3Params) {
+        this.domModification();
+
         this.transformationStep = 0;
-        
         this.rotation = 25 * 1/stepsCount;
         let interval = setInterval(() => {
             this.transformationHandler(stepsCount);
@@ -222,6 +229,14 @@ Figure.prototype.transformLayers = function(stepsCount) {
             }
         }, 20);
     }
+};
+
+Figure.prototype.domModification = function() {
+    this.canvas.classList.add("transformed");
+    document.getElementById("calc__block").classList.add("hidden");
+    document.getElementById("calc__transformed").classList.remove("hidden");
+    document.getElementById("calc__wrapper").classList.add("transformed");
+    
 };
 
 Figure.prototype.transformationHandler = function(stepsCount) {

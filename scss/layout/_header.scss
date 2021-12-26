@@ -1,3 +1,74 @@
 // -----------------------------------------------------------------------------
 // This file contains all styles related to the header of the site/application.
 // -----------------------------------------------------------------------------
+
+.header {
+    position: relative;
+    z-index: 4;
+    &__wrapper {
+        position: relative;
+        padding-top: 116px;
+        height: 1080px;
+        z-index: 5;
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0; 
+            display: block;
+            width: 100%;
+            height: inherit;
+            background: linear-gradient(106.81deg, 
+            #F1A8CA 4.48%, #5C519A 34.39%, #5B60A2 62.78%, #53BBD1 97.26%);
+            filter: blur(160px);
+            z-index: 1;
+        }
+        &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            display: block;
+            width: 100%;
+            height: inherit;
+            background: image("header__stars.png");
+            z-index: 2;
+            opacity: 0.3;
+        }
+    }
+
+    h1 {
+        width: 100%;
+        max-width: 585px;
+        padding-top: 260px;
+    }
+
+    &__imgWrapper {
+        position: absolute;
+        z-index: 2;
+        top: 116px;
+        left: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 1000px;
+        overflow: hidden;
+    }
+
+    &__earth {
+        width: 783px;
+        height: 783px;
+        position: absolute;
+        top: 91px;
+        right: 200px;
+        @include image("header__earth.png");
+    }
+
+    &__mars {
+        width: 481px;
+        height: 440px;
+        position: absolute;
+        top: 524px;
+        right: 0px;
+        @include image("header__mars.png");
+    }
+}

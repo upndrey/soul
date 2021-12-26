@@ -32,3 +32,9 @@
   }
 }
 
+@mixin image($url, $size:contain) {
+  background: image($url);
+  background-size: $size;
+  background-repeat: no-repeat;
+  background-position: center center;
+}

@@ -1,0 +1,26 @@
+.details {
+    position: relative;
+    z-index: 6;
+    &__wrapper {
+        position: relative;
+        bottom: 150px;
+        padding-top: 230px;
+        height: 900px;
+        z-index: 5;
+        &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: inherit;
+            background: linear-gradient(268.5deg, #715DA0 2.16%, #6674AF 49.44%, #587DB1 96.33%);
+            filter: blur(200px);
+        }
+    }
+
+    h2,p {
+        z-index: 10;
+        text-align: center;
+    }
+}

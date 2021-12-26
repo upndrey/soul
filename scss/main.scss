@@ -18,12 +18,18 @@
   'base/helpers';
 
 // 4. Layout-related sections
-@import
+@import 
+  'layout/nav',
   'layout/header',
+  'layout/calc',
+  'layout/details',
   'layout/footer';
 
 // 5. Components
 @import
+  'components/wrapper',
+  'components/container',
+  'components/title',
   'components/button';
 
 // 6. Page-specific styles
