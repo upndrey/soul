@@ -7,7 +7,7 @@
     &__wrapper {
         position: relative;
         height: 770px;
-        // transition: 2s ease-in-out;
+        transition: 2s ease-in-out;
 
         &.transformed {
             height: 1300px;
@@ -43,7 +43,7 @@
         top: -300px;
         left: -250px;
         z-index: 1;
-        // transition: 2s ease-in-out;
+        transition: 2s ease-in-out;
     }
 
     #calc__canvas.transformed {
@@ -59,7 +59,7 @@
         max-width: 750px;
         float: right;
         opacity: 1;
-        // transition: 2s ease-in-out;
+        transition: 2s ease-in-out;
         &.hidden {
             opacity: 0;
             z-index: 1;
@@ -113,7 +113,7 @@
         top: 0;
         float: right;
         opacity: 1;
-        // transition: 2s ease-in-out;
+        transition: 2s ease-in-out;
         z-index: 8;
         &.hidden {
             opacity: 0;
