@@ -265,14 +265,15 @@ Figure.prototype.drawSmallCircles = function() {
 
 Figure.prototype.transformLayers = function(stepsCount) {
     if(this.layer1Params && this.layer2Params && this.layer3Params) {
-        this.domModification();
-
+        this.domStartModification();
         this.transformationStep = 0;
         this.rotation = 25 * 1/stepsCount;
         let interval = setInterval(() => {
             this.transformationHandler(stepsCount);
             if(this.transformationStep == stepsCount) {
                 clearInterval(interval);
+                this.domEndModification();
+        
                 this.setTemporaryParams();
                 this.transformationStep = 0;
             }
@@ -280,11 +281,14 @@ Figure.prototype.transformLayers = function(stepsCount) {
     }
 };
 
-Figure.prototype.domModification = function() {
+Figure.prototype.domStartModification = function() {
     this.canvas.classList.add("transformed");
     document.getElementById("calc__block").classList.add("hidden");
-    document.getElementById("calc__transformed").classList.remove("hidden");
     document.getElementById("calc__wrapper").classList.add("transformed");
+};
+
+Figure.prototype.domEndModification = function() {
+    document.getElementById("calc__transformed").classList.remove("hidden");
     document.getElementById("calc__container").classList.add("transformed");
 };
 
