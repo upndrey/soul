@@ -1,8 +1,17 @@
 .container {
-    max-width: $max-width; /* 1 */
+    max-width: $width_xl; /* 1 */
     margin-left: auto; /* 2 */
     margin-right: auto; /* 2 */
-    padding-left: 20px; /* 3 */
-    padding-right: 20px; /* 3 */
+    box-sizing: border-box;
     width: 100%; /* 1 */ 
+    @media (max-width: $breakpoint_xl) {
+        max-width: $width_lg;
+    }
+    @media (max-width: $breakpoint_md) {
+        max-width: $width_md;
+    }
+    @media (max-width: $breakpoint_sm) {
+        max-width: $width_sm;
+    }
 } 
+

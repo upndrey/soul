@@ -40,6 +40,9 @@
 
     #calc__canvas {
         position: absolute;
+        @media (max-width: $breakpoint_xl) {
+            max-width: 900px;
+        }
         top: -300px;
         left: -250px;
         z-index: 1;
@@ -49,6 +52,10 @@
     #calc__canvas.transformed {
         left: calc(50% - 450px);
         top: 180px;
+        @media (max-width: $breakpoint_xl) {
+            left: calc(50% - 370px);
+            top: 300px;
+        }
     }
 
     &__block {
@@ -57,6 +64,10 @@
         width: 100%;
         top: 150px;
         max-width: 750px;
+        @media (max-width: $breakpoint_xl) {
+            top: 0px;
+            max-width: 700px;
+        }
         float: right;
         opacity: 1;
         transition: 2s ease-in-out;
@@ -82,9 +93,15 @@
             box-sizing: border-box;
             padding: 10px 20px;
             margin-bottom: 24px;
+            @media (max-width: $breakpoint_xl) {
+                margin-bottom: 12px;
+            }
 
             &:nth-child(2n + 1) {
                 margin-right: 24px;
+                @media (max-width: $breakpoint_xl) {
+                    margin-right: 12px;
+                }
             }
         }
     } 
@@ -108,10 +125,9 @@
 
     &__transformed {
         width: 100%;
-        max-width: $max-width;
+        max-width: inherit;
         position: absolute;
         top: 0;
-        float: right;
         opacity: 1;
         transition: 2s ease-in-out;
         z-index: 8;
@@ -132,6 +148,9 @@
                 &>div {
                     font-family: Lato-Regular;
                     width: 342px;
+                    @media (max-width: $breakpoint_xl) {
+                        width: 250px;
+                    }
                     height: 66px;
                     display: flex;
                     align-items: center;
@@ -153,6 +172,9 @@
                 &>div {
                     width: 100%;
                     max-width: 430px;
+                    @media (max-width: $breakpoint_xl) {
+                        max-width: 325px;
+                    }
                     display: flex;
                     flex-direction: column;
                     &>p:nth-child(1) {
@@ -183,6 +205,9 @@
                         }
                         &>p:nth-child(2) {
                             max-width: 424px;
+                            @media (max-width: $breakpoint_xl) {
+                                max-width: 325px;
+                            }
                             text-align: right;
                             align-self: flex-end;
                         }
@@ -190,8 +215,8 @@
     
                     &:nth-child(2) {
                         position: absolute;
-                        left: -60px;
-                        top: 230px;
+                        left: 0px;
+                        top: 260px;
                         &>p:nth-child(1) {
                             left: 30px;
                             text-align: right;
@@ -199,6 +224,9 @@
                         }
                         &>p:nth-child(2) {
                             max-width: 336px;
+                            @media (max-width: $breakpoint_xl) {
+                                max-width: 250px;
+                            }
                             text-align: right;
                             align-self: flex-end;
                         }
@@ -215,6 +243,9 @@
                         }
                         &>p:nth-child(2) {
                             max-width: 434px;
+                            @media (max-width: $breakpoint_xl) {
+                                max-width: 250px;
+                            }
                             align-self: flex-start;
                             text-align: left;
                         }
@@ -224,7 +255,7 @@
 
             &__more {
                 width: 100%;
-                max-width: $max-width;
+                max-width: inherit;
 
                 display: flex;
                 align-items: center;
@@ -257,6 +288,10 @@
             &__links {
                 width: 100%;
                 max-width: 464px;
+                @media (max-width: $breakpoint_xl) {
+                    max-width: 350px;
+                    margin-right: 20px;
+                }
                 height: 226px;
                 background: rgba(255, 255, 255, 0.14);
                 border-radius: 30px;
@@ -275,6 +310,9 @@
                     &:nth-child(1) {
                     font-family: Lato-Medium;
                     font-size: 18px;
+                    @media (max-width: $breakpoint_xl) {
+                        font-size: 16px;
+                    }
                     font-style: normal;
                     font-weight: 500;
                     line-height: 30px;
@@ -284,6 +322,9 @@
                     &:nth-child(2) {
                         font-family: Lato-Light;
                         font-size: 18px;
+                        @media (max-width: $breakpoint_xl) {
+                            font-size: 16px;
+                        }
                         font-style: normal;
                         font-weight: 300;
                         line-height: 30px;

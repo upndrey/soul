@@ -42,25 +42,21 @@ $dark-grey: rgb(68, 68, 68) !default;
 
 
 
-/// Container's maximum width
-/// @type Length
-$max-width: 1440px !default;
+/// xl container
+$width_xl: 1440px !default;
 
-
-
-
-/// Breakpoints map
-/// @prop {String} keys - Keys are identifiers mapped to a given length
-/// @prop {Map} values - Values are actual breakpoints expressed in pixels
-$breakpoints: (
-  'small': 320px,
-  'medium': 768px,
-  'large': 1024px,
-) !default;
-
-
-
-
+/// lg breakpoint
+$breakpoint_xl: 1480px !default;
+/// lg container
+$width_lg: 1120px !default;
+/// md breakpoint
+$breakpoint_md: 1160px !default;
+/// md container
+$width_md: 720px !default;
+/// sm breakpoint
+$breakpoint_sm: 760px !default;
+/// sm container
+$width_sm: 100% !default;
 
 
 /// Relative or absolute URL where all assets are served from

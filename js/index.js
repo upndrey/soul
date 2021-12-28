@@ -2,8 +2,11 @@ document.addEventListener("DOMContentLoaded", main);
 function main() {
     const figure = new Figure("calc__canvas", "calc__process");
     figure.init();
+    const details = new Details("details__canvas", "details__video");
+    details.init();
 }
 
+// Calc
 function Figure(canvasId = "canvas", buttonId = "someButton") {
     this.canvas = document.getElementById(canvasId);
     this.eventButton = document.getElementById(buttonId);
@@ -240,7 +243,6 @@ Figure.prototype.drawLayer3Part2 = function() {
 
 Figure.prototype.drawSmallCircles = function() {
     params = this.smallCircleParams;
-    console.log(params.c3x);
     //arc 1
     this.ctx.beginPath();
     this.ctx.arc(params.c1x, params.c1y, params.radius, 0, 2 * Math.PI, false);
@@ -315,15 +317,29 @@ Figure.prototype.transformationHandler = function(stepsCount) {
         lineWidth: 3,
         list: list
     });
-    this.smallCircleTransform(stepsCount, {
-        c1x: -230,
-        c1y: 0,
-        c2x: 90,
-        c2y: -140,
-        c3x: -200,
-        c3y: 200,
-        opacity: 1
-    });
+    var mq = window.matchMedia( "(max-width: 1480px)" );
+    if (mq.matches) {
+        this.smallCircleTransform(stepsCount, {
+            c1x: -230,
+            c1y: 0,
+            c2x: 90,
+            c2y: -140,
+            c3x: -150,
+            c3y: 260,
+            opacity: 1
+        });
+    }
+    else {
+        this.smallCircleTransform(stepsCount, {
+            c1x: -230,
+            c1y: 0,
+            c2x: 90,
+            c2y: -140,
+            c3x: -200,
+            c3y: 200,
+            opacity: 1
+        });
+    }
     this.drawLayers();
     this.transformationStep += 1;
 };
@@ -387,4 +403,197 @@ Figure.prototype.transformationFormulaGenerator = function(tempParam, endParams,
     return (paramName) => {
         return tempParam[paramName] + (endParams[paramName] - tempParam[paramName]) * this.transformationStep / stepsCount;
     };
+};
+
+
+
+
+
+
+// Details
+
+function Details(canvasId = "canvas", videoId = "video") {
+    this.canvas = document.getElementById(canvasId);
+    this.video = document.getElementById(videoId);
+    this.ctx = this.canvas.getContext('2d');
+    this.nParam = 0;
+    this.angles = [0, 400, 800];
+    this.radiusX = 317;
+    this.radiusY = 317;
+    this.transformX = 0;
+    this.transformY = 0;
+    this.step = 0;
+    this.stepsCount = 70;
+    
+    this.height = 700;
+    var mq = window.matchMedia( "(max-width: 1480px)" );
+    if (mq.matches) {
+        this.width = 1120;
+    }
+    else {
+        this.width = 1440;
+    }
+    mq = window.matchMedia( "(max-width: 1160px)" );
+    if (mq.matches) {
+        this.width = 720;
+    }
+    mq = window.matchMedia( "(max-width: 760px)" );
+    if (mq.matches) {
+        this.width = 720;
+    }
+    this.centerX = this.width/2;
+    this.centerY = this.height/2;
+}
+
+Details.prototype.init = function() {
+    
+    mq = window.matchMedia( "(max-width: 760px)" );
+    if (!mq.matches) {
+        setInterval(this.draw.bind(this), 20);
+    }
+    this.video.addEventListener("click", () => {
+        this.transform();
+        this.editDom();
+    }, {once: true});
+};
+
+Details.prototype.draw = function() {
+    this.ctx.clearRect(0, 0, this.width, this.height);
+    this.drawCircle();
+    this.drawCircle(-10, "rgba(255, 255, 255, .5)");
+    if(this.transformX == 0) {
+        this.drawMovingCircle(0);
+        this.drawMovingCircle(1);
+        this.drawMovingCircle(2);
+    }
+};
+
+Details.prototype.drawCircle = function(modifier=0, color="#fff") {
+    let fourPointsParam = 0.552284749831;
+    this.ctx.beginPath();
+    let savedRadiusX = this.radiusX;
+    let savedRadiusY = this.radiusY;
+    this.radiusX += modifier;
+    this.radiusY += modifier;
+    // this.ctx.arc(this.centerX, this.centerY, this.radius, 0, 2 * Math.PI, false);
+    this.ctx.moveTo(this.centerX - this.radiusX - this.transformX, this.centerY- this.transformY);
+    let nextStepX = this.centerX - this.radiusX - this.transformX;
+    let nextStepY = this.centerY - this.transformY;
+    this.ctx.bezierCurveTo(
+        this.centerX - this.radiusX - this.transformX, 
+        this.centerY - this.radiusY*fourPointsParam - this.transformY, 
+        this.centerX - this.radiusX*fourPointsParam - this.transformX, 
+        this.centerY - this.radiusY - this.transformY, 
+        this.centerX - this.transformX, 
+        this.centerY - this.radiusY - this.transformY
+    );
+    nextStepX = this.centerX + this.transformX;
+    nextStepY = this.centerY - this.radiusY - this.transformY;
+    this.ctx.lineTo(nextStepX, nextStepY);
+    this.ctx.bezierCurveTo(
+        this.centerX + this.radiusX*fourPointsParam + this.transformX, 
+        this.centerY - this.radiusY - this.transformY, 
+        this.centerX + this.radiusX + this.transformX, 
+        this.centerY - this.radiusY*fourPointsParam - this.transformY, 
+        this.centerX + this.radiusX + this.transformX, 
+        this.centerY - this.transformY
+    );
+    nextStepX = this.centerX + this.radiusX + this.transformX;
+    nextStepY = this.centerY + this.transformY;
+    this.ctx.lineTo(nextStepX, nextStepY);
+    this.ctx.bezierCurveTo(
+        this.centerX + this.radiusX + this.transformX, 
+        this.centerY + this.radiusY*fourPointsParam + this.transformY, 
+        this.centerX + this.radiusX*fourPointsParam + this.transformX, 
+        this.centerY + this.radiusY + this.transformY, 
+        this.centerX + this.transformX, 
+        this.centerY + this.radiusY + this.transformY
+    );
+    nextStepX = this.centerX - this.transformX;
+    nextStepY = this.centerY + this.radiusY + this.transformY;
+    this.ctx.lineTo(nextStepX, nextStepY);
+    this.ctx.bezierCurveTo(
+        this.centerX - this.radiusX*fourPointsParam - this.transformX, 
+        this.centerY + this.radiusY + this.transformY, 
+        this.centerX - this.radiusX - this.transformX, 
+        this.centerY + this.radiusY*fourPointsParam + this.transformY, 
+        this.centerX - this.radiusX - this.transformX, 
+        this.centerY + this.transformY
+    );
+    nextStepX = this.centerX - this.radiusX - this.transformX;
+    nextStepY = this.centerY - this.transformY;
+    this.ctx.lineTo(nextStepX, nextStepY);
+
+    this.ctx.shadowBlur = 15;
+    this.ctx.shadowOffsetX = 0;
+    this.ctx.shadowOffsetY = 0;
+    this.ctx.shadowColor = "lightblue";
+    
+    this.ctx.fillStyle = "transparent";
+    this.ctx.strokeStyle = color;
+    this.ctx.stroke();
+    this.ctx.fill();
+    this.ctx.closePath();
+    this.radiusX = savedRadiusX;
+    this.radiusY = savedRadiusY;
+};
+
+Details.prototype.drawMovingCircle = function(id) {
+    var x = this.centerX + this.nParam + this.radiusX * Math.cos(this.angles[id]);
+    var y = this.centerY + this.nParam + this.radiusY * Math.sin(this.angles[id]);
+    this.ctx.beginPath();
+    this.ctx.arc(x, y, 5, 0, 2 * Math.PI, false);
+    this.ctx.fillStyle = "#fff";
+    this.ctx.fill();
+    this.ctx.closePath();
+
+    this.angles[id] += Math.acos(1-Math.pow(3/this.radiusX,2)/2);
+};
+
+Details.prototype.editDom = function() {
+    document.getElementById("video__container").classList.add("active");
+};
+
+Details.prototype.transform = function() {
+    let params = JSON.parse(JSON.stringify(this));
+    let interval = setInterval(() => {
+        this.transformationHandler(params);
+        if(this.step == this.stepsCount) {
+            clearInterval(interval);
+            this.step = 0;
+        }
+        this.step++;
+    }, 20);
+};
+
+Details.prototype.transformationHandler = function(params) {
+    this.transformCircle(params);
+};
+
+Details.prototype.transformCircle = function(params) {
+    this.radiusX = this.tFormula(params.radiusX, 10);
+    this.radiusY = this.tFormula(params.radiusY, 10);
+    this.transformX = this.tFormula(params.transformX, 700);
+    this.transformY = this.tFormula(params.transformY, 300);
+    
+    var mq = window.matchMedia( "(max-width: 1480px)" );
+    if (mq.matches) {
+        this.transformX = this.tFormula(params.transformX, 535);
+    }
+    else {
+        this.transformX = this.tFormula(params.transformX, 700);
+    }
+    mq = window.matchMedia( "(max-width: 1160px)" );
+    if (mq.matches) {
+        this.transformX = this.tFormula(params.transformX, 335);
+    }
+    mq = window.matchMedia( "(max-width: 760px)" );
+    if (mq.matches) {
+        this.transformX = this.tFormula(params.transformX, );
+    }
+    this.transformY = this.tFormula(params.transformY, 300);
+}
+
+Details.prototype.tFormula = function(startParam, endParam) {
+    return startParam + (endParam - startParam) * this.step / this.stepsCount;
 };

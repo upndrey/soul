@@ -1,6 +1,8 @@
 .details {
     position: relative;
     z-index: 6;
+    overflow: hidden;
+    padding-bottom: 50px;
     &__wrapper {
         position: relative;
         bottom: 150px;
@@ -22,5 +24,41 @@
     h2,p {
         z-index: 10;
         text-align: center;
+    }
+
+    #details__canvas {
+        position: absolute;
+        left: 0;
+        top: 145px;
+    }
+
+    .video__container {
+        max-width: inherit;
+        display: block;
+        width: 590px;
+        height: 590px;
+        margin: auto;
+        margin-top: 83px;
+        background: #000;
+        border-radius: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        transition: 2s ease-in-out;
+
+        #details__video {
+            max-width: calc(100% - 60px);
+            height: 590px;
+        }
+
+        &.active {
+            width: calc(100% - 60px);
+            border-radius: 5px;
+            #details__video {
+                max-width: 100%;
+                height: 590px;
+            }
+        }
     }
 }
