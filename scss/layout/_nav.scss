@@ -37,6 +37,9 @@
             font-style: normal;
             font-weight: 500;
             font-size: 16px;
+            @media (max-width: $breakpoint_xl) {
+                font-size: 12px;
+            }
             line-height: 16px;
             text-align: center;
             list-style: none;
@@ -50,7 +53,7 @@
         align-items: center;
         justify-content: space-between;
         @media (max-width: $breakpoint_xl) {
-            margin-left: 10px;
+            margin-left: 20px;
         }
 
         .inst {

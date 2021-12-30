@@ -40,13 +40,14 @@
 
     #calc__canvas {
         position: absolute;
-        @media (max-width: $breakpoint_xl) {
-            max-width: 900px;
-        }
         top: -300px;
         left: -250px;
         z-index: 1;
         transition: 2s ease-in-out;
+        @media (max-width: $breakpoint_xl) {
+            max-width: 900px;
+            left: -150px;
+        }
     }
 
     #calc__canvas.transformed {
@@ -66,7 +67,8 @@
         max-width: 750px;
         @media (max-width: $breakpoint_xl) {
             top: 0px;
-            max-width: 700px;
+            max-width: 600px;
+            width: fit-content;
         }
         float: right;
         opacity: 1;
@@ -84,6 +86,9 @@
             font-family: Lato-Regular;
             width: 100%;
             max-width: 342px;
+            @media (max-width: $breakpoint_xl) {
+                max-width: 250px;
+            }
             height: 55px;
             display: flex;
             background: transparent;
@@ -121,6 +126,9 @@
         background: linear-gradient(269.48deg, #EDA6C9 2.9%, #D76DA0 97.08%);
         border: 0;
         cursor: pointer;
+        @media (max-width: $breakpoint_xl) {
+            max-width: 250px;
+        }
     }
 
     &__transformed {
@@ -261,6 +269,7 @@
                 align-items: center;
                 justify-content: center;
                 &>div {
+                    cursor: pointer;
                     width: 342px;
                     height: 55px;
                     margin: 0 13px;
@@ -297,6 +306,7 @@
                 border-radius: 30px;
                 padding: 20px 30px;
                 &>p {
+                    cursor: pointer;
                     &.active {
                         color: #EA9DC3;
                     }
@@ -331,6 +341,10 @@
                         letter-spacing: 0em;
                         text-align: left;
                     }
+                }
+
+                &.hidden {
+                    display: none;
                 }
             }
         }

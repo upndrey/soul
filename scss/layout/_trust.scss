@@ -1,0 +1,179 @@
+.trust {
+    position: relative;
+    z-index: 6;
+    overflow: hidden;
+    &__wrapper {
+        position: relative;
+        padding-top: 100px;
+        height: 700px;
+        z-index: 5;
+        &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: inherit;
+            background: linear-gradient(268.5deg, #715DA0 2.16%, #6674AF 49.44%, #587DB1 96.33%);
+            filter: blur(200px);
+        }
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    h2+p {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    &__block {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    &__left {
+        position: relative;
+        width: 100%;
+        max-width: 342px;
+        @media (max-width: $breakpoint_xl) {
+            max-width: 300px;
+            margin-right: 20px;
+        }
+    }
+
+    &__links {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 150px;
+        background: rgba(255, 255, 255, 0.14);
+        border-radius: 30px;
+        padding: 20px 30px;
+        margin-bottom: 60px;
+        &>p {
+            cursor: pointer;
+            &.active {
+                color: #EA9DC3;
+            }
+        }
+    }
+
+    &__nav {
+        #trust__nums {
+            font-family: Lato-Regular;
+            font-style: normal;
+            font-size: 36px;
+            line-height: 30px;
+            margin-bottom: 30px;
+            span {
+                font-family: Lato-Bold;
+                font-style: normal;
+                font-weight: bold;
+                font-size: 70px;
+                line-height: 30px;
+            }
+        }
+
+        #trust__arrows {
+            width: 250px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            &>* {
+                cursor: pointer;
+                width: 98px;
+                height: 15px;
+                @include image("trust__arrow.svg");
+                &:first-child {
+                    transform: rotate(180deg);
+                }
+                &:hover {
+                    filter: brightness(0) invert(86%) sepia(95%) saturate(7128%) hue-rotate(282deg) brightness(94%) contrast(92%);
+                }
+            }
+        }
+    }
+
+    &__text {
+        width: 100%;
+        max-width: 950px;
+        background: rgba(67, 67, 103, 0.35);
+        border-radius: 30px;
+        box-sizing: border-box;
+        @media (max-width: $breakpoint_xl) {
+            max-width: 750px;
+        }
+        &>p {
+            &:nth-child(1) {
+            font-family: Lato-Medium;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 30px;
+            letter-spacing: 0em;
+            text-align: left;
+            padding: 0 30px;
+            padding-top: 27px;
+            @media (max-width: $breakpoint_xl) {
+                font-size: 16px;
+            }
+            }
+            &:nth-child(2) {
+                font-family: Lato-Light;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 300;
+                line-height: 30px;
+                letter-spacing: 0em;
+                text-align: left;
+                padding: 0 30px;
+                padding-bottom: 25px;
+                @media (max-width: $breakpoint_xl) {
+                    font-size: 14px;
+                }
+            }
+        }
+        &>div {
+            background: #43436773;
+            border-radius: 0 0 30px 30px;
+            display: flex;
+            justify-content: space-between;
+            padding: 27px 30px;
+            &>div {
+                &>span {
+                    text-transform: uppercase;
+
+                    &:first-child {
+                        font-family: Lato-Regular;
+                        font-size: 18px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 18px;
+                        letter-spacing: 0em;
+                        text-align: left;
+                    }
+
+                    &:last-child{
+                        font-family: Lato-Light;
+                        font-size: 18px;
+                        font-style: normal;
+                        font-weight: 300;
+                        line-height: 18px;
+                        letter-spacing: 0em;
+                        text-align: left;
+                        color: #EA9DC3;
+                    }
+                }
+            }
+        }
+
+        &.hidden {
+            display: none;
+        }
+    }
+
+
+}

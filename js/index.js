@@ -4,6 +4,8 @@ function main() {
     figure.init();
     const details = new Details("details__canvas", "details__video");
     details.init();
+    const trust = new Trust();
+    trust.init();
 }
 
 // Calc
@@ -73,8 +75,42 @@ Figure.prototype.init = function() {
         this.setTemporaryParams();
         this.ctx.translate(500, 550);
         this.drawLayers();
+        this.stampsInit();
         this.eventButton.addEventListener("click", this.transformLayers.bind(this, 100), {once: true});
 };
+
+Figure.prototype.stampsInit = function() {
+    const stamp1 = document.getElementById("stamp1");
+    const stamp2 = document.getElementById("stamp2");
+    const stamp3 = document.getElementById("stamp3");
+    const stamp1link = document.getElementById("stamp1link");
+    const stamp2link = document.getElementById("stamp2link");
+    const stamp3link = document.getElementById("stamp3link");
+    document.querySelectorAll(".stamp__links>.stampLink").forEach((stampDom, i) => {
+        stampDom.addEventListener("click", () => {
+            if(!stampDom.classList.contains("active")) {
+                stamp1.classList.add("hidden");
+                stamp2.classList.add("hidden");
+                stamp3.classList.add("hidden");
+                stamp1link.classList.remove("active");
+                stamp2link.classList.remove("active");
+                stamp3link.classList.remove("active");
+                switch(i) {
+                    case 0: 
+                        stamp1.classList.remove("hidden");
+                        break;
+                    case 1: 
+                        stamp2.classList.remove("hidden");
+                        break;
+                    case 2: 
+                        stamp3.classList.remove("hidden");
+                        break;
+                }
+                stampDom.classList.add("active");
+            }
+        });
+    });
+}
 
 Figure.prototype.setTemporaryParams = function() {
     if(this.layer1Params && this.layer2Params && this.layer3Params) {
@@ -268,6 +304,8 @@ Figure.prototype.transformLayers = function(stepsCount) {
         this.domStartModification();
         this.transformationStep = 0;
         this.rotation = 25 * 1/stepsCount;
+
+        window.scroll(0,findPos(document.getElementById("calc__transformed")));
         let interval = setInterval(() => {
             this.transformationHandler(stepsCount);
             if(this.transformationStep == stepsCount) {
@@ -277,9 +315,19 @@ Figure.prototype.transformLayers = function(stepsCount) {
                 this.setTemporaryParams();
                 this.transformationStep = 0;
             }
-        }, 20);
+        }, 30);
     }
 };
+
+function findPos(obj) {
+    var curtop = 0;
+    if (obj.offsetParent) {
+        do {
+            curtop += obj.offsetTop;
+        } while (obj = obj.offsetParent);
+    return [curtop + 100];
+    }
+}
 
 Figure.prototype.domStartModification = function() {
     this.canvas.classList.add("transformed");
@@ -427,7 +475,7 @@ function Details(canvasId = "canvas", videoId = "video") {
     this.transformX = 0;
     this.transformY = 0;
     this.step = 0;
-    this.stepsCount = 70;
+    this.stepsCount = 50;
     
     this.height = 700;
     var mq = window.matchMedia( "(max-width: 1480px)" );
@@ -450,13 +498,13 @@ function Details(canvasId = "canvas", videoId = "video") {
 }
 
 Details.prototype.init = function() {
-    
+    let interval;
     mq = window.matchMedia( "(max-width: 760px)" );
     if (!mq.matches) {
-        setInterval(this.draw.bind(this), 20);
+        interval = setInterval(this.draw.bind(this), 40);
     }
     this.video.addEventListener("click", () => {
-        this.transform();
+        this.transform(interval);
         this.editDom();
     }, {once: true});
 };
@@ -558,16 +606,17 @@ Details.prototype.editDom = function() {
     document.getElementById("video__container").classList.add("active");
 };
 
-Details.prototype.transform = function() {
+Details.prototype.transform = function(drawInterval) {
     let params = JSON.parse(JSON.stringify(this));
     let interval = setInterval(() => {
         this.transformationHandler(params);
         if(this.step == this.stepsCount) {
             clearInterval(interval);
+            clearInterval(drawInterval);
             this.step = 0;
         }
         this.step++;
-    }, 20);
+    }, 30);
 };
 
 Details.prototype.transformationHandler = function(params) {
@@ -601,3 +650,78 @@ Details.prototype.transformCircle = function(params) {
 Details.prototype.tFormula = function(startParam, endParam) {
     return startParam + (endParam - startParam) * this.step / this.stepsCount;
 };
+
+
+// Trust 
+function Trust() {
+    this.state = 0;
+    this.lastState = 2;
+
+    this.arrLeftDom = document.getElementById("trust__arrLeft");
+    this.arrRightDom = document.getElementById("trust__arrRight");
+    this.trust1linkDom = document.getElementById("trust1link");
+    this.trust2linkDom = document.getElementById("trust2link");
+    this.trust3linkDom = document.getElementById("trust3link");
+    this.trust1Dom = document.getElementById("trust1");
+    this.trust2Dom = document.getElementById("trust2");
+    this.trust3Dom = document.getElementById("trust3");
+}
+
+Trust.prototype.init = function() {
+    this.arrLeftDom.addEventListener("click", this.setState.bind(this, "remove", 1));
+    this.arrRightDom.addEventListener("click", this.setState.bind(this, "add", 1));
+    this.trust1linkDom.addEventListener("click", this.setState.bind(this, "set", 0));
+    this.trust2linkDom.addEventListener("click", this.setState.bind(this, "set", 1));
+    this.trust3linkDom.addEventListener("click", this.setState.bind(this, "set", 2));
+}
+
+Trust.prototype.setState = function(event, state) {
+    console.log(this.state, event, state);
+    let lastState = this.state;
+    switch(event) {
+        case 'remove':
+            this.state -= state;
+            break;
+        case 'add':
+            this.state += state;
+            break;
+        case 'set':
+            this.state = state;
+            break;
+        default:
+            break;
+    }
+
+    if(this.state > this.lastState)
+        this.state = 0;
+    else if(this.state < 0)
+        this.state = this.lastState;
+    console.log(this.state);
+    if(lastState != this.state)
+        this.editContent();
+}
+
+Trust.prototype.editContent = function() {
+    document.querySelector("#trust__nums>span").innerText = `0${this.state+1}`;
+    this.trust1linkDom.classList.remove("active");
+    this.trust2linkDom.classList.remove("active");
+    this.trust3linkDom.classList.remove("active");
+    this.trust1Dom.classList.add("hidden");
+    this.trust2Dom.classList.add("hidden");
+    this.trust3Dom.classList.add("hidden");
+
+    switch(this.state) {
+        case 0:
+            this.trust1linkDom.classList.add("active");
+            this.trust1Dom.classList.remove("hidden");
+            break;
+        case 1:
+            this.trust2linkDom.classList.add("active");
+            this.trust2Dom.classList.remove("hidden");
+            break;
+        case 2:
+            this.trust3linkDom.classList.add("active");
+            this.trust3Dom.classList.remove("hidden");
+            break;
+    }
+}
