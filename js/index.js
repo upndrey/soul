@@ -1,17 +1,21 @@
 document.addEventListener("DOMContentLoaded", main);
 function main() {
-    const figure = new Figure("calc__canvas", "calc__process");
-    figure.init();
+    const calc = new Calc("calc__canvas", "calc__process");
+    calc.init();
     const details = new Details("details__canvas", "details__video");
     details.init();
     const trust = new Trust();
     trust.init();
     const unique = new Unique();
     unique.init();
+    const author = new Details("author__canvas");
+    author.init();
+    const mission = new Mission("mission__canvasStatic", "mission__canvas");
+    mission.init();
 }
 
 // Calc
-function Figure(canvasId = "canvas", buttonId = "someButton") {
+function Calc(canvasId = "canvas", buttonId = "someButton") {
     this.canvas = document.getElementById(canvasId);
     this.eventButton = document.getElementById(buttonId);
     this.ctx = this.canvas.getContext('2d');
@@ -26,7 +30,7 @@ function Figure(canvasId = "canvas", buttonId = "someButton") {
     this.smallCircleParamsTemp = null;
 }
 
-Figure.prototype.init = function() {
+Calc.prototype.init = function() {
         this.setLayer1Params({
             centerX: 100,
             centerY: -100,
@@ -78,10 +82,10 @@ Figure.prototype.init = function() {
         this.ctx.translate(500, 550);
         this.drawLayers();
         this.stampsInit();
-        this.eventButton.addEventListener("click", this.transformLayers.bind(this, 100), {once: true});
+        this.eventButton.addEventListener("click", this.transformLayers.bind(this, 50), {once: true});
 };
 
-Figure.prototype.stampsInit = function() {
+Calc.prototype.stampsInit = function() {
     const stamp1 = document.getElementById("stamp1");
     const stamp2 = document.getElementById("stamp2");
     const stamp3 = document.getElementById("stamp3");
@@ -114,7 +118,7 @@ Figure.prototype.stampsInit = function() {
     });
 }
 
-Figure.prototype.setTemporaryParams = function() {
+Calc.prototype.setTemporaryParams = function() {
     if(this.layer1Params && this.layer2Params && this.layer3Params) {
         this.layer1ParamsTemp = JSON.parse(JSON.stringify(this.layer1Params));
         this.layer2ParamsTemp = JSON.parse(JSON.stringify(this.layer2Params));
@@ -123,7 +127,7 @@ Figure.prototype.setTemporaryParams = function() {
     }
 }
 
-Figure.prototype.setLayer1Params = function(params) {
+Calc.prototype.setLayer1Params = function(params) {
     if(this.layer1Params) {
         Object.keys(params).forEach((elem) => {
             this.layer1Params[elem] = params[elem];
@@ -133,7 +137,7 @@ Figure.prototype.setLayer1Params = function(params) {
         this.layer1Params = params;
 };
 
-Figure.prototype.setLayer2Params = function(params) {
+Calc.prototype.setLayer2Params = function(params) {
     if(this.layer2Params) {
         Object.keys(params).forEach((elem) => {
             this.layer2Params[elem] = params[elem];
@@ -143,7 +147,7 @@ Figure.prototype.setLayer2Params = function(params) {
         this.layer2Params = params;
 };
 
-Figure.prototype.setLayer3Params = function(params) {
+Calc.prototype.setLayer3Params = function(params) {
     if(this.layer3Params) {
         Object.keys(params).forEach((elem) => {
             this.layer3Params[elem] = params[elem];
@@ -153,7 +157,7 @@ Figure.prototype.setLayer3Params = function(params) {
         this.layer3Params = params;
 };
 
-Figure.prototype.setSmallCircleParams = function(params) {
+Calc.prototype.setSmallCircleParams = function(params) {
     if(this.smallCircleParams) {
         Object.keys(params).forEach((elem) => {
             this.smallCircleParams[elem] = params[elem];
@@ -163,7 +167,7 @@ Figure.prototype.setSmallCircleParams = function(params) {
         this.smallCircleParams = params;
 };
  
-Figure.prototype.drawLayers = function() {
+Calc.prototype.drawLayers = function() {
     if(this.layer1Params && this.layer2Params && this.layer3Params) {
         this.ctx.clearRect(-500, -500, this.canvas.width, this.canvas.height);
         this.ctx.rotate(this.rotation * Math.PI / 180)
@@ -177,7 +181,7 @@ Figure.prototype.drawLayers = function() {
     }
 };
 
-Figure.prototype.drawLayer1 = function() {
+Calc.prototype.drawLayer1 = function() {
     params = this.layer1Params;
 
     this.ctx.beginPath();
@@ -187,7 +191,7 @@ Figure.prototype.drawLayer1 = function() {
     this.ctx.closePath();
 };
 
-Figure.prototype.drawLayer2Part1 = function() {
+Calc.prototype.drawLayer2Part1 = function() {
     params = this.layer2Params;
 
     this.ctx.beginPath();
@@ -199,7 +203,7 @@ Figure.prototype.drawLayer2Part1 = function() {
     this.ctx.closePath();
 };
 
-Figure.prototype.drawLayer2Part2 = function() {
+Calc.prototype.drawLayer2Part2 = function() {
     params = this.layer2Params;
 
 
@@ -228,7 +232,7 @@ Figure.prototype.drawLayer2Part2 = function() {
     this.ctx.closePath();
 };
 
-Figure.prototype.drawLayer2Transformed = function() {
+Calc.prototype.drawLayer2Transformed = function() {
     params = this.layer2Params;
 
     this.ctx.beginPath();
@@ -247,7 +251,7 @@ Figure.prototype.drawLayer2Transformed = function() {
     this.ctx.closePath();
 };
 
-Figure.prototype.drawLayer3Part1 = function() {
+Calc.prototype.drawLayer3Part1 = function() {
     params = this.layer3Params;
     var gradient = this.ctx.createLinearGradient(0, 0, 0, 900);
     gradient.addColorStop(0, "rgb(98, 102, 165)");
@@ -263,7 +267,7 @@ Figure.prototype.drawLayer3Part1 = function() {
     }
 };
 
-Figure.prototype.drawLayer3Part2 = function() {
+Calc.prototype.drawLayer3Part2 = function() {
     params = this.layer3Params;
     var gradient = this.ctx.createLinearGradient(0, 0, 0, 900);
     gradient.addColorStop(0, "rgb(98, 102, 165)");
@@ -279,7 +283,7 @@ Figure.prototype.drawLayer3Part2 = function() {
     }
 };
 
-Figure.prototype.drawSmallCircles = function() {
+Calc.prototype.drawSmallCircles = function() {
     params = this.smallCircleParams;
     //arc 1
     this.ctx.beginPath();
@@ -301,7 +305,7 @@ Figure.prototype.drawSmallCircles = function() {
     this.ctx.closePath();
 };
 
-Figure.prototype.transformLayers = function(stepsCount) {
+Calc.prototype.transformLayers = function(stepsCount) {
     if(this.layer1Params && this.layer2Params && this.layer3Params) {
         this.domStartModification();
         this.transformationStep = 0;
@@ -331,18 +335,18 @@ function findPos(obj) {
     }
 }
 
-Figure.prototype.domStartModification = function() {
+Calc.prototype.domStartModification = function() {
     this.canvas.classList.add("transformed");
     document.getElementById("calc__block").classList.add("hidden");
     document.getElementById("calc__wrapper").classList.add("transformed");
 };
 
-Figure.prototype.domEndModification = function() {
+Calc.prototype.domEndModification = function() {
     document.getElementById("calc__transformed").classList.remove("hidden");
     document.getElementById("calc__container").classList.add("transformed");
 };
 
-Figure.prototype.transformationHandler = function(stepsCount) {
+Calc.prototype.transformationHandler = function(stepsCount) {
     this.layer1Transform(stepsCount, {
         centerX: 0,
         centerY: -80,
@@ -398,7 +402,7 @@ Figure.prototype.transformationHandler = function(stepsCount) {
     this.transformationStep += 1;
 };
 
-Figure.prototype.layer1Transform = function(stepsCount, endParams) {
+Calc.prototype.layer1Transform = function(stepsCount, endParams) {
     let tempParam = this.layer1ParamsTemp;
     let tFunc = this.transformationFormulaGenerator(tempParam, endParams, stepsCount);
     this.setLayer1Params({
@@ -408,7 +412,7 @@ Figure.prototype.layer1Transform = function(stepsCount, endParams) {
     });
 };
 
-Figure.prototype.layer2Transform = function(stepsCount, endParams) {
+Calc.prototype.layer2Transform = function(stepsCount, endParams) {
     let tempParam = this.layer2ParamsTemp;
     let tFunc = this.transformationFormulaGenerator(tempParam, endParams, stepsCount);
     this.setLayer2Params({
@@ -419,7 +423,7 @@ Figure.prototype.layer2Transform = function(stepsCount, endParams) {
     });
 };
 
-Figure.prototype.layer3Transform = function(stepsCount, endParams) {
+Calc.prototype.layer3Transform = function(stepsCount, endParams) {
     let tempParam = this.layer3ParamsTemp;
     this.layer3Params.list = this.layer3Params.list.map((listElem, i) => {
         return tempParam.list[i] + (endParams.list[i] - tempParam.list[i]) * this.transformationStep / stepsCount;
@@ -439,7 +443,7 @@ Figure.prototype.layer3Transform = function(stepsCount, endParams) {
     });
 };
 
-Figure.prototype.smallCircleTransform = function(stepsCount, endParams) {
+Calc.prototype.smallCircleTransform = function(stepsCount, endParams) {
     let tempParam = this.smallCircleParamsTemp;
     let tFunc = this.transformationFormulaGenerator(tempParam, endParams, stepsCount);
     this.setSmallCircleParams({
@@ -453,7 +457,7 @@ Figure.prototype.smallCircleTransform = function(stepsCount, endParams) {
     });
 };
 
-Figure.prototype.transformationFormulaGenerator = function(tempParam, endParams, stepsCount) {
+Calc.prototype.transformationFormulaGenerator = function(tempParam, endParams, stepsCount) {
     return (paramName) => {
         return tempParam[paramName] + (endParams[paramName] - tempParam[paramName]) * this.transformationStep / stepsCount;
     };
@@ -467,6 +471,7 @@ Figure.prototype.transformationFormulaGenerator = function(tempParam, endParams,
 // Details
 
 function Details(canvasId = "canvas", videoId = "video") {
+    this.canvasId = canvasId;
     this.canvas = document.getElementById(canvasId);
     this.video = document.getElementById(videoId);
     this.ctx = this.canvas.getContext('2d');
@@ -477,7 +482,7 @@ function Details(canvasId = "canvas", videoId = "video") {
     this.transformX = 0;
     this.transformY = 0;
     this.step = 0;
-    this.stepsCount = 50;
+    this.stepsCount = 20;
     
     this.height = 700;
     var mq = window.matchMedia( "(max-width: 1480px)" );
@@ -500,15 +505,24 @@ function Details(canvasId = "canvas", videoId = "video") {
 }
 
 Details.prototype.init = function() {
+    if(this.canvasId == "author__canvas") {
+        this.radiusX = 250;
+        this.radiusY = 250;
+        this.centerX = 255;
+        this.centerY = 255;
+    }
     let interval;
     mq = window.matchMedia( "(max-width: 760px)" );
     if (!mq.matches) {
         interval = setInterval(this.draw.bind(this), 40);
     }
-    this.video.addEventListener("click", () => {
-        this.transform(interval);
-        this.editDom();
-    }, {once: true});
+    if(this.canvasId != "author__canvas") {
+        this.video.addEventListener("click", (e) => {
+            e.preventDefault();
+            this.transform(interval);
+            this.editDom();
+        }, {once: true});
+    }
 };
 
 Details.prototype.draw = function() {
@@ -830,3 +844,95 @@ Unique.prototype.editContent = function() {
             break;
     }
 }
+
+// Mission
+
+function Mission(staticId, dynamicId) {
+    this.staticCanvas = document.getElementById(staticId);
+    this.dynamicCanvas = document.getElementById(dynamicId);
+    this.staticCtx = this.staticCanvas.getContext('2d');
+    this.ctx = this.dynamicCanvas.getContext('2d');
+    this.angleList = [];
+    this.radiusList = [
+        100, 
+        150, 
+        200,
+        300,
+        350,
+        500,
+        550,
+        700,
+        750
+    ];
+    this.centerX = this.staticCanvas.width - 100;
+    this.centerY = 100;
+}
+
+Mission.prototype.init = function() {
+    for(let i = 0; i < this.radiusList.length; i++) {
+        this.angleList.push(0 + i * 50);
+        this.angleList.push(200 + i * 50);
+        this.angleList.push(400 + i * 50);
+        this.angleList.push(600 + i * 50);
+        this.angleList.push(800 + i * 50);
+        this.angleList.push(1000 + i * 50);
+    }
+    let interval;
+    this.drawStatic();
+    interval = setInterval(this.drawDynamic.bind(this), 40);
+}
+
+Mission.prototype.drawDynamic = function() {
+    this.ctx.clearRect(0, 0, this.dynamicCanvas.width, this.dynamicCanvas.height);
+    
+    let j = 0;
+    for(let i = 0; i < this.radiusList.length; i++) {
+        this.drawMovingCircle(i, j);
+        j++;
+        this.drawMovingCircle(i, j);
+        j++;
+        this.drawMovingCircle(i, j);
+        j++;
+        this.drawMovingCircle(i, j);
+        j++;
+        this.drawMovingCircle(i, j);
+        j++;
+        this.drawMovingCircle(i, j);
+        j++;
+    }
+}
+
+Mission.prototype.drawStatic = function() {
+    this.drawFilledCircle();
+    for(let i = 0; i < this.radiusList.length; i++) {
+        this.drawCircle(i);
+    }
+}
+
+Mission.prototype.drawMovingCircle = function(id, angleId) {
+    var x = this.centerX + this.radiusList[id] * Math.cos(this.angleList[angleId]);
+    var y = this.centerY + this.radiusList[id] * Math.sin(this.angleList[angleId]);
+    this.ctx.beginPath();
+    this.ctx.arc(x, y, 10, 0, 2 * Math.PI, false);
+    this.ctx.fillStyle = "#fff";
+    this.ctx.fill();
+    this.ctx.closePath();
+
+    this.angleList[angleId] += Math.acos(1-Math.pow(3/this.radiusList[id],2)/2);
+};
+
+Mission.prototype.drawFilledCircle = function() {
+    this.staticCtx.beginPath();
+    this.staticCtx.arc(this.centerX, this.centerY, 65, 0, 2 * Math.PI, false);
+    this.staticCtx.fillStyle = "#3F45A6";
+    this.staticCtx.fill();
+    this.staticCtx.closePath();
+}
+
+Mission.prototype.drawCircle = function(id) {
+    this.staticCtx.beginPath();
+    this.staticCtx.arc(this.centerX, this.centerY, this.radiusList[id], 0, 2 * Math.PI, false);
+    this.staticCtx.strokeStyle = "#fff";
+    this.staticCtx.stroke();
+    this.staticCtx.closePath();
+};

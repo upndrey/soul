@@ -1,0 +1,62 @@
+.mission {
+    position: relative;
+    z-index: 6;
+    &__wrapper {
+        position: relative;
+        overflow: hidden;
+        padding-top: 250px;
+        padding-bottom: 200px;
+        z-index: 5;
+        &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: inherit;
+            background: linear-gradient(268.5deg, #715DA0 2.16%, #6674AF 49.44%, #587DB1 96.33%);
+            filter: blur(200px);
+        }
+
+        #mission__canvas, #mission__canvasStatic {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+    }
+
+    &>div {
+        width: 700px;
+        &>h2 {
+            text-align: left;
+        }
+        &>p {
+            text-align: left;
+            font-size: 18px;
+        }
+        div {
+            margin-top: 46px;
+            p:first-child {
+                font-family: Lato-Medium;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 30px;
+                letter-spacing: 0em;
+                text-align: left;
+                text-transform: uppercase;
+
+            }
+            p:last-child {
+                font-family: Lato-Light;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 300;
+                line-height: 30px;
+                letter-spacing: 0em;
+                text-align: left;
+
+            }
+        }
+    }
+}

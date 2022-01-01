@@ -1,0 +1,104 @@
+.author {
+    position: relative;
+    z-index: 6;
+    display: flex;
+    justify-content: space-between;
+    &__wrapper {
+        position: relative;
+        overflow: hidden;
+        padding-top: 100px;
+        z-index: 5;
+        &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: inherit;
+            background: linear-gradient(268.5deg, #715DA0 2.16%, #6674AF 49.44%, #587DB1 96.33%);
+            filter: blur(200px);
+        }
+    }
+
+    &__left {
+        margin-right: 20px;
+        canvas {
+            position: absolute;
+        }
+
+        img {
+            padding: 36px;
+        }
+    }
+
+    .right {
+        &__name {
+            span {
+                font-family: Lato-Medium;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 30px;
+                text-transform: uppercase;
+                color: #EA9DC3;
+                margin-right: 10px;
+            }
+        }
+
+        ul {
+            padding: 0;
+            margin: 0;
+            margin-bottom: 21px;
+            li {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                font-family: Lato-Light;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 300;
+                line-height: 26px;
+                letter-spacing: 0em;
+                text-align: left;
+                span {
+                    font-family: Lato-Medium;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 26px;
+                    letter-spacing: 0em;
+                    text-align: left;
+                }
+            }
+        }
+
+        button {
+            margin-top: 15px;
+            width: 268px;
+            height: 61px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            background: rgba(45, 45, 82, 0.19);
+            border-radius: 90px;
+            border: 0;
+
+            font-family: Lato-Light;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 300;
+            line-height: 26px;
+            letter-spacing: 0em;
+            color: #fff;
+            cursor: pointer;
+
+            &>div {
+                margin-left: 15px;
+                width: 27px;
+                height: 27px;
+                @include image("author__inst.svg");
+            }
+        }
+    }
+}

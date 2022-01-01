@@ -48,7 +48,7 @@
         align-items: center;
         justify-content: center;
         overflow: hidden;
-        transition: 2s ease-in-out;
+        transition: 2s;
 
         #details__video {
             max-width: calc(100% - 60px);
@@ -56,7 +56,7 @@
         }
 
         &.active {
-            width: calc(100% - 70px);
+            width: calc(100% - 78px);
             border-radius: 5px;
             #details__video {
                 max-width: 100%;
