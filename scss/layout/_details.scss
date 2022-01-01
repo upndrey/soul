@@ -29,7 +29,10 @@
     #details__canvas {
         position: absolute;
         left: 0;
-        top: 120px;
+        top: 144px;
+        @media (max-width: $breakpoint_xl) {
+            top: 120px;
+        }
     }
 
     .video__container {

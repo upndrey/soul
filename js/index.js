@@ -6,6 +6,8 @@ function main() {
     details.init();
     const trust = new Trust();
     trust.init();
+    const unique = new Unique();
+    unique.init();
 }
 
 // Calc
@@ -676,7 +678,6 @@ Trust.prototype.init = function() {
 }
 
 Trust.prototype.setState = function(event, state) {
-    console.log(this.state, event, state);
     let lastState = this.state;
     switch(event) {
         case 'remove':
@@ -696,7 +697,6 @@ Trust.prototype.setState = function(event, state) {
         this.state = 0;
     else if(this.state < 0)
         this.state = this.lastState;
-    console.log(this.state);
     if(lastState != this.state)
         this.editContent();
 }
@@ -722,6 +722,111 @@ Trust.prototype.editContent = function() {
         case 2:
             this.trust3linkDom.classList.add("active");
             this.trust3Dom.classList.remove("hidden");
+            break;
+    }
+}
+
+function Unique() {
+    this.state = 0;
+    this.lastState = 2;
+    this.block1LinkDom = document.getElementById("unique__block1Link");
+    this.block2LinkDom = document.getElementById("unique__block2Link");
+    this.block3LinkDom = document.getElementById("unique__block3Link");
+    this.block1Dom = document.getElementById("unique__block1");
+    this.block2Dom = document.getElementById("unique__block2");
+    this.block3Dom = document.getElementById("unique__block3");
+    this.arrLeftDom = document.getElementById("unique__arrowLeft");
+    this.arrRightDom = document.getElementById("unique__arrowRight");
+}
+
+
+Unique.prototype.init = function() {
+    this.arrLeftDom.addEventListener(
+        "click", 
+        this.setState.bind(this, "remove", 1)
+    );
+    this.arrRightDom.addEventListener(
+        "click", 
+        this.setState.bind(this, "add", 1)
+    );
+    this.block1LinkDom.addEventListener(
+        "click", 
+        this.setState.bind(this, "set", 0)
+    );
+    this.block2LinkDom.addEventListener(
+        "click", 
+        this.setState.bind(this, "set", 1)
+    );
+    this.block3LinkDom.addEventListener(
+        "click", 
+        this.setState.bind(this, "set", 2)
+    );
+    this.block1Dom.addEventListener(
+        "click", 
+        this.setState.bind(this, "set", 0)
+    );
+    this.block2Dom.addEventListener(
+        "click", 
+        this.setState.bind(this, "set", 1)
+    );
+    this.block3Dom.addEventListener(
+        "click", 
+        this.setState.bind(this, "set", 2)
+    );
+}
+
+Unique.prototype.setState = function(event, state) {
+    let lastState = this.state;
+    switch(event) {
+        case 'remove':
+            this.state -= state;
+            break;
+        case 'add':
+            this.state += state;
+            break;
+        case 'set':
+            this.state = state;
+            break;
+        default:
+            break;
+    }
+
+    if(this.state > this.lastState)
+        this.state = this.lastState;
+    else if(this.state < 0)
+        this.state = 0;
+    console.log(
+        this.state
+    );
+    if(lastState != this.state)
+        this.editContent();
+}
+
+
+Unique.prototype.editContent = function() {
+    this.block1LinkDom.classList.remove("active");
+    this.block2LinkDom.classList.remove("active");
+    this.block3LinkDom.classList.remove("active");
+    this.block1Dom.classList.remove("active");
+    this.block2Dom.classList.remove("active");
+    this.block2Dom.classList.remove("leftActive");
+    this.block2Dom.classList.remove("rightActive");
+    this.block3Dom.classList.remove("active");
+
+    switch(this.state) {
+        case 0:
+            this.block1LinkDom.classList.add("active");
+            this.block1Dom.classList.add("active");
+            this.block2Dom.classList.add("leftActive");
+            break;
+        case 1:
+            this.block2LinkDom.classList.add("active");
+            this.block2Dom.classList.add("active");
+            break;
+        case 2:
+            this.block3LinkDom.classList.add("active");
+            this.block3Dom.classList.add("active");
+            this.block2Dom.classList.add("rightActive");
             break;
     }
 }
