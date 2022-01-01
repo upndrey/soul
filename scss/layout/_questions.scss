@@ -1,0 +1,115 @@
+.questions {
+    position: relative;
+    z-index: 6;
+    &__wrapper {
+        position: relative;
+        overflow: hidden;
+        padding-top: 100px;
+        padding-bottom: 100px;
+        z-index: 5;
+        &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: inherit;
+            background: linear-gradient(268.5deg, #715DA0 2.16%, #6674AF 49.44%, #587DB1 96.33%);
+            filter: blur(200px);
+        }
+    }
+
+    &>h2 {
+        text-align: center;
+    }
+
+    &>p {
+        margin-bottom: 50px;
+    }
+
+    form {
+        width: 100%;
+        max-width: 950px;
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        input {
+            font-family: Lato-Regular;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 18px;
+            letter-spacing: 0em;
+        }
+
+        input[type=text],
+        input[type=email]
+         {
+            border: 1px solid #FFFFFF;
+            box-sizing: border-box;
+            background: transparent;
+            filter: drop-shadow(0px 5px 12px rgba(95, 89, 105, 0.14));
+            border-radius: 90px;
+            color: #fff;
+            padding: 20px 27px;
+        }
+
+        input[name=name],
+        input[name=email] {
+            max-width: 470px;
+            width: 100%;
+            margin-bottom: 24px;
+        }
+
+        input[name=text] {
+            width: 100%;
+            margin-bottom: 24px;
+        }
+
+        div {
+            width: 100%;
+            margin-bottom: 24px;
+            text-align: left;
+            label, input {
+                cursor: pointer;
+            }
+
+            a {
+                text-decoration: underline;
+            }
+        }
+
+        input[type=submit] {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 464px;
+            height: 55px;
+            border: 0;
+            color: #fff;
+            background: linear-gradient(269.48deg, #EDA6C9 2.9%, #D76DA0 97.08%);
+            box-shadow: 0px 4px 12px rgba(120, 98, 163, 0.31);
+            border-radius: 90px;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin: auto;
+        }
+    }
+    ::-webkit-input-placeholder { /* Chrome */
+        color: #fff;
+    }
+    :-ms-input-placeholder { /* IE 10+ */
+        color: #fff;
+    }
+    ::-moz-placeholder { /* Firefox 19+ */
+        color: #fff;
+        opacity: 1;
+    }
+    :-moz-placeholder { /* Firefox 4 - 18 */
+        color: #fff;
+        opacity: 1;
+    }
+}

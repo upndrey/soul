@@ -1,3 +1,106 @@
-// -----------------------------------------------------------------------------
-// This file contains all styles related to the footer of the site/application.
-// -----------------------------------------------------------------------------
+.footer {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    z-index: 6;
+    &__wrapper {
+        position: relative;
+        overflow: hidden;
+        padding-top: 100px;
+        padding-bottom: 50px;
+        z-index: 5;
+        &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: inherit;
+            background: linear-gradient(268.5deg, #715DA0 2.16%, #6674AF 49.44%, #587DB1 96.33%);
+            filter: blur(200px);
+        }
+    }
+
+    &__politics {
+        display: flex;
+        flex-direction: column;
+
+        a {
+            text-decoration: underline;
+        }
+    }
+    
+
+    &__logo {
+        width: 219px;
+        height: 67px;
+        @include image("footer__logo.svg");
+        margin-bottom: 20px;
+    }
+
+    &__links {
+        display: flex;
+        justify-content: space-between;
+    }
+    ul {
+        margin: 0;
+        padding: 0;
+        li {
+            list-style: none;
+            font-family: Lato-Regular;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 39px;
+            letter-spacing: 0em;
+            text-align: left;
+        }
+    }
+
+    &__media {
+        button {
+            width: 220px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Lato-Regular;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 16px;
+            letter-spacing: 0em;
+            text-align: center;
+            text-transform: uppercase;
+            border: 1px solid #FFFFFF;
+            background: transparent;
+            color: #fff;
+            box-sizing: border-box;
+            filter: drop-shadow(0px 3px 12px rgba(234, 157, 195, 0.59));
+            border-radius: 90px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+    }
+    &__social {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &>* {
+            margin: 0 15px;
+        }
+
+        .inst {
+            width: 24px;
+            height: 24px;
+            @include image("nav__inst.png");
+        }
+        .login {
+            width: 21px;
+            height: 24px;
+            @include image("nav__login.png");
+        }
+    }
+}

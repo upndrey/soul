@@ -12,6 +12,9 @@ function main() {
     author.init();
     const mission = new Mission("mission__canvasStatic", "mission__canvas");
     mission.init();
+
+    const courses = new Courses();
+    courses.init();
 }
 
 // Calc
@@ -740,6 +743,7 @@ Trust.prototype.editContent = function() {
     }
 }
 
+// Unique
 function Unique() {
     this.state = 0;
     this.lastState = 2;
@@ -846,7 +850,6 @@ Unique.prototype.editContent = function() {
 }
 
 // Mission
-
 function Mission(staticId, dynamicId) {
     this.staticCanvas = document.getElementById(staticId);
     this.dynamicCanvas = document.getElementById(dynamicId);
@@ -936,3 +939,44 @@ Mission.prototype.drawCircle = function(id) {
     this.staticCtx.stroke();
     this.staticCtx.closePath();
 };
+
+// Courses
+function Courses() {
+    this.state = 0;
+    this.lastState = 2;
+    this.block1LinkDom = document.getElementById("courses__more1");
+    this.block2LinkDom = document.getElementById("courses__more2");
+    this.block3LinkDom = document.getElementById("courses__more3");
+    this.block4LinkDom = document.getElementById("courses__more4");
+    this.block1Dom = document.getElementById("courses__additional1");
+    this.block2Dom = document.getElementById("courses__additional2");
+    this.block3Dom = document.getElementById("courses__additional3");
+    this.block4Dom = document.getElementById("courses__additional4");
+}
+
+
+Courses.prototype.init = function() {
+    this.block1LinkDom.addEventListener(
+        "click", 
+        this.toggle.bind(this, this.block1Dom, this.block1LinkDom)
+    );
+    this.block2LinkDom.addEventListener(
+        "click", 
+        this.toggle.bind(this, this.block2Dom, this.block2LinkDom)
+    );
+    this.block3LinkDom.addEventListener(
+        "click", 
+        this.toggle.bind(this, this.block3Dom, this.block3LinkDom)
+    );
+    this.block4LinkDom.addEventListener(
+        "click", 
+        this.toggle.bind(this, this.block4Dom, this.block4LinkDom)
+    );
+}
+
+
+Courses.prototype.toggle = function(blockDom, linkDom) {
+    blockDom.classList.toggle("hidden");
+    linkDom.innerText = linkDom.innerText == "Подробнее" ? "Свернуть" : "Подробнее";
+
+}
