@@ -20,6 +20,7 @@
             background: linear-gradient(106.81deg, 
             #F1A8CA 4.48%, #5C519A 34.39%, #5B60A2 62.78%, #53BBD1 97.26%);
             filter: blur(160px);
+            @include image("header__bg.png", cover);
             z-index: 1;
         }
         &:after {
