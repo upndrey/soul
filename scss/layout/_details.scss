@@ -41,7 +41,7 @@
         width: 590px;
         height: 590px;
         margin: auto;
-        margin-top: 83px;
+        margin-top: 87px;
         background: #000;
         border-radius: 400px;
         display: flex;
@@ -49,14 +49,20 @@
         justify-content: center;
         overflow: hidden;
         transition: 2s;
+        @media (max-width: $breakpoint_xl) {
+            margin-top: 83px;
+        }
 
         #details__video {
-            max-width: calc(100% - 60px);
+            max-width: calc(100% - 155px);
             height: 590px;
         }
 
         &.active {
-            width: calc(100% - 78px);
+            width: calc(100% - 170px);
+            @media (max-width: $breakpoint_xl) {
+                width: calc(100% - 90px);
+            }
             border-radius: 5px;
             #details__video {
                 max-width: 100%;
