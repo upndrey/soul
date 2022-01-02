@@ -126,9 +126,16 @@
         background: linear-gradient(269.48deg, #EDA6C9 2.9%, #D76DA0 97.08%);
         border: 0;
         cursor: pointer;
+        &:hover {
+            background: linear-gradient(269.48deg, #F09FE0 2.9%, #EA5DA0 109.39%);
+        }
         @media (max-width: $breakpoint_xl) {
             max-width: 250px;
         }
+    }
+
+    h2 {
+        margin-bottom: 20px;
     }
 
     &__transformed {
@@ -280,10 +287,16 @@
                     background: linear-gradient(269.48deg, #EDA6C9 2.9%, #D76DA0 97.08%);
                     box-shadow: 0px 4px 12px rgba(92, 81, 154, 0.29);
                     border-radius: 90px;
+                    &:hover {
+                        background: linear-gradient(269.48deg, #F09FE0 2.9%, #EA5DA0 109.39%);
+                    }
 
                     &:nth-child(2) {
                         background: linear-gradient(244.24deg, #A9D1FA 8.88%, #8C80CF 84.02%);
                         box-shadow: 0px 4px 12px #5572A8;
+                        &:hover {
+                            background: linear-gradient(244.24deg, #59BBE9 8.88%, #4E55BF 84.02%);
+                        }
                     }
                 }
             }

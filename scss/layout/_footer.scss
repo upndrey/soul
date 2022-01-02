@@ -28,6 +28,9 @@
 
         a {
             text-decoration: underline;
+            &:hover {
+                color: #EA9DC3;
+            }
         }
     }
     
@@ -55,6 +58,12 @@
             line-height: 39px;
             letter-spacing: 0em;
             text-align: left;
+            a {
+                &:hover {
+                    text-decoration: none;
+                    color: #EA9DC3;
+                }
+            }
         }
     }
 
@@ -81,6 +90,10 @@
             border-radius: 90px;
             cursor: pointer;
             margin-bottom: 20px;
+            &:hover {
+                color: #5A6AA7;
+                background: #fff;
+            }
         }
     }
     &__social {
@@ -96,11 +109,19 @@
             width: 24px;
             height: 24px;
             @include image("nav__inst.png");
+            cursor: pointer;
+            &:hover {
+                filter: brightness(0) invert(86%) sepia(95%) saturate(7128%) hue-rotate(282deg) brightness(94%) contrast(92%);
+            }
         }
         .login {
             width: 21px;
             height: 24px;
             @include image("nav__login.png");
+            cursor: pointer;
+            &:hover {
+                filter: brightness(0) invert(86%) sepia(95%) saturate(7128%) hue-rotate(282deg) brightness(94%) contrast(92%);
+            }
         }
     }
 }

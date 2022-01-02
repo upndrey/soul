@@ -5,7 +5,6 @@
     &__wrapper {
         position: relative;
         padding-top: 100px;
-        height: 700px;
         z-index: 5;
         &:before {
             content: '';
@@ -21,6 +20,7 @@
 
     h2 {
         text-align: center;
+        margin-bottom: 20px;
     }
 
     h2+p {

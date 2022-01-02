@@ -78,6 +78,9 @@
 
             a {
                 text-decoration: underline;
+                &:hover {
+                    color: #EA9DC3;
+                }
             }
         }
 
@@ -96,6 +99,9 @@
             text-transform: uppercase;
             cursor: pointer;
             margin: auto;
+            &:hover {
+                background: linear-gradient(269.48deg, #F09FE0 2.9%, #EA5DA0 109.39%);
+            }
         }
     }
     ::-webkit-input-placeholder { /* Chrome */
