@@ -1,0 +1,318 @@
+.popup {
+    display: none;
+    &.active {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        border-radius: 500px;
+        background: #fff;
+        color: #000;
+        z-index: 999;
+
+        .close {
+            position: absolute;
+            font-size: 50px;
+            font-weight: 300;
+            color: #fff;
+            right: 0;
+            top: 0;
+            cursor: pointer;
+            &:hover {
+                color: #EA9DC3;
+            }
+        }
+
+        .close2 {
+            color: #EA9DC3;
+            font-family: Lato-Regular;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 16px;
+            letter-spacing: 0em;
+            text-align: center;
+            text-transform: uppercase;
+            margin-top: 40px;
+            cursor: pointer;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    &__wrapper {
+        display: none;
+        &.active {
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, .2);
+        }
+    }
+    
+}
+
+.lid__popup.active, 
+.buy__popup.active , 
+.login__popup.active, 
+.registration__popup.active,
+.step1__popup,
+.step2__popup,
+.step3__popup {
+    width: 700px;
+    height: 700px;
+    max-width: 100%;
+    padding: 25px;
+
+    h3 {
+        color: #364277;
+        margin-bottom: 20px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        input {
+            font-family: Lato-Regular;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 18px;
+            letter-spacing: 0em;
+        }
+
+        input[type=text],
+        input[type=email],
+        input[type=password] 
+         {
+            border: 1px solid #364277;
+            box-sizing: border-box;
+            background: transparent;
+            filter: drop-shadow(0px 5px 12px rgba(95, 89, 105, 0.14));
+            border-radius: 90px;
+            padding: 20px 27px;
+            color: #000;
+        }
+
+        input[name=name],
+        input[name=email],
+        input[name=password] {
+            max-width: 470px;
+            width: 100%;
+            margin-bottom: 24px;
+        }
+
+        input[name=text] {
+            width: 100%;
+            margin-bottom: 24px;
+        }
+        
+        div {
+            width: 100%;
+            margin-bottom: 24px;
+            text-align: left;
+            label, input {
+                cursor: pointer;
+                font-size: 16px;
+            }
+
+            a {
+                text-decoration: underline;
+                &:hover {
+                    color: #EA9DC3;
+                }
+            }
+        }
+        
+        input[type=submit] {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 464px;
+            height: 55px;
+            border: 0;
+            color: #fff;
+            background: linear-gradient(269.48deg, #EDA6C9 2.9%, #D76DA0 97.08%);
+            box-shadow: 0px 4px 12px rgba(120, 98, 163, 0.31);
+            border-radius: 90px;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin: auto;
+            &:hover {
+                background: linear-gradient(269.48deg, #F09FE0 2.9%, #EA5DA0 109.39%);
+            }
+        }
+    }
+}
+
+.buy__popup.active {
+    width: 950px;
+    height: 950px;
+    h3 {
+        span {
+            color: #EA9DC3;
+        }
+    }
+
+    &>p {
+        width: 700px;
+        max-width: 100%;
+        font-family: Lato-Light;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 300;
+        letter-spacing: 0em;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    form {
+        width: 700px;
+        max-width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        input[type=text],
+        input[type=email],
+        input[type=password] {
+            width: 342px;
+            max-width: 100%;
+            margin-bottom: 10px;
+        }
+
+        label {
+            
+            margin-left: 10px;
+        }
+
+        .buy__checkbox {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .buy__price {
+            margin: auto;
+            font-family: Lato-Medium;
+            font-size: 30px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 16px;
+            letter-spacing: 0em;
+            text-align: right;
+            color: #495EB7;
+            margin-bottom: 37px;
+            span {
+                margin-left: 10px;
+                text-decoration: line-through;
+                font-family: Lato-Regular;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 16px;
+                letter-spacing: 0em;
+                text-align: left;
+                color: #B5B9CC;
+            }
+        }
+
+        .buy__card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            input[name=card] {
+                max-width: 100%;
+                width: 250px;
+                margin-top: 10px;
+                height: 55px;
+                border-right: 0;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+            input[name=cardDate] {
+                max-width: 100%;
+                width: 100px;
+                margin-top: 10px;
+                height: 55px;
+                padding-left: 5px;
+                border-left: 0;
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+            }
+
+            input[type=submit] {
+                margin-left: 10px;
+                max-width: 100%;
+                width: 340px;
+            }
+        }
+    }
+}
+
+.lid__popup_done.active {
+    width: 680px;
+    height: 680px;
+    padding: 35px;
+
+    h3 {
+        color: #364277;
+    }
+}
+
+
+.login__popup.active, 
+.registration__popup.active {
+    h3 {
+        border-bottom: 2px solid #BDC1D2;
+        a {
+            color: #BDC1D2;
+            &.active {
+                color: #364277;
+                padding-bottom: 2px;
+                border-bottom: 2px solid #364277;
+            }
+            &:hover {
+                color: #364277;
+                text-decoration: none;
+                padding-bottom: 2px;
+                border-bottom: 2px solid #364277;
+
+            }
+        }
+    }
+    form {
+        margin-top: 15px;
+    }
+
+    .login__forget {
+        font-size: 16px;
+        color: #364277;
+        text-decoration: underline;
+        margin-top: 10px;
+        margin-left: auto;
+    }
+}
+
+.step1__popup,
+.step2__popup,
+.step3__popup {
+    p {
+        text-align: center;
+    }
+}
