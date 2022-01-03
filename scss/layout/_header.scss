@@ -17,10 +17,7 @@
             display: block;
             width: 100%;
             height: inherit;
-            background: linear-gradient(106.81deg, 
-            #F1A8CA 4.48%, #5C519A 34.39%, #5B60A2 62.78%, #53BBD1 97.26%);
-            filter: blur(160px);
-            @include image("header__bg.png", cover);
+            @include image("header__bg.svg", cover);
             z-index: 1;
         }
         &:after {
@@ -32,7 +29,7 @@
             height: inherit;
             background: image("header__stars.png");
             z-index: 2;
-            opacity: 0.3;
+            opacity: 0.6;
         }
     }
 

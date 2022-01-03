@@ -14,8 +14,7 @@
             top: 0;
             width: 100%;
             height: inherit;
-            background: linear-gradient(268.5deg, #715DA0 2.16%, #6674AF 49.44%, #587DB1 96.33%);
-            filter: blur(200px);
+            @include image("questions__bg.svg", cover);
         }
     }
 

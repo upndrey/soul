@@ -13,11 +13,10 @@
             content: '';
             position: absolute;
             left: 0;
-            top: 0;
+            top: -220px;
             width: 100%;
-            height: inherit;
-            background: linear-gradient(268.5deg, #715DA0 2.16%, #6674AF 49.44%, #587DB1 96.33%);
-            filter: blur(200px);
+            height: 1337px;
+            @include image("details__bg.svg", cover);
         }
     }
 

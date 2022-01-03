@@ -11,18 +11,20 @@
 
         &.transformed {
             height: 1300px;
+            &:before {
+                height: 1700px;  
+                @include image("calc__bg_transformed.svg", cover);
+            }
         }
 
         &:before {
             content: '';
             position: absolute;
-            top: 0; 
+            top: -250px; 
             display: block; 
             width: 100%;
-            height: inherit;
-            background: linear-gradient(95.49deg, 
-            #382C68 -28.43%, #5A65A5 35.38%, #5C86B6 93.77%);
-            filter: blur(160px);
+            height: 900px;  
+            @include image("calc__bg.svg", cover);
             z-index: 1;
         }
         &:after {
@@ -32,9 +34,9 @@
             display: block;
             width: 100%;
             height: inherit;
-            background: image("header__stars.png");
+            background: image("header__stars.png", cover);
             z-index: 2;
-            opacity: 0.3;
+            opacity: 0.6;
         }
     }
 
