@@ -32,6 +32,9 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        @media (max-width: $breakpoint_md) {
+            display: none;
+        }
         &>li {
             font-family: Lato-Medium;
             font-style: normal;
@@ -61,7 +64,9 @@
         @media (max-width: $breakpoint_xl) {
             margin-left: 20px;
         }
-
+        @media (max-width: $breakpoint_md) {
+            max-width: fit-content;
+        }
         .inst {
             width: 24px;
             height: 24px;
@@ -76,6 +81,105 @@
             @include image("nav__login.png");
             &:hover {
                 filter: brightness(0) invert(86%) sepia(95%) saturate(7128%) hue-rotate(282deg) brightness(94%) contrast(92%);
+            }
+            @media (max-width: $breakpoint_md) {
+                margin-left: 20px;
+            }
+        }
+    }
+
+    .burger {
+        display: none;
+        @media (max-width: $breakpoint_md) {
+            display: flex;
+        }
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        width: 35px;
+        height: 30px;
+        cursor: pointer;
+        transition: .4s;
+        z-index: 20;
+        margin-left: 20px;
+        &__icon {
+            display: block;
+            position: relative;
+            bottom: 8px;
+            background: #fff;
+            width: 90%;
+            height: 2px;
+            transition: .4s;
+
+            &::after,
+            &::before {
+                content: "";
+                display: block;
+                position: absolute;
+                background: #fff;
+                width: 100%;
+                height: 2px;
+                transition: .4s;
+                right: 0;
+            }
+
+            &::after {
+                top: 8px;
+                width: 80%;
+            }
+            &::before {
+                top: 16px;
+                width: 50%;
+            }
+        }
+
+        &.active>.burger__icon {
+            background: transparent;
+
+            &::before,
+            &::after {
+                top: 8px;
+                width: 100%;
+            }
+
+            &::after {
+                transform: rotate(-45deg);
+                -webkit-transform: rotate(-45deg);
+            }
+
+            &::before {
+                transform: rotate(45deg);
+                -webkit-transform: rotate(45deg);
+            }
+        }
+    }
+}
+.mobileNav__wrapper {
+    position: fixed;
+    top: 112px;
+    left: 0;
+    right: 0;
+    display: block;
+    z-index: 10;
+    background: rgba(0, 0, 0, .3);
+    &.hidden {
+        display: none;
+    }
+    ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        li {
+            list-style: none;
+            font-size: 16px;
+            margin-bottom: 15px;
+            a {
+                &:hover {
+                    text-decoration: none;
+                    color: #EA9DC3;
+                }
             }
         }
     }

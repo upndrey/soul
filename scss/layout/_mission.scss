@@ -7,6 +7,9 @@
         padding-top: 250px;
         padding-bottom: 200px;
         z-index: 5;
+        @media (max-width: $breakpoint_md) {
+            padding-bottom: 0px;
+        }
         &:before {
             content: '';
             position: absolute;

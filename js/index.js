@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", main);
 function main() {
+    const nav = new Nav();
+    nav.init();
     const calc = new Calc("calc__canvas", "calc__process");
     calc.init();
     const details = new Details("details__canvas", "details__video");
@@ -12,10 +14,20 @@ function main() {
     author.init();
     const mission = new Mission("mission__canvasStatic", "mission__canvas");
     mission.init();
-
     const courses = new Courses();
     courses.init();
 }
+
+function Nav() {
+
+}
+
+Nav.prototype.init = function() {
+    document.querySelector(".burger").addEventListener("click", () => {
+        document.querySelector(".burger").classList.toggle("active");
+        document.querySelector(".mobileNav__wrapper").classList.toggle("hidden");
+    });
+};
 
 // Calc
 function Calc(canvasId = "canvas", buttonId = "someButton") {
@@ -311,20 +323,26 @@ Calc.prototype.drawSmallCircles = function() {
 Calc.prototype.transformLayers = function(stepsCount) {
     if(this.layer1Params && this.layer2Params && this.layer3Params) {
         this.domStartModification();
-        this.transformationStep = 0;
-        this.rotation = 25 * 1/stepsCount;
-
         window.scroll(0,findPos(document.getElementById("calc__transformed")));
-        let interval = setInterval(() => {
-            this.transformationHandler(stepsCount);
-            if(this.transformationStep == stepsCount) {
-                clearInterval(interval);
-                this.domEndModification();
-        
-                this.setTemporaryParams();
-                this.transformationStep = 0;
-            }
-        }, 30);
+        mq = window.matchMedia( "(max-width: 1160px)" );
+        if (!mq.matches) {
+            this.transformationStep = 0;
+            this.rotation = 25 * 1/stepsCount;
+
+            let interval = setInterval(() => {
+                this.transformationHandler(stepsCount);
+                if(this.transformationStep == stepsCount) {
+                    clearInterval(interval);
+                    this.domEndModification();
+            
+                    this.setTemporaryParams();
+                    this.transformationStep = 0;
+                }
+            }, 30);
+        }
+        else {
+            this.domEndModification();
+        }
     }
 };
 
@@ -502,10 +520,6 @@ function Details(canvasId = "canvas", videoId = "video") {
     if (mq.matches) {
         this.width = 720;
     }
-    mq = window.matchMedia( "(max-width: 760px)" );
-    if (mq.matches) {
-        this.width = 720;
-    }
     this.centerX = this.width/2;
     this.centerY = this.height/2;
 }
@@ -518,17 +532,17 @@ Details.prototype.init = function() {
         this.centerY = 255;
     }
     let interval;
-    mq = window.matchMedia( "(max-width: 760px)" );
+    mq = window.matchMedia( "(max-width: 1160px)" );
     if (!mq.matches) {
         interval = setInterval(this.draw.bind(this), 40);
     }
     if(this.canvasId != "author__canvas") {
         this.video.addEventListener("click", (e) => {
-            e.preventDefault();
             this.transform(interval);
             this.editDom();
         }, {once: true});
     }
+    
 };
 
 Details.prototype.draw = function() {
@@ -625,7 +639,10 @@ Details.prototype.drawMovingCircle = function(id) {
 };
 
 Details.prototype.editDom = function() {
-    document.getElementById("video__container").classList.add("active");
+    mq = window.matchMedia( "(max-width: 1160px)" );
+    if (!mq.matches) {
+        document.getElementById("video__container").classList.add("active");
+    }
 };
 
 Details.prototype.transform = function(drawInterval) {

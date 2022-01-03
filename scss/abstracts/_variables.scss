@@ -52,12 +52,7 @@ $width_lg: 1120px !default;
 /// md breakpoint
 $breakpoint_md: 1160px !default;
 /// md container
-$width_md: 720px !default;
-/// sm breakpoint
-$breakpoint_sm: 760px !default;
-/// sm container
-$width_sm: 100% !default;
-
+$width_md: calc(100% - 40px)  !default;
 
 /// Relative or absolute URL where all assets are served from
 /// @type String

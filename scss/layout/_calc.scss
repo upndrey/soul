@@ -1,6 +1,9 @@
 .calc {
     position: relative;
     z-index: 3;
+    @media (max-width: $breakpoint_md) {
+        height: fit-content;
+    }
     &.transformed {
         z-index: 10;
     }
@@ -11,6 +14,9 @@
 
         &.transformed {
             height: 1300px;
+            @media (max-width: $breakpoint_md) {
+                height: fit-content;
+            }
             &:before {
                 height: 1700px;  
                 @include image("calc__bg_transformed.svg", cover);
@@ -27,17 +33,6 @@
             @include image("calc__bg.svg", cover);
             z-index: 1;
         }
-        &:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            display: block;
-            width: 100%;
-            height: inherit;
-            background: image("header__stars.png", cover);
-            z-index: 2;
-            opacity: 0.6;
-        }
     }
 
     #calc__canvas {
@@ -51,6 +46,11 @@
             top: -150px;
             left: -150px;
         }
+        @media (max-width: $breakpoint_md) {
+            max-width: 100%;
+            top: 0px;
+            left: 0px;
+        }
     }
 
     #calc__canvas.transformed {
@@ -60,6 +60,11 @@
             left: calc(50% - 370px);
             top: 300px;
         }
+        @media (max-width: $breakpoint_md) {
+            max-width: 100%;
+            top: 300px;
+            left: 0px;
+        }
     }
 
     &__block {
@@ -68,16 +73,21 @@
         width: 100%;
         top: 150px;
         max-width: 750px;
-        @media (max-width: $breakpoint_xl) {
-            max-width: 600px;
-            width: fit-content;
-        }
         float: right;
         opacity: 1;
         transition: 2s;
         &.hidden {
             opacity: 0;
             z-index: 1;
+        }
+        @media (max-width: $breakpoint_xl) {
+            max-width: 600px;
+            width: fit-content;
+        }
+        @media (max-width: $breakpoint_md) {
+            width: 100%;
+            float: none;
+            margin: auto;
         }
     }
     &__inputs {
@@ -88,9 +98,6 @@
             font-family: Lato-Regular;
             width: 100%;
             max-width: 342px;
-            @media (max-width: $breakpoint_xl) {
-                max-width: 250px;
-            }
             height: 55px;
             display: flex;
             background: transparent;
@@ -100,14 +107,21 @@
             box-sizing: border-box;
             padding: 10px 20px;
             margin-bottom: 24px;
+
             @media (max-width: $breakpoint_xl) {
+                max-width: 250px;
                 margin-bottom: 12px;
             }
-
+            @media (max-width: $breakpoint_md) {
+                max-width: 100%;
+            }
             &:nth-child(2n + 1) {
                 margin-right: 24px;
                 @media (max-width: $breakpoint_xl) {
                     margin-right: 12px;
+                }
+                @media (max-width: $breakpoint_md) {
+                    margin-right: 0;
                 }
             }
         }
@@ -134,6 +148,10 @@
         @media (max-width: $breakpoint_xl) {
             max-width: 250px;
         }
+        @media (max-width: $breakpoint_md) {
+            width: 100%;
+            max-width: 100%;
+        }
     }
 
     h2 {
@@ -151,10 +169,17 @@
         &.hidden {
             opacity: 0;
         }
+        @media (max-width: $breakpoint_md) {
+            position: relative;
+            height: fit-content;
+        }
 
         h2 {
             text-align: center;
             margin-bottom: 50px;
+        }
+        @media (max-width: $breakpoint_md) {
+            max-width: 100%;
         }
 
         .calc{
@@ -162,12 +187,12 @@
                 width: 100%;
                 display: flex;
                 justify-content: space-between;
+                @media (max-width: $breakpoint_md) {
+                    flex-direction: column;
+                }
                 &>div {
                     font-family: Lato-Regular;
                     width: 342px;
-                    @media (max-width: $breakpoint_xl) {
-                        width: 250px;
-                    }
                     height: 66px;
                     display: flex;
                     align-items: center;
@@ -178,6 +203,14 @@
                     border-radius: 90px;
                     box-sizing: border-box;
                     padding: 10px 20px;
+                    @media (max-width: $breakpoint_xl) {
+                        width: 250px;
+                    }
+                    @media (max-width: $breakpoint_md) {
+                        width: 100%;
+                        margin-bottom: 10px;
+                        height: 50px;
+                    }
                 }
             }
 
@@ -186,14 +219,22 @@
                 width: 100%;
                 height: 600px;
                 margin-top: 70px;
+                @media (max-width: $breakpoint_md) {
+                    height: fit-content;
+                    margin-bottom: 20px;
+                }
                 &>div {
                     width: 100%;
                     max-width: 430px;
+                    display: flex;
+                    flex-direction: column;
                     @media (max-width: $breakpoint_xl) {
                         max-width: 325px;
                     }
-                    display: flex;
-                    flex-direction: column;
+                    @media (max-width: $breakpoint_md) {
+                        max-width: 100%;
+                        margin-bottom: 30px;
+                    }
                     &>p:nth-child(1) {
                         position: relative;
                         width: 100%;
@@ -209,24 +250,41 @@
                         padding: 0 30px 22px 30px;
                         margin-bottom: 10px;
                         border-bottom: 1px solid #EA9DC3;
+                        @media (max-width: $breakpoint_md) {
+                            max-width: 100%;
+                            text-align: center;
+                        }
                     }
     
                     &:nth-child(1) {
                         position: absolute;
                         left: 0;
                         top: 0;
+                        @media (max-width: $breakpoint_md) {
+                            position: relative;
+                        }
                         &>p:nth-child(1) {
                             left: 30px;
                             text-align: right;
                             align-self: flex-end;
+                            @media (max-width: $breakpoint_md) {
+                                left: 0;
+                                text-align: center;
+                                align-self: flex-start;
+                            }
                         }
                         &>p:nth-child(2) {
                             max-width: 424px;
+                            text-align: right;
+                            align-self: flex-end;
                             @media (max-width: $breakpoint_xl) {
                                 max-width: 325px;
                             }
-                            text-align: right;
-                            align-self: flex-end;
+                            @media (max-width: $breakpoint_md) {
+                                max-width: 100%;
+                                text-align: left;
+                                align-self: flex-start;
+                            }
                         }
                     }
     
@@ -234,18 +292,32 @@
                         position: absolute;
                         left: 0px;
                         top: 260px;
+                        @media (max-width: $breakpoint_md) {
+                            position: relative;
+                            top: 0;
+                        }
                         &>p:nth-child(1) {
                             left: 30px;
                             text-align: right;
                             align-self: flex-end;
+                            @media (max-width: $breakpoint_md) {
+                                left: 0;
+                                text-align: center;
+                                align-self: flex-start;
+                            }
                         }
                         &>p:nth-child(2) {
                             max-width: 336px;
+                            text-align: right;
+                            align-self: flex-end;
                             @media (max-width: $breakpoint_xl) {
                                 max-width: 250px;
                             }
-                            text-align: right;
-                            align-self: flex-end;
+                            @media (max-width: $breakpoint_md) {
+                                max-width: 100%;
+                                text-align: left;
+                                align-self: flex-start;
+                            }
                         }
                     }
     
@@ -253,18 +325,32 @@
                         position: absolute;
                         right: 0;
                         top: 50px;
+                        @media (max-width: $breakpoint_md) {
+                            position: relative;
+                            top: 0;
+                        }
                         &>p:nth-child(1) {
                             right: 30px;
                             align-self: flex-start;
-                            text-align-last: left;
+                            text-align: left;
+                            @media (max-width: $breakpoint_md) {
+                                right: 0;
+                                text-align: center;
+                                align-self: flex-start;
+                            }
                         }
                         &>p:nth-child(2) {
                             max-width: 434px;
+                            align-self: flex-start;
+                            text-align: left;
                             @media (max-width: $breakpoint_xl) {
                                 max-width: 250px;
                             }
-                            align-self: flex-start;
-                            text-align: left;
+                            @media (max-width: $breakpoint_md) {
+                                max-width: 100%;
+                                text-align: left;
+                                align-self: flex-start;
+                            }
                         }
                     }
                 }
@@ -277,6 +363,9 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                @media (max-width: $breakpoint_md) {
+                    flex-direction: column;
+                }
                 &>div {
                     cursor: pointer;
                     width: 342px;
@@ -289,6 +378,11 @@
                     background: linear-gradient(269.48deg, #EDA6C9 2.9%, #D76DA0 97.08%);
                     box-shadow: 0px 4px 12px rgba(92, 81, 154, 0.29);
                     border-radius: 90px;
+                    @media (max-width: $breakpoint_md) {
+                        max-width: 100%;
+                        font-size: 16px;
+                    }
+
                     &:hover {
                         background: linear-gradient(269.48deg, #F09FE0 2.9%, #EA5DA0 109.39%);
                     }
@@ -296,6 +390,9 @@
                     &:nth-child(2) {
                         background: linear-gradient(244.24deg, #A9D1FA 8.88%, #8C80CF 84.02%);
                         box-shadow: 0px 4px 12px #5572A8;
+                        @media (max-width: $breakpoint_md) {
+                            margin-top: 20px;
+                        }
                         &:hover {
                             background: linear-gradient(244.24deg, #59BBE9 8.88%, #4E55BF 84.02%);
                         }
@@ -308,18 +405,24 @@
             display: flex;
             justify-content: space-between;
             margin-top: 40px;
+            @media (max-width: $breakpoint_md) {
+                flex-direction: column;
+            }
 
             &__links {
                 width: 100%;
                 max-width: 464px;
-                @media (max-width: $breakpoint_xl) {
-                    max-width: 350px;
-                    margin-right: 20px;
-                }
                 height: 226px;
                 background: rgba(255, 255, 255, 0.14);
                 border-radius: 30px;
                 padding: 20px 30px;
+                @media (max-width: $breakpoint_xl) {
+                    max-width: 350px;
+                    margin-right: 20px;
+                }
+                @media (max-width: $breakpoint_md) {
+                    margin-bottom: 20px;
+                }
                 &>p {
                     cursor: pointer;
                     &.active {

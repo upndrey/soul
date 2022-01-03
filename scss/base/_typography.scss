@@ -34,6 +34,9 @@ h2 {
     font-size: 40px;
     line-height: 70px;
   }
+  @media (max-width: $breakpoint_md) {
+    line-height: 50px;
+  }
 }
 
 h3 {

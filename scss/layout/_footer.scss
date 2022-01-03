@@ -4,6 +4,10 @@
     justify-content: space-between;
     align-items: flex-start;
     z-index: 6;
+    @media (max-width: $breakpoint_md) {
+        flex-direction: column;
+        align-items: center;
+    }
     &__wrapper {
         position: relative;
         overflow: hidden;
@@ -26,6 +30,9 @@
         display: flex;
         flex-direction: column;
 
+        @media (max-width: $breakpoint_md) {
+            margin-bottom: 20px;
+        }
         a {
             text-decoration: underline;
             &:hover {
@@ -58,6 +65,9 @@
             line-height: 39px;
             letter-spacing: 0em;
             text-align: left;
+            @media (max-width: $breakpoint_md) {
+                text-align: center;
+            }
             a {
                 &:hover {
                     text-decoration: none;
@@ -68,6 +78,9 @@
     }
 
     &__media {
+        @media (max-width: $breakpoint_md) {
+            margin-top: 30px;
+        }
         button {
             width: 220px;
             height: 44px;

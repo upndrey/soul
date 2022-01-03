@@ -26,17 +26,6 @@
             }
             z-index: 1;
         }
-        &:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            display: block;
-            width: 100%;
-            height: inherit;
-            background: image("header__stars.png");
-            z-index: 2;
-            opacity: 0.6;
-        }
     }
 
     h1 {
