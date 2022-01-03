@@ -9,6 +9,9 @@
         position: relative;
         padding-top: 116px;
         height: 1080px;
+        @media (max-width: $breakpoint_xl) {
+            height: 700px;
+        }
         z-index: 5;
         &:before {
             content: '';
@@ -18,6 +21,9 @@
             width: 100%;
             height: inherit;
             @include image("header__bg.svg", cover);
+            @media (max-width: $breakpoint_xl) {
+                height: 900px;
+            }
             z-index: 1;
         }
         &:after {
@@ -37,6 +43,9 @@
         width: 100%;
         max-width: 585px;
         padding-top: 260px;
+        @media (max-width: $breakpoint_xl) {
+            padding-top: 100px;
+        }
     }
 
     &__imgWrapper {
@@ -49,6 +58,9 @@
         padding: 0;
         width: 100%;
         height: 1000px;
+        @media (max-width: $breakpoint_xl) {
+            height: 600px;
+        }
         overflow: hidden;
     }
 
@@ -58,6 +70,11 @@
         position: absolute;
         top: 91px;
         right: 200px;
+        @media (max-width: $breakpoint_xl) {
+            top: 50px;
+            width: 500px;
+            height: 500px;
+        }
         @include image("header__earth.png");
     }
 
@@ -67,6 +84,11 @@
         position: absolute;
         top: 524px;
         right: 0px;
+        @media (max-width: $breakpoint_xl) {
+            top: 250px;
+            width: 350px;
+            height: 350px;
+        }
         @include image("header__mars.png");
     }
 }

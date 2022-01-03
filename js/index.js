@@ -491,6 +491,9 @@ function Details(canvasId = "canvas", videoId = "video") {
     var mq = window.matchMedia( "(max-width: 1480px)" );
     if (mq.matches) {
         this.width = 1120;
+        this.height = 600;
+        this.radiusX = 280;
+        this.radiusY = 280;
     }
     else {
         this.width = 1440;
@@ -651,6 +654,7 @@ Details.prototype.transformCircle = function(params) {
     var mq = window.matchMedia( "(max-width: 1480px)" );
     if (mq.matches) {
         this.transformX = this.tFormula(params.transformX, 535);
+        this.transformY = this.tFormula(params.transformY, 260);
     }
     else {
         this.transformX = this.tFormula(params.transformX, 700);
@@ -663,7 +667,6 @@ Details.prototype.transformCircle = function(params) {
     if (mq.matches) {
         this.transformX = this.tFormula(params.transformX, );
     }
-    this.transformY = this.tFormula(params.transformY, 300);
 }
 
 Details.prototype.tFormula = function(startParam, endParam) {

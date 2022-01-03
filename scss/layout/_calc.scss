@@ -48,6 +48,7 @@
         transition: 2s;
         @media (max-width: $breakpoint_xl) {
             max-width: 900px;
+            top: -150px;
             left: -150px;
         }
     }
@@ -68,7 +69,6 @@
         top: 150px;
         max-width: 750px;
         @media (max-width: $breakpoint_xl) {
-            top: 0px;
             max-width: 600px;
             width: fit-content;
         }
