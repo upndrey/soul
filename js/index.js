@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", main);
 function main() {
+    const popup = new Popup();
+    popup.init();
     const nav = new Nav();
     nav.init();
     const calc = new Calc("calc__canvas", "calc__process");
@@ -18,6 +20,66 @@ function main() {
     courses.init();
 }
 
+// Popup
+function Popup() {
+    this.activePopupDom = null;
+    this.wrapperDom = document.getElementById("popup__wrapper");
+    this.lidDom = document.getElementById("lid__popup");
+    this.lidDoneDom = document.getElementById("lid__popup_done");
+    this.buyDom = document.getElementById("buy__popup");
+    this.loginDom = document.getElementById("login__popup");
+    this.registrationDom = document.getElementById("registration__popup");
+    this.step1Dom = document.getElementById("step1__popup");
+    this.step2Dom = document.getElementById("step2__popup");
+    this.step3Dom = document.getElementById("step3__popup");
+}
+
+Popup.prototype.init = function() {
+    this.openPopupHandler("lidPopupLink", this.lidDom);
+    this.openPopupHandler("lidDonePopupLink", this.lidDoneDom);
+    this.openPopupHandler("buyPopupLink", this.buyDom);
+    this.openPopupHandler("loginPopupLink1", this.loginDom);
+    this.openPopupHandler("loginPopupLink2", this.loginDom);
+    this.openPopupHandler("loginPopupLink3", this.loginDom);
+    this.openPopupHandler("registrationPopupLink1", this.registrationDom);
+    this.openPopupHandler("registrationPopupLink2", this.registrationDom);
+    this.openPopupHandler("step1PopupLink", this.step1Dom);
+    this.openPopupHandler("step2PopupLink", this.step2Dom);
+    this.openPopupHandler("step3PopupLink", this.step3Dom);
+
+    this.closePopupHandler();
+};
+
+Popup.prototype.openPopupHandler = function(linkId, popupDom) {
+    const popupLinkDom = document.getElementById(linkId);
+    popupLinkDom.addEventListener("click", (e) => {
+        e.preventDefault();
+        this.openPopup(popupDom);
+    });
+};
+
+Popup.prototype.openPopup = function(popupDom) {
+    if(this.activePopupDom) {
+        this.activePopupDom.classList.remove("active");
+    }
+    this.activePopupDom = popupDom;
+    this.wrapperDom.classList.add("active");
+    this.activePopupDom.classList.add("active");
+};
+
+Popup.prototype.closePopupHandler = function() {
+    document.querySelectorAll(".closePopup").forEach((closeDom) => {
+        closeDom.addEventListener("click", this.closePopup.bind(this));
+    });
+};
+
+Popup.prototype.closePopup = function() {
+    this.activePopupDom.classList.remove("active");
+    this.wrapperDom.classList.remove("active");
+    this.activePopupDom = null;
+};
+
+// Nav
 function Nav() {
 
 }

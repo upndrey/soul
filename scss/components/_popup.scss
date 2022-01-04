@@ -71,6 +71,10 @@
 .step3__popup {
     width: 700px;
     height: 700px;
+    @media (max-width: $breakpoint_xl) {
+        width: 600px;
+        height: 600px;
+    }
     max-width: 100%;
     padding: 25px;
 
@@ -104,6 +108,9 @@
             border-radius: 90px;
             padding: 20px 27px;
             color: #000;
+            @media (max-width: $breakpoint_xl) {
+                max-width: 350px;
+            }
         }
 
         input[name=name],
@@ -112,6 +119,9 @@
             max-width: 470px;
             width: 100%;
             margin-bottom: 24px;
+            @media (max-width: $breakpoint_xl) {
+                max-width: 350px;
+            }
         }
 
         input[name=text] {
@@ -142,6 +152,9 @@
             align-items: center;
             justify-content: center;
             max-width: 464px;
+            @media (max-width: $breakpoint_xl) {
+                max-width: 350px;
+            }
             height: 55px;
             border: 0;
             color: #fff;
@@ -161,6 +174,10 @@
 .buy__popup.active {
     width: 950px;
     height: 950px;
+    @media (max-width: $breakpoint_xl) {
+        height: 600px;
+        border-radius: 150px;
+    }
     h3 {
         span {
             color: #EA9DC3;
@@ -268,6 +285,10 @@
 .lid__popup_done.active {
     width: 680px;
     height: 680px;
+    @media (max-width: $breakpoint_xl) {
+        width: 600px;
+        height: 600px;
+    }
     padding: 35px;
 
     h3 {
@@ -286,13 +307,18 @@
                 color: #364277;
                 padding-bottom: 2px;
                 border-bottom: 2px solid #364277;
+                @media (max-width: $breakpoint_xl) {
+                    padding-bottom: 11px;
+                }
             }
             &:hover {
                 color: #364277;
                 text-decoration: none;
                 padding-bottom: 2px;
                 border-bottom: 2px solid #364277;
-
+                @media (max-width: $breakpoint_xl) {
+                    padding-bottom: 11px;
+                }
             }
         }
     }
