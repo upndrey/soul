@@ -13,9 +13,9 @@
             content: '';
             position: absolute;
             left: 0;
-            top: -120px;
+            top: -140px;
             width: 100%;
-            height: 1337px;
+            height: 1300px;
             @include image("details__bg.svg", cover);
             @media (max-width: $breakpoint_xl) {
                 top: -180px;

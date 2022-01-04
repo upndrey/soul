@@ -10,19 +10,23 @@
     }
     &__wrapper {
         position: relative;
-        overflow: hidden;
+        //overflow: hidden;
         padding-top: 100px;
         padding-bottom: 50px;
-        z-index: 5;
+        z-index: 6;
         &:before {
             content: '';
             position: absolute;
             left: 0;
-            top: 0;
+            top: -86px;
             width: 100%;
-            height: inherit;
-            background: linear-gradient(268.5deg, #715DA0 2.16%, #6674AF 49.44%, #587DB1 96.33%);
-            filter: blur(200px);
+            height: 400px;
+            @include image("footer__bg.svg", cover);
+            @media (max-width: $breakpoint_md) {
+                top: auto;
+                bottom: 0;
+                height: 700px;
+            }
         }
     }
 

@@ -3,10 +3,10 @@
     z-index: 6;
     &__wrapper {
         position: relative;
-        overflow: hidden;
+        //overflow: hidden;
         padding-top: 250px;
         padding-bottom: 200px;
-        z-index: 5;
+        z-index: 3;
         @media (max-width: $breakpoint_md) {
             padding-bottom: 0px;
         }
@@ -14,16 +14,16 @@
             content: '';
             position: absolute;
             left: 0;
-            top: 0;
+            top: -100px;
             width: 100%;
-            height: inherit;
+            height: 1100px;
             @include image("mission__bg.svg", cover);
         }
 
         #mission__canvas, #mission__canvasStatic {
             position: absolute;
             right: 0;
-            top: 0;
+            top: -200px;
         }
     }
 

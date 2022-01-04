@@ -26,7 +26,7 @@
         &:before {
             content: '';
             position: absolute;
-            top: -250px; 
+            top: -100px; 
             display: block; 
             width: 100%;
             height: 900px;  
@@ -48,7 +48,7 @@
         }
         @media (max-width: $breakpoint_md) {
             max-width: 100%;
-            top: 0px;
+            top: -100px;
             left: 0px;
         }
     }
@@ -62,7 +62,7 @@
         }
         @media (max-width: $breakpoint_md) {
             max-width: 100%;
-            top: 300px;
+            top: -100px;
             left: 0px;
         }
     }

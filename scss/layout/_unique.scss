@@ -3,17 +3,16 @@
     z-index: 6;
     &__wrapper {
         position: relative;
-        overflow: hidden;
         padding-top: 200px;
         padding-bottom: 100px;
-        z-index: 5;
+        overflow-x: hidden;
         &:before {
             content: '';
             position: absolute;
             left: 0;
-            top: 0;
+            top: -300px;
             width: 100%;
-            height: inherit;
+            height: 1400px;
             @include image("unique__bg.svg", cover);
         }
     }
@@ -24,6 +23,9 @@
         text-align: center;
         line-height: 65px;
         margin-bottom: 20px;
+        @media (max-width: $breakpoint_md) {
+            line-height: 40px;
+        }
         span {
             display: block;
         }

@@ -950,7 +950,7 @@ function Mission(staticId, dynamicId) {
         750
     ];
     this.centerX = this.staticCanvas.width - 100;
-    this.centerY = 100;
+    this.centerY = 300;
 }
 
 Mission.prototype.init = function() {
