@@ -195,12 +195,24 @@ Calc.prototype.init = function() {
         this.ctx.translate(500, 550);
         this.drawLayers();
         this.stampsInit();
+        this.inputHandler();
         document.querySelectorAll(".calc__inputs>input[type=text]").forEach((inputDom) => {
             inputDom.addEventListener("click", (e) => {
                 e.target.value = null;
             }, {once: true})
         });
         this.eventButton.addEventListener("click", this.transformLayers.bind(this, 50), {once: true});
+};
+
+Calc.prototype.inputHandler = function() {
+    document.getElementById("sex").addEventListener("click", (e) => {
+        if(e.target.value == "Мужской") {
+        }
+        else {
+
+        }
+        this.drawLayers();
+    })
 };
 
 Calc.prototype.stampsInit = function() {
@@ -304,6 +316,7 @@ Calc.prototype.drawLayer1 = function() {
 
     this.ctx.beginPath();
     this.ctx.arc(params.centerX, params.centerY, params.radius, 0, 2 * Math.PI, false);
+    
     this.ctx.fillStyle = params.color;
     this.ctx.fill();
     this.ctx.closePath();
@@ -471,10 +484,15 @@ Calc.prototype.domEndModification = function() {
 };
 
 Calc.prototype.transformationHandler = function(stepsCount) {
+    
+    var gradient = this.ctx.createLinearGradient(50, 50, 100, -100);
+    gradient.addColorStop(0, "rgb(63, 69, 166)");
+    gradient.addColorStop(1, "rgb(93, 142, 218)");
     this.layer1Transform(stepsCount, {
         centerX: 0,
         centerY: -80,
-        radius: 106
+        radius: 106,
+        color: gradient
     });
     this.layer2Transform(stepsCount, {
         centerX: 0,
@@ -532,7 +550,8 @@ Calc.prototype.layer1Transform = function(stepsCount, endParams) {
     this.setLayer1Params({
         radius: tFunc("radius"),
         centerX: tFunc("centerX"),
-        centerY: tFunc("centerY")
+        centerY: tFunc("centerY"),
+        color: endParams.color
     });
 };
 
