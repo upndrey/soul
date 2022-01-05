@@ -58,7 +58,7 @@
         overflow: hidden;
         transition: 2s;
         @media (max-width: $breakpoint_xl) {
-            margin-top: 83px;
+            margin-top: 80px;
             width: 500px;
             height: 500px;
         }
@@ -86,7 +86,7 @@
         &.active {
             width: calc(100% - 170px);
             @media (max-width: $breakpoint_xl) {
-                width: calc(100% - 110px);
+                width: calc(100% - 140px);
             }
             @media (max-width: $breakpoint_md) {
                 width: 100%;

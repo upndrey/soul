@@ -4,6 +4,8 @@ function main() {
     popup.init();
     const nav = new Nav();
     nav.init();
+    const header = new Header();
+    header.init();
     const calc = new Calc("calc__canvas", "calc__process");
     calc.init();
     const details = new Details("details__canvas", "details__video");
@@ -100,6 +102,28 @@ Nav.prototype.init = function() {
             this.navWrapperDom.classList.remove("scrolled");
         }
     });
+};
+
+// Header
+function Header() {
+    this.mars = document.querySelector(".header__mars");
+    this.centerX = 150;
+    this.centerY = 170;
+    this.radius = 250;
+    this.angle = 700;
+}
+
+Header.prototype.init = function() {   
+    setInterval(() => {
+        console.log(1);
+        var x = this.centerX + this.radius * Math.cos(this.angle);
+        var y = this.centerY + this.radius * Math.sin(this.angle);
+    
+        this.mars.style.right = `${x}px`;
+        this.mars.style.top = `${y}px`;
+
+        this.angle -= Math.acos(1-Math.pow(3/this.radius,2)/2);
+    }, 30);
 };
 
 // Calc

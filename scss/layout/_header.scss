@@ -40,43 +40,36 @@
     &__imgWrapper {
         position: absolute;
         z-index: 2;
-        top: 116px;
+        top: 0;
         left: 0;
         right: 0;
         margin: 0;
         padding: 0;
         width: 100%;
-        height: 1000px;
+        height: 800px;
         @media (max-width: $breakpoint_xl) {
-            height: 600px;
         }
         overflow: hidden;
     }
 
     &__earth {
-        width: 783px;
-        height: 783px;
         position: absolute;
-        top: 91px;
         right: 200px;
+        top: 150px;
+        width: 500px;
+        height: 500px;
         @media (max-width: $breakpoint_xl) {
-            top: 50px;
-            width: 500px;
-            height: 500px;
         }
         @include image("header__earth.png");
     }
 
     &__mars {
-        width: 481px;
-        height: 440px;
         position: absolute;
-        top: 524px;
-        right: 0px;
+        // right: 0px;
+        // top: 250px;
+        width: 350px;
+        height: 350px;
         @media (max-width: $breakpoint_xl) {
-            top: 250px;
-            width: 350px;
-            height: 350px;
         }
         @include image("header__mars.png");
     }
