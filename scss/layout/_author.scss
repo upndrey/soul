@@ -109,6 +109,10 @@
             letter-spacing: 0em;
             color: #fff;
             cursor: pointer;
+            @media (max-width: $breakpoint_xl) {
+                width: 300px;
+                height: 55px;
+            }
 
             @media (max-width: $breakpoint_md) {
                 max-width: 100%;

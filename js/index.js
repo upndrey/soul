@@ -81,13 +81,24 @@ Popup.prototype.closePopup = function() {
 
 // Nav
 function Nav() {
-
+    this.navWrapperDom = document.querySelector(".nav__wrapper");
 }
 
 Nav.prototype.init = function() {
     document.querySelector(".burger").addEventListener("click", () => {
         document.querySelector(".burger").classList.toggle("active");
         document.querySelector(".mobileNav__wrapper").classList.toggle("hidden");
+    });
+    if(window.scrollY > 200) {
+        this.navWrapperDom.classList.add("scrolled");
+    }
+    document.addEventListener("scroll", (e) => {
+        if(window.scrollY > 200) {
+            this.navWrapperDom.classList.add("scrolled");
+        }
+        else {
+            this.navWrapperDom.classList.remove("scrolled");
+        }
     });
 };
 
@@ -159,6 +170,11 @@ Calc.prototype.init = function() {
         this.ctx.translate(500, 550);
         this.drawLayers();
         this.stampsInit();
+        document.querySelectorAll(".calc__inputs>input[type=text]").forEach((inputDom) => {
+            inputDom.addEventListener("click", (e) => {
+                e.target.value = null;
+            }, {once: true})
+        });
         this.eventButton.addEventListener("click", this.transformLayers.bind(this, 50), {once: true});
 };
 
@@ -600,8 +616,12 @@ Details.prototype.init = function() {
     }
     if(this.canvasId != "author__canvas") {
         this.video.addEventListener("click", (e) => {
+            this.video.setAttribute("controls", "controls");
             this.transform(interval);
             this.editDom();
+            if(this.video.onpause) {
+                this.video.play();
+            }
         }, {once: true});
     }
     

@@ -18,7 +18,7 @@
             height: 1300px;
             @include image("details__bg.svg", cover);
             @media (max-width: $breakpoint_xl) {
-                top: -180px;
+                top: -120px;
             }
             @media (max-width: $breakpoint_md) {
                 top: 0;

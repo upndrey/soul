@@ -8,37 +8,39 @@
     <title>Document</title>
 </head>
 <body>
-    <nav class="nav container">
-        <div class="nav__logo"></div>
-        <ul class="nav__menu">
-            <li><a href="#">Калькулятор</a></li>
-            <li><a href="#">О системе</a></li>
-            <li><a href="#">Материи</a></li>
-            <li><a href="#">Почему мы</a></li>
-            <li><a href="#">Уникальность метода</a></li>
-            <li><a href="#">Об авторе</a></li>
-            <li><a href="#">Тарифы</a></li>
-            <li><a href="#">Обратная связь</a></li>
-        </ul>
-        <div class="nav__social social">
-            <a href="#"><div class="social__inst inst"></div></a>
-            <a href="#" id="loginPopupLink1"><div class="social__login login"></div></a>
-            <div class="burger">
-                <div class="burger__icon"></div>
+    <div class="nav__wrapper">
+        <nav class="nav container">
+            <div class="nav__logo"></div>
+            <ul class="nav__menu">
+                <li><a href="#">Калькулятор</a></li>
+                <li><a href="#">О системе</a></li>
+                <li><a href="#">Материи</a></li>
+                <li><a href="#">Почему мы</a></li>
+                <li><a href="#">Уникальность метода</a></li>
+                <li><a href="#">Об авторе</a></li>
+                <li><a href="#">Тарифы</a></li>
+                <li><a href="#">Обратная связь</a></li>
+            </ul>
+            <div class="nav__social social">
+                <a href="#"><div class="social__inst inst"></div></a>
+                <a href="#" id="loginPopupLink1"><div class="social__login login"></div></a>
+                <div class="burger">
+                    <div class="burger__icon"></div>
+                </div>
             </div>
+        </nav>
+        <div class="mobileNav__wrapper container hidden">
+            <ul>
+                <li><a href="#">Калькулятор</a></li>
+                <li><a href="#">О системе</a></li>
+                <li><a href="#">Материи</a></li>
+                <li><a href="#">Почему мы</a></li>
+                <li><a href="#">Уникальность метода</a></li>
+                <li><a href="#">Об авторе</a></li>
+                <li><a href="#">Тарифы</a></li>
+                <li><a href="#">Обратная связь</a></li>
+            </ul>
         </div>
-    </nav>
-    <div class="mobileNav__wrapper container hidden">
-        <ul>
-            <li><a href="#">Калькулятор</a></li>
-            <li><a href="#">О системе</a></li>
-            <li><a href="#">Материи</a></li>
-            <li><a href="#">Почему мы</a></li>
-            <li><a href="#">Уникальность метода</a></li>
-            <li><a href="#">Об авторе</a></li>
-            <li><a href="#">Тарифы</a></li>
-            <li><a href="#">Обратная связь</a></li>
-        </ul>
     </div>
     <header class="header__wrapper wrapper">
         <div class="header__imgWrapper">
@@ -64,10 +66,12 @@
                     <input type="text" value="Дата рождения">
                     <input type="text" value="Место рождения">
                     <input type="text" value="Время рождения">
-                    <select>
-                        <option >Женский</option>
-                        <option>Мужской</option>
-                    </select>
+                    <div class="select__wrapper">
+                        <select>
+                            <option >Женский</option>
+                            <option>Мужской</option>
+                        </select>
+                    </div>
                 </div>
                 <button id="calc__process">Рассчитать</button>
             </div>
@@ -127,7 +131,7 @@
             <p>За 3 минуты мы расскажем, как сложилась эта система, и почему стоит ей доверять</p>
             <canvas width="1440" height="700" id="details__canvas"></canvas>
             <div class="video__container" id="video__container">
-                <video src="video/video.mp4" id="details__video" controls></div>
+                <video src="video/video.mp4" id="details__video"></div>
             </div>
         </div>
     </div>
@@ -156,7 +160,7 @@
                     <div>
                         <div>
                             <span>Первый блок: </span>
-                            <span>Цинь</span>
+                            <span>Юнг</span>
                         </div>
                         <div>
                             <span>Следующий блок: </span>
@@ -184,7 +188,7 @@
                     <div>
                         <div>
                             <span>Первый блок: </span>
-                            <span>Цинь</span>
+                            <span>Human Design</span>
                         </div>
                         <div>
                             <span>Следующий блок: </span>
@@ -355,8 +359,7 @@
                 <div>
                     <input type="checkbox" required name="politics" id="questions__politics">
                     <label for="questions__politics">
-                        Я соглашаюсь с 
-                        <a href="#">Политикой конфиденциальности</a>
+                        Я соглашаюсь с <a href="#"> Политикой конфиденциальности</a>
                     </label>
                 </div>
                 <input type="submit">

@@ -22,7 +22,7 @@
             height: 1200px;
             @include image("header__bg.svg", cover);
             @media (max-width: $breakpoint_xl) {
-                height: 900px;
+                height: 800px;
             }
             z-index: 1;
         }

@@ -200,7 +200,7 @@
                         line-height: 18px;
                         letter-spacing: 0em;
                         text-align: left;
-                        @media (max-width: $breakpoint_md) {
+                        @media (max-width: $breakpoint_xl) {
                             font-size: 16px;
                         }
                     }
@@ -214,7 +214,7 @@
                         letter-spacing: 0em;
                         text-align: left;
                         color: #EA9DC3;
-                        @media (max-width: $breakpoint_md) {
+                        @media (max-width: $breakpoint_xl) {
                             font-size: 16px;
                         }
                     }
