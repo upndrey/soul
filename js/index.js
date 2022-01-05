@@ -106,18 +106,19 @@ Nav.prototype.init = function() {
 
 // Header
 function Header() {
-    this.mars = document.querySelector(".header__mars");
-    this.centerX = 150;
-    this.centerY = 170;
+    this.mars = document.querySelector(".header__marsDynamic");
+    this.centerX = 420;
+    this.centerY = 360;
     this.radius = 250;
     this.angle = 700;
 }
 
 Header.prototype.init = function() {   
     setInterval(() => {
-        console.log(1);
         var x = this.centerX + this.radius * Math.cos(this.angle);
         var y = this.centerY + this.radius * Math.sin(this.angle);
+        x = Math.round(x);
+        y = Math.round(y);
     
         this.mars.style.right = `${x}px`;
         this.mars.style.top = `${y}px`;

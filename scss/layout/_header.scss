@@ -64,13 +64,23 @@
     }
 
     &__mars {
+        width: 481px;
+        height: 440px;
         position: absolute;
-        // right: 0px;
-        // top: 250px;
+        top: 524px;
+        right: 0px;
+        top: 350px;
         width: 350px;
         height: 350px;
         @media (max-width: $breakpoint_xl) {
         }
         @include image("header__mars.png");
+    }
+
+    &__marsDynamic {
+        position: absolute;
+        width: 66px;
+        height: 66px;
+        @include image("header__marsDynamic.png");
     }
 }
