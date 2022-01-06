@@ -891,7 +891,7 @@ Trust.prototype.editContent = function() {
 
 // Unique
 function Unique() {
-    this.state = 0;
+    this.state = 1;
     this.lastState = 2;
     this.block1LinkDom = document.getElementById("unique__block1Link");
     this.block2LinkDom = document.getElementById("unique__block2Link");
@@ -962,35 +962,52 @@ Unique.prototype.setState = function(event, state) {
     console.log(
         this.state
     );
-    if(lastState != this.state)
-        this.editContent();
+    //if(lastState != this.state)
+        this.editContent(lastState);
 }
 
 
-Unique.prototype.editContent = function() {
+Unique.prototype.editContent = function(lastState) {
     this.block1LinkDom.classList.remove("active");
     this.block2LinkDom.classList.remove("active");
     this.block3LinkDom.classList.remove("active");
-    this.block1Dom.classList.remove("active");
-    this.block2Dom.classList.remove("active");
-    this.block2Dom.classList.remove("leftActive");
-    this.block2Dom.classList.remove("rightActive");
-    this.block3Dom.classList.remove("active");
-
+    // this.block1Dom.classList.remove("active");
+    // this.block2Dom.classList.remove("active");
+    // this.block2Dom.classList.remove("leftActive");
+    // this.block2Dom.classList.remove("rightActive");
+    // this.block3Dom.classList.remove("active");
+    let temp = "";
     switch(this.state) {
         case 0:
             this.block1LinkDom.classList.add("active");
-            this.block1Dom.classList.add("active");
-            this.block2Dom.classList.add("leftActive");
+            // this.block1Dom.classList.add("active");
+            // this.block2Dom.classList.add("leftActive");
+            temp = this.block2Dom.querySelector("h3").innerHTML;
+            this.block2Dom.querySelector("h3").innerHTML = 
+                this.block1Dom.querySelector("h3").innerHTML;
+            this.block1Dom.querySelector("h3").innerHTML = 
+                temp;
             break;
         case 1:
             this.block2LinkDom.classList.add("active");
-            this.block2Dom.classList.add("active");
+            // this.block2Dom.classList.add("active");
+            
+            temp = this.block2Dom.querySelector("h3").innerHTML;
+            this.block2Dom.querySelector("h3").innerHTML = 
+                this.block2Dom.querySelector("h3").innerHTML;
+            this.block2Dom.querySelector("h3").innerHTML = 
+                temp;
             break;
         case 2:
             this.block3LinkDom.classList.add("active");
-            this.block3Dom.classList.add("active");
-            this.block2Dom.classList.add("rightActive");
+            // this.block3Dom.classList.add("active");
+            // this.block2Dom.classList.add("rightActive");
+            
+            temp = this.block2Dom.querySelector("h3").innerHTML;
+            this.block2Dom.querySelector("h3").innerHTML = 
+                this.block3Dom.querySelector("h3").innerHTML;
+            this.block3Dom.querySelector("h3").innerHTML = 
+                temp;
             break;
     }
 }
