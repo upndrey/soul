@@ -473,7 +473,7 @@ Calc.prototype.drawSmallCircles = function() {
 Calc.prototype.transformLayers = function(stepsCount) {
     if(this.layer1Params && this.layer2Params && this.layer3Params) {
         this.domStartModification();
-        window.scroll(0,findPos(document.getElementById("calc__transformed")));
+        window.scroll(0,findPos(document.getElementById("calc__transformed"), 100));
         mq = window.matchMedia( "(max-width: 1160px)" );
         if (!mq.matches) {
             this.transformationStep = 0;
@@ -487,6 +487,9 @@ Calc.prototype.transformLayers = function(stepsCount) {
             
                     this.setTemporaryParams();
                     this.transformationStep = 0;
+                    document.getElementById("calc__recalc").addEventListener("click", () => {
+                        this.transformLayersBack(50);
+                    }, {once: true});
                 }
             }, 30);
         }
@@ -496,25 +499,111 @@ Calc.prototype.transformLayers = function(stepsCount) {
     }
 };
 
-function findPos(obj) {
+
+Calc.prototype.transformLayersBack = function(stepsCount) {
+    if(this.layer1Params && this.layer2Params && this.layer3Params) {
+        this.domEndModification();
+        window.scroll(0,findPos(document.getElementById("calc__wrapper"), -100));
+        mq = window.matchMedia( "(max-width: 1160px)" );
+        if (!mq.matches) {
+            this.transformationStep = 0;
+            this.rotation = -1* 25 * 1/stepsCount;
+
+            let interval = setInterval(() => {
+                this.transformationBackHandler(stepsCount);
+                if(this.transformationStep == stepsCount) {
+                    clearInterval(interval);
+                    this.domStartModification();
+            
+                    this.setTemporaryParams();
+                    this.transformationStep = 0;
+                    this.eventButton.addEventListener("click", this.transformLayers.bind(this, 50), {once: true});
+                }
+            }, 30);
+        }
+        else {
+            this.domStartModification();
+        }
+    }
+};
+
+function findPos(obj, bonus) {
     var curtop = 0;
     if (obj.offsetParent) {
         do {
             curtop += obj.offsetTop;
         } while (obj = obj.offsetParent);
-    return [curtop + 100];
+    return [curtop + bonus];
     }
 }
 
 Calc.prototype.domStartModification = function() {
-    this.canvas.classList.add("transformed");
-    document.getElementById("calc__block").classList.add("hidden");
-    document.getElementById("calc__wrapper").classList.add("transformed");
+    this.canvas.classList.toggle("transformed");
+    document.getElementById("calc__block").classList.toggle("hidden");
+    document.getElementById("calc__wrapper").classList.toggle("transformed");
 };
 
 Calc.prototype.domEndModification = function() {
-    document.getElementById("calc__transformed").classList.remove("hidden");
-    document.getElementById("calc__container").classList.add("transformed");
+    document.getElementById("calc__transformed").classList.toggle("hidden");
+    document.getElementById("calc__container").classList.toggle("transformed");
+};
+
+
+Calc.prototype.transformationBackHandler = function(stepsCount) {
+    this.layer1Transform(stepsCount, {
+        centerX: 100,
+        centerY: -100,
+        color: "#3f45a7",
+        radius: 100,
+    });
+    this.layer2Transform(stepsCount, {
+        centerX: 0,
+        centerY: 0,
+        colorA: 1,
+        radius: 250,
+    });
+    let list = [];
+    for(let i = 0; i < 8; i++) {
+        list.push(40);
+    }
+    this.layer3Transform(stepsCount, {
+        centerX: 0,
+        centerY: 0,
+        minRadiusX: 250,
+        minRadiusY: 250,
+        rotation: 0,
+        moveSizeX: 0,
+        moveSizeY: 0,
+        radiusSizeX: 40,
+        radiusSizeY: 40,
+        lineWidth: 1,
+        list: list
+    });
+    var mq = window.matchMedia( "(max-width: 1480px)" );
+    if (mq.matches) {
+        this.smallCircleTransform(stepsCount, {
+            c1x: 0,
+            c1y: 0,
+            c2x: 0,
+            c2y: 0,
+            c3x: 0,
+            c3y: 0,
+            opacity: 0
+        });
+    }
+    else {
+        this.smallCircleTransform(stepsCount, {
+            c1x: 0,
+            c1y: 0,
+            c2x: 0,
+            c2y: 0,
+            c3x: 0,
+            c3y: 0,
+            opacity: 0
+        });
+    }
+    this.drawLayers();
+    this.transformationStep += 1;
 };
 
 Calc.prototype.transformationHandler = function(stepsCount) {
@@ -636,7 +725,12 @@ Calc.prototype.smallCircleTransform = function(stepsCount, endParams) {
 
 Calc.prototype.transformationFormulaGenerator = function(tempParam, endParams, stepsCount) {
     return (paramName) => {
-        return tempParam[paramName] + (endParams[paramName] - tempParam[paramName]) * this.transformationStep / stepsCount;
+        if(paramName == "colorA")
+            console.log(tempParam[paramName], endParams[paramName], this.transformationStep, stepsCount);
+
+        return tempParam[paramName] + 
+            (endParams[paramName] - tempParam[paramName]) 
+            * this.transformationStep / stepsCount;
     };
 };
 
