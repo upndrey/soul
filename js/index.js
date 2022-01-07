@@ -133,6 +133,7 @@ function Calc(canvasId = "canvas", buttonId = "someButton") {
     this.eventButton = document.getElementById(buttonId);
     this.ctx = this.canvas.getContext('2d');
     this.rotation = 0;
+    this.gender = "Женский";
     this.layer1Params = null;
     this.layer1ParamsTemp = null;
     this.layer2Params = null;
@@ -188,6 +189,9 @@ Calc.prototype.init = function() {
             c2y: 0,
             c3x: 0,
             c3y: 0,
+            colorR: 255,
+            colorG: 255,
+            colorB: 255,
             opacity: 0,
             radius: 10
         });
@@ -378,7 +382,7 @@ Calc.prototype.drawLayer2Part2 = function() {
     this.ctx.fillStyle = gradient1;
     this.ctx.fill();
     this.ctx.closePath();
-    if(!this.rotation) {
+    if(this.rotation <= 0) {
         let gradient3 = this.ctx.createRadialGradient(5, -10, 230, 5, -10, 350);
         gradient3.addColorStop(0, `rgba(50, 65, 135, 0)`);
         gradient3.addColorStop(1, `rgba(50, 65, 135, 1)`);
@@ -404,14 +408,20 @@ Calc.prototype.drawLayer2Transformed = function() {
     this.ctx.moveTo(params.centerX - params.radius, params.centerY);
     this.ctx.ellipse(params.centerX, params.centerY, params.radius, params.radius - 150, 0, 0, 2*Math.PI);    
     this.ctx.lineTo(params.centerX - params.radius, params.centerY);
-    this.ctx.fillStyle = "#568bd7";
+    if(this.gender == "Мужской")
+        this.ctx.fillStyle = "#568bd7";
+    else
+        this.ctx.fillStyle = "#7D64A5";
     this.ctx.fill();
     this.ctx.closePath();
     this.ctx.beginPath();
     this.ctx.moveTo(params.centerX - params.radius, params.centerY);
     this.ctx.ellipse(params.centerX, params.centerY, params.radius - 90, params.radius - 190, 0, 0, 2*Math.PI);    
     this.ctx.lineTo(params.centerX - params.radius, params.centerY);
-    this.ctx.fillStyle = "#5373c8";
+    if(this.gender == "Мужской")
+        this.ctx.fillStyle = "#5373c8";
+    else
+        this.ctx.fillStyle = "#5C519A";
     this.ctx.fill();
     this.ctx.closePath();
 };
@@ -453,19 +463,19 @@ Calc.prototype.drawSmallCircles = function() {
     //arc 1
     this.ctx.beginPath();
     this.ctx.arc(params.c1x, params.c1y, params.radius, 0, 2 * Math.PI, false);
-    this.ctx.fillStyle = `rgba(164, 195, 242, ${params.opacity})`;
+    this.ctx.fillStyle = `rgba(${params.colorR}, ${params.colorG}, ${params.colorB}, ${params.opacity})`;
     this.ctx.fill();
     this.ctx.closePath();
     //arc 2
     this.ctx.beginPath();
     this.ctx.arc(params.c2x, params.c2y, params.radius, 0, 2 * Math.PI, false);
-    this.ctx.fillStyle = `rgba(164, 195, 242, ${params.opacity})`;
+    this.ctx.fillStyle = `rgba(${params.colorR}, ${params.colorG}, ${params.colorB}, ${params.opacity})`;
     this.ctx.fill();
     this.ctx.closePath();
     //arc 3
     this.ctx.beginPath();
     this.ctx.arc(params.c3x, params.c3y, params.radius, 0, 2 * Math.PI, false);
-    this.ctx.fillStyle = `rgba(164, 195, 242, ${params.opacity})`;
+    this.ctx.fillStyle = `rgba(${params.colorR}, ${params.colorG}, ${params.colorB}, ${params.opacity})`;
     this.ctx.fill();
     this.ctx.closePath();
 };
@@ -478,6 +488,7 @@ Calc.prototype.transformLayers = function(stepsCount) {
         if (!mq.matches) {
             this.transformationStep = 0;
             this.rotation = 25 * 1/stepsCount;
+            this.gender = document.getElementById("sex").value;
 
             let interval = setInterval(() => {
                 this.transformationHandler(stepsCount);
@@ -507,11 +518,11 @@ Calc.prototype.transformLayersBack = function(stepsCount) {
         mq = window.matchMedia( "(max-width: 1160px)" );
         if (!mq.matches) {
             this.transformationStep = 0;
-            this.rotation = -1* 25 * 1/stepsCount;
+            this.rotation = -1 * 25 * 1/stepsCount;
 
             let interval = setInterval(() => {
                 this.transformationBackHandler(stepsCount);
-                if(this.transformationStep == stepsCount) {
+                if(this.transformationStep == stepsCount + 1) {
                     clearInterval(interval);
                     this.domStartModification();
             
@@ -559,6 +570,9 @@ Calc.prototype.transformationBackHandler = function(stepsCount) {
     this.layer2Transform(stepsCount, {
         centerX: 0,
         centerY: 0,
+        colorR: 71,
+        colorG: 127,
+        colorB: 210,
         colorA: 1,
         radius: 250,
     });
@@ -588,6 +602,9 @@ Calc.prototype.transformationBackHandler = function(stepsCount) {
             c2y: 0,
             c3x: 0,
             c3y: 0,
+            colorR: 255,
+            colorG: 255,
+            colorB: 255,
             opacity: 0
         });
     }
@@ -599,6 +616,9 @@ Calc.prototype.transformationBackHandler = function(stepsCount) {
             c2y: 0,
             c3x: 0,
             c3y: 0,
+            colorR: 255,
+            colorG: 255,
+            colorB: 255,
             opacity: 0
         });
     }
@@ -609,18 +629,40 @@ Calc.prototype.transformationBackHandler = function(stepsCount) {
 Calc.prototype.transformationHandler = function(stepsCount) {
     
     var gradient = this.ctx.createLinearGradient(50, 50, 100, -100);
-    gradient.addColorStop(0, "rgb(63, 69, 166)");
-    gradient.addColorStop(1, "rgb(93, 142, 218)");
+    if(this.gender == "Мужской") {
+        gradient.addColorStop(0, "rgb(63, 69, 166)");
+        gradient.addColorStop(1, "rgb(93, 142, 218)");
+    }
+    else {
+        gradient.addColorStop(0, "rgba(70, 59, 129, 1)");
+        gradient.addColorStop(1, "rgba(140, 128, 207, 1)");
+    }
     this.layer1Transform(stepsCount, {
         centerX: 0,
         centerY: -80,
         radius: 106,
         color: gradient
     });
+    let colorR = 164;
+    let colorG = 195;
+    let colorB = 242;
+    if(this.gender == "Мужской") {
+        colorR = 71;
+        colorG = 127;
+        colorB = 210;
+    }
+    else {
+        colorR = 148;
+        colorG = 114;
+        colorB = 172;
+    }
     this.layer2Transform(stepsCount, {
         centerX: 0,
         centerY: 0,
         radius: 230,
+        colorR: colorR,
+        colorG: colorG,
+        colorB: colorB,
         colorA: 0
     });
     let list = [];
@@ -641,6 +683,16 @@ Calc.prototype.transformationHandler = function(stepsCount) {
         list: list
     });
     var mq = window.matchMedia( "(max-width: 1480px)" );
+    if(this.gender == "Мужской") {
+        colorR = 164;
+        colorG = 195;
+        colorB = 242;
+    }
+    else {
+        colorR = 237;
+        colorG = 191;
+        colorB = 213;
+    }
     if (mq.matches) {
         this.smallCircleTransform(stepsCount, {
             c1x: -230,
@@ -649,7 +701,10 @@ Calc.prototype.transformationHandler = function(stepsCount) {
             c2y: -140,
             c3x: -150,
             c3y: 260,
-            opacity: 1
+            opacity: 1,
+            colorR: colorR,
+            colorG: colorG,
+            colorB: colorB
         });
     }
     else {
@@ -660,7 +715,10 @@ Calc.prototype.transformationHandler = function(stepsCount) {
             c2y: -140,
             c3x: -200,
             c3y: 200,
-            opacity: 1
+            opacity: 1,
+            colorR: colorR,
+            colorG: colorG,
+            colorB: colorB
         });
     }
     this.drawLayers();
@@ -685,6 +743,9 @@ Calc.prototype.layer2Transform = function(stepsCount, endParams) {
         radius: tFunc("radius"),
         centerX: tFunc("centerX"),
         centerY: tFunc("centerY"),
+        colorR: tFunc("colorR"),
+        colorG: tFunc("colorG"),
+        colorB: tFunc("colorB"),
         colorA: tFunc("colorA"),
     });
 };
@@ -720,6 +781,9 @@ Calc.prototype.smallCircleTransform = function(stepsCount, endParams) {
         c2y: tFunc('c2y'),
         c3x: tFunc('c3x'),
         c3y: tFunc('c3y'),
+        colorR: tFunc('colorR'),
+        colorG: tFunc('colorG'),
+        colorB: tFunc('colorB')
     });
 };
 

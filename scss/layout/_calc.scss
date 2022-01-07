@@ -549,5 +549,19 @@
                 }
             }
         }
+
+        .calc__recalc {
+            font-family: Lato-Medium;
+            font-weight: 500;
+            font-size: 18px;
+            color: #3A406E;
+            text-decoration: underline;
+            text-align: center;
+            cursor: pointer;
+            margin-top: 20px;
+            &:hover {
+                color: #EA9DC3;
+            }
+        }
     }
 }
