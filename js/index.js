@@ -789,8 +789,6 @@ Calc.prototype.smallCircleTransform = function(stepsCount, endParams) {
 
 Calc.prototype.transformationFormulaGenerator = function(tempParam, endParams, stepsCount) {
     return (paramName) => {
-        if(paramName == "colorA")
-            console.log(tempParam[paramName], endParams[paramName], this.transformationStep, stepsCount);
 
         return tempParam[paramName] + 
             (endParams[paramName] - tempParam[paramName]) 
