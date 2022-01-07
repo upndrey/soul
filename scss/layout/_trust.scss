@@ -71,6 +71,9 @@
         border-radius: 30px;
         padding: 20px 30px;
         margin-bottom: 60px;
+        @media (max-width: $breakpoint_xl) {
+            margin-bottom: 120px;
+        }
         @media (max-width: $breakpoint_md) {
             margin-bottom: 20px;
         }
@@ -158,7 +161,7 @@
         border-radius: 30px;
         box-sizing: border-box;
         @media (max-width: $breakpoint_xl) {
-            max-width: 750px;
+            max-width: 800px;
         }
         @media (max-width: $breakpoint_md) {
             max-width: 100%;
