@@ -145,6 +145,7 @@
             width: 100%;
             &>option {
                 color: #000;
+                background: transparent;
             }
             &#sex {
                 @media (max-width: $breakpoint_xl) {
