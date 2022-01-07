@@ -107,8 +107,8 @@ Nav.prototype.init = function() {
 // Header
 function Header() {
     this.mars = document.querySelector(".header__marsDynamic");
-    this.centerX = 420;
-    this.centerY = 360;
+    this.centerX = 430;
+    this.centerY = 375;
     this.radius = 250;
     this.angle = 700;
 }
@@ -117,13 +117,13 @@ Header.prototype.init = function() {
     setInterval(() => {
         var x = this.centerX + this.radius * Math.cos(this.angle);
         var y = this.centerY + this.radius * Math.sin(this.angle);
-        x = Math.round(x);
-        y = Math.round(y);
+        // x = Math.round(x);
+        // y = Math.round(y);
     
         this.mars.style.right = `${x}px`;
         this.mars.style.top = `${y}px`;
 
-        this.angle -= Math.acos(1-Math.pow(3/this.radius,2)/2);
+        this.angle -= Math.acos(1-Math.pow(3/this.radius,2)/2) / 2;
     }, 30);
 };
 
@@ -163,20 +163,20 @@ Calc.prototype.init = function() {
             radius: 250,
         });
         let list = [];
-        for(let i = 0; i < 11; i++) {
-            list.push(20);
+        for(let i = 0; i < 8; i++) {
+            list.push(40);
         }
         this.setLayer3Params({
             centerX: 0,
             centerY: 0,
             color: "#ffffff55",
-            count: 11,
+            count: 8,
             list: list,
             minRadiusX: 250,
             minRadiusY: 250,
             rotation: 0,
-            radiusSizeX: 20,
-            radiusSizeY: 20,
+            radiusSizeX: 40,
+            radiusSizeY: 40,
             moveSizeX: 0,
             moveSizeY: 0,
             lineWidth: 1,
@@ -192,7 +192,7 @@ Calc.prototype.init = function() {
             radius: 10
         });
         this.setTemporaryParams();
-        this.ctx.translate(500, 550);
+        this.ctx.translate(490, 550);
         this.drawLayers();
         this.stampsInit();
         this.inputHandler();
@@ -660,9 +660,23 @@ Details.prototype.init = function() {
     }
     if(this.canvasId != "author__canvas") {
         this.video.addEventListener("click", (e) => {
+            document.getElementById("video__start").classList.add('hidden');
             this.video.setAttribute("controls", "controls");
             this.transform(interval);
             this.editDom();
+            console.log(this.video.onpause);
+            if(this.video.onpause) {
+                this.video.play();
+            }
+        }, {once: true});
+        
+        document.getElementById("video__start").addEventListener("click", (e) => {
+            document.getElementById("video__start").classList.add('hidden');
+            this.video.setAttribute("controls", "controls");
+            this.transform(interval);
+            this.editDom();
+            console.log(this.video.onpause);
+            this.video.play();
             if(this.video.onpause) {
                 this.video.play();
             }
@@ -673,8 +687,8 @@ Details.prototype.init = function() {
 
 Details.prototype.draw = function() {
     this.ctx.clearRect(0, 0, this.width, this.height);
-    this.drawCircle();
-    this.drawCircle(-10, "rgba(255, 255, 255, .5)");
+    this.drawCircle(0, "rgba(255, 255, 255, 0.6)");
+    this.drawCircle(-10, "rgba(255, 255, 255, 0.12)");
     if(this.transformX == 0) {
         this.drawMovingCircle(0);
         this.drawMovingCircle(1);
@@ -761,7 +775,7 @@ Details.prototype.drawMovingCircle = function(id) {
     this.ctx.fill();
     this.ctx.closePath();
 
-    this.angles[id] += Math.acos(1-Math.pow(3/this.radiusX,2)/2);
+    this.angles[id] += Math.acos(1-Math.pow(3/this.radiusX,2)/2) / 2;
 };
 
 Details.prototype.editDom = function() {
@@ -962,7 +976,7 @@ Unique.prototype.setState = function(event, state) {
     console.log(
         this.state
     );
-    //if(lastState != this.state)
+    if(lastState != this.state)
         this.editContent(lastState);
 }
 
@@ -971,43 +985,23 @@ Unique.prototype.editContent = function(lastState) {
     this.block1LinkDom.classList.remove("active");
     this.block2LinkDom.classList.remove("active");
     this.block3LinkDom.classList.remove("active");
-    // this.block1Dom.classList.remove("active");
-    // this.block2Dom.classList.remove("active");
-    // this.block2Dom.classList.remove("leftActive");
-    // this.block2Dom.classList.remove("rightActive");
-    // this.block3Dom.classList.remove("active");
+    this.block1Dom.classList.remove("active");
+    this.block2Dom.classList.remove("active");
+    this.block3Dom.classList.remove("active");
     let temp = "";
     switch(this.state) {
         case 0:
             this.block1LinkDom.classList.add("active");
-            // this.block1Dom.classList.add("active");
-            // this.block2Dom.classList.add("leftActive");
-            temp = this.block2Dom.querySelector("h3").innerHTML;
-            this.block2Dom.querySelector("h3").innerHTML = 
-                this.block1Dom.querySelector("h3").innerHTML;
-            this.block1Dom.querySelector("h3").innerHTML = 
-                temp;
+            this.block1Dom.classList.add("active");
+            this.block2Dom.classList.add("leftActive");
             break;
         case 1:
             this.block2LinkDom.classList.add("active");
-            // this.block2Dom.classList.add("active");
-            
-            temp = this.block2Dom.querySelector("h3").innerHTML;
-            this.block2Dom.querySelector("h3").innerHTML = 
-                this.block2Dom.querySelector("h3").innerHTML;
-            this.block2Dom.querySelector("h3").innerHTML = 
-                temp;
+            this.block2Dom.classList.add("active");
             break;
         case 2:
             this.block3LinkDom.classList.add("active");
-            // this.block3Dom.classList.add("active");
-            // this.block2Dom.classList.add("rightActive");
-            
-            temp = this.block2Dom.querySelector("h3").innerHTML;
-            this.block2Dom.querySelector("h3").innerHTML = 
-                this.block3Dom.querySelector("h3").innerHTML;
-            this.block3Dom.querySelector("h3").innerHTML = 
-                temp;
+            this.block3Dom.classList.add("active");
             break;
     }
 }
