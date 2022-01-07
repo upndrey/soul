@@ -24,6 +24,9 @@
             position: absolute;
             right: 0;
             top: -200px;
+            @media (max-width: $breakpoint_xl) {
+                width: 750px;
+            }
         }
     }
 
