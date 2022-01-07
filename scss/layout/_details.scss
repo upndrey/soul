@@ -9,6 +9,9 @@
         padding-top: 0px;
         height: 800px;
         z-index: 5;
+        @media (max-width: $breakpoint_xl) {
+            height: 700px;
+        }
         &:before {
             content: '';
             position: absolute;

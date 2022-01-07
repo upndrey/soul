@@ -87,6 +87,7 @@
         justify-content: space-between;
         @media (max-width: $breakpoint_xl) {
             margin-left: 20px;
+            max-width: 60px;
         }
         @media (max-width: $breakpoint_md) {
             max-width: fit-content;
@@ -95,6 +96,10 @@
             width: 24px;
             height: 24px;
             @include image("nav__inst.png");
+            @media (max-width: $breakpoint_xl) {
+                width: 20px;
+                height: 20px;
+            }
             &:hover {
                 filter: brightness(0) invert(86%) sepia(95%) saturate(7128%) hue-rotate(282deg) brightness(94%) contrast(92%);
             }
@@ -103,6 +108,10 @@
             width: 21px;
             height: 24px;
             @include image("nav__login.png");
+            @media (max-width: $breakpoint_xl) {
+                width: 18px;
+                height: 20px;
+            }
             &:hover {
                 filter: brightness(0) invert(86%) sepia(95%) saturate(7128%) hue-rotate(282deg) brightness(94%) contrast(92%);
             }
