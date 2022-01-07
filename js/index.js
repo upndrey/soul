@@ -354,6 +354,7 @@ Calc.prototype.drawLayer2Part2 = function() {
         this.ctx.shadowOffsetY = 0;
         this.ctx.fill();
         this.ctx.closePath();
+
     }
 
     this.ctx.beginPath();
@@ -370,12 +371,29 @@ Calc.prototype.drawLayer2Part2 = function() {
     gradient1.addColorStop(1, `rgba(${params.colorR}, ${params.colorG}, ${params.colorB}, 0)`);
 
     this.ctx.beginPath();
+    this.ctx.shadowColor = "transparent";
     this.ctx.moveTo(params.centerX - params.radius, params.centerY);
     this.ctx.ellipse(params.centerX, params.centerY, params.radius, params.radius, .25, 0, 2*Math.PI); 
     this.ctx.lineTo(params.centerX - params.radius, params.centerY);
     this.ctx.fillStyle = gradient1;
     this.ctx.fill();
     this.ctx.closePath();
+    if(!this.rotation) {
+        let gradient3 = this.ctx.createRadialGradient(5, -10, 230, 5, -10, 350);
+        gradient3.addColorStop(0, `rgba(50, 65, 135, 0)`);
+        gradient3.addColorStop(1, `rgba(50, 65, 135, 1)`);
+        this.ctx.beginPath();
+        this.ctx.moveTo(params.centerX - params.radius, params.centerY);
+        this.ctx.ellipse(params.centerX, params.centerY, params.radius, params.radius, .25, 0, 2*Math.PI); 
+        this.ctx.lineTo(params.centerX - params.radius, params.centerY);
+        this.ctx.fillStyle = gradient3;
+        this.ctx.shadowColor = "#324187";
+        this.ctx.shadowBlur = 25;
+        this.ctx.shadowOffsetX = 0;
+        this.ctx.shadowOffsetY = 0;
+        this.ctx.fill();
+        this.ctx.closePath();
+    }
 };
 
 Calc.prototype.drawLayer2Transformed = function() {
