@@ -338,11 +338,26 @@ Calc.prototype.drawLayer2Part2 = function() {
     params = this.layer2Params;
 
 
-    let gradient2 = this.ctx.createLinearGradient(-250, -250, 250, 250);
+    let gradient2 = this.ctx.createLinearGradient(-100, -100, 250, 250);
     gradient2.addColorStop(0, `rgba(147, 96, 175, ${params.colorA})`);
     gradient2.addColorStop(1, `rgba(255, 255, 255, ${params.colorA})`);
 
+    if(!this.rotation) {
+        this.ctx.beginPath();
+        this.ctx.moveTo(params.centerX - params.radius, params.centerY);
+        this.ctx.ellipse(params.centerX, params.centerY, params.radius, params.radius, .25, 0, 2*Math.PI); 
+        this.ctx.lineTo(params.centerX - params.radius, params.centerY);
+        this.ctx.fillStyle = "#52619B";
+        this.ctx.shadowColor = "#324187";
+        this.ctx.shadowBlur = 25;
+        this.ctx.shadowOffsetX = 0;
+        this.ctx.shadowOffsetY = 0;
+        this.ctx.fill();
+        this.ctx.closePath();
+    }
+
     this.ctx.beginPath();
+    this.ctx.shadowColor = "transparent";
     this.ctx.moveTo(params.centerX - params.radius, params.centerY);
     this.ctx.ellipse(params.centerX, params.centerY, params.radius, params.radius, .25, 0, 2*Math.PI); 
     this.ctx.lineTo(params.centerX - params.radius, params.centerY);
@@ -350,7 +365,7 @@ Calc.prototype.drawLayer2Part2 = function() {
     this.ctx.fill();
     this.ctx.closePath();
 
-    let gradient1 = this.ctx.createRadialGradient(50,-50,150, 50,-50,250);
+    let gradient1 = this.ctx.createRadialGradient(40,-40,150, 40,-40,250);
     gradient1.addColorStop(0, `rgba(${params.colorR}, ${params.colorG}, ${params.colorB}, ${params.colorA})`);
     gradient1.addColorStop(1, `rgba(${params.colorR}, ${params.colorG}, ${params.colorB}, 0)`);
 
