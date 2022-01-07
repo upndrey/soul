@@ -27,6 +27,10 @@
     h2 {
         text-align: center;
         margin-bottom: 20px;
+        @media (max-width: $breakpoint_xl) {
+            max-width: 1000px;
+            margin: auto;
+        }
     }
 
     h2+p {
@@ -90,13 +94,18 @@
             line-height: 30px;
             margin-bottom: 30px;
             span {
-                font-family: Lato-Bold;
-                font-style: normal;
-                font-weight: bold;
-                font-size: 70px;
-                line-height: 30px;
-                @media (max-width: $breakpoint_md) {
-                    font-size: 24px;
+                &:nth-child(1) {
+                    font-family: Lato-Bold;
+                    font-style: normal;
+                    font-weight: bold;
+                    font-size: 70px;
+                    line-height: 30px;
+                    @media (max-width: $breakpoint_md) {
+                        font-size: 24px;
+                    }
+                }
+                &:nth-child(2) {
+                    opacity: .5;
                 }
             }
             @media (max-width: $breakpoint_md) {
@@ -115,6 +124,12 @@
             margin: auto;
             display: flex;
             justify-content: space-between;
+            @media (max-width: $breakpoint_xl) {
+                margin: 0;
+            }
+            @media (max-width: $breakpoint_md) {
+                margin: auto;
+            }
             &>* {
                 cursor: pointer;
                 width: 98px;

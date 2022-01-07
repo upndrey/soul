@@ -17,6 +17,7 @@
             margin-bottom: 150px;
             @media (max-width: $breakpoint_md) {
                 height: fit-content;
+                margin-bottom: 250px;
             }
             &:before {
                 height: 1700px;  
@@ -86,7 +87,7 @@
             width: fit-content;
             float: none;
             margin: auto;
-            top: 75px;
+            top: 180px;
             left: 300px;
         }
         @media (max-width: $breakpoint_md) {
@@ -118,9 +119,9 @@
             font-size: 16px;
 
             @media (max-width: $breakpoint_xl) {
-                max-width: 350px;
+                max-width: 230px;
                 margin-bottom: 12px;
-                height: 50px;
+                height: 45px;
             }
             @media (max-width: $breakpoint_md) {
                 max-width: 100%;
@@ -128,7 +129,7 @@
             &:nth-child(2n + 1) {
                 margin-right: 24px;
                 @media (max-width: $breakpoint_xl) {
-                    margin-right: 0;
+                    margin-right: 10px;
                 }
                 @media (max-width: $breakpoint_md) {
                     margin-right: 0;
@@ -144,6 +145,11 @@
             width: 100%;
             &>option {
                 color: #000;
+            }
+            &#sex {
+                @media (max-width: $breakpoint_xl) {
+                    margin-right: 0;
+                }
             }
          }
         
@@ -193,8 +199,8 @@
             background: linear-gradient(269.48deg, #F09FE0 2.9%, #EA5DA0 109.39%);
         }
         @media (max-width: $breakpoint_xl) {
-            max-width: 350px;
-            height: 50px;
+            max-width: 230px;
+            height: 45px;
             width: 100%;
         }
         @media (max-width: $breakpoint_md) {

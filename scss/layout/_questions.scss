@@ -119,6 +119,10 @@
                 font-family: Lato-Light;
                 font-weight: 300;
                 font-size: 16px;
+                
+                @media (max-width: $breakpoint_md) {
+                    display: block;
+                }
 
                 &:before {
                     content: '';
