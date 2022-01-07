@@ -114,12 +114,18 @@
             letter-spacing: 0em;
             color: #fff;
             cursor: pointer;
+            transition: .5s;
+            border: 2px solid transparent;
             @media (max-width: $breakpoint_xl) {
                 height: 55px;
             }
 
             @media (max-width: $breakpoint_md) {
                 max-width: 100%;
+            }
+            &:hover {
+                background: transparent;
+                border: 2px solid rgba(45, 45, 82, 0.19);
             }
             &>div {
                 margin-left: 15px;
