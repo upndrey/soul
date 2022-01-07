@@ -393,6 +393,7 @@ Calc.prototype.drawLayer2Part2 = function() {
         this.ctx.shadowOffsetY = 0;
         this.ctx.fill();
         this.ctx.closePath();
+        this.ctx.shadowColor = "transparent";
     }
 };
 
