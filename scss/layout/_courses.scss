@@ -128,6 +128,9 @@
                     margin-right: 30px;
                     cursor: pointer;
 
+                    @media (max-width: $breakpoint_xl) {
+                        height: 40px;
+                    }
                     &:hover {
                         background: #EA9DC3;
                         color: #fff;
