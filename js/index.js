@@ -1074,11 +1074,11 @@ Mission.prototype.drawMovingCircle = function(id, angleId) {
     var y = this.centerY + this.radiusList[id] * Math.sin(this.angleList[angleId]);
     this.ctx.beginPath();
     this.ctx.arc(x, y, 10, 0, 2 * Math.PI, false);
-    this.ctx.fillStyle = "#fff";
+    this.ctx.fillStyle = "rgba(255, 255, 255, .5)";
     this.ctx.fill();
     this.ctx.closePath();
 
-    this.angleList[angleId] += Math.acos(1-Math.pow(3/this.radiusList[id],2)/2);
+    this.angleList[angleId] += Math.acos(1-Math.pow(3/this.radiusList[id],2)/2) / 2;
 };
 
 Mission.prototype.drawFilledCircle = function() {
@@ -1092,7 +1092,7 @@ Mission.prototype.drawFilledCircle = function() {
 Mission.prototype.drawCircle = function(id) {
     this.staticCtx.beginPath();
     this.staticCtx.arc(this.centerX, this.centerY, this.radiusList[id], 0, 2 * Math.PI, false);
-    this.staticCtx.strokeStyle = "#fff";
+    this.staticCtx.strokeStyle = "rgba(255, 255, 255, .5)";
     this.staticCtx.stroke();
     this.staticCtx.closePath();
 };
