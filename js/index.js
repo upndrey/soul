@@ -400,8 +400,8 @@ Calc.prototype.drawLayer2Transformed = function() {
 Calc.prototype.drawLayer3Part1 = function() {
     params = this.layer3Params;
     var gradient = this.ctx.createLinearGradient(0, 0, 0, 900);
-    gradient.addColorStop(0, "rgb(98, 102, 165)");
-    gradient.addColorStop(1, "rgb(189, 159, 211)");
+    gradient.addColorStop(0, "rgba(98, 102, 165, 1)");
+    gradient.addColorStop(1, "rgba(189, 159, 211, 0)");
     for(let i = 0; i < params.count; i++) {
         this.ctx.beginPath();
         this.ctx.moveTo(params.centerX - params.radius, params.centerY);
@@ -416,8 +416,8 @@ Calc.prototype.drawLayer3Part1 = function() {
 Calc.prototype.drawLayer3Part2 = function() {
     params = this.layer3Params;
     var gradient = this.ctx.createLinearGradient(0, 0, 0, 900);
-    gradient.addColorStop(0, "rgb(98, 102, 165)");
-    gradient.addColorStop(1, "rgb(189, 159, 211)");
+    gradient.addColorStop(0, "rgba(98, 102, 165, 1)");
+    gradient.addColorStop(1, "rgba(189, 159, 211, 0)");
     for(let i = 0; i < params.count; i++) {
         this.ctx.beginPath();
         this.ctx.moveTo(params.centerX - params.radius, params.centerY);
