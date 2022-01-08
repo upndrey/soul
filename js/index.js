@@ -796,11 +796,6 @@ Calc.prototype.transformationFormulaGenerator = function(tempParam, endParams, s
     };
 };
 
-
-
-
-
-
 // Details
 
 function Details(canvasId = "canvas", videoId = "video") {

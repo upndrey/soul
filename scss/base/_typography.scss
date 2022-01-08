@@ -19,6 +19,9 @@ h1 {
     font-size: 65px;
     line-height: 60px;
   }
+  @media (max-width: $breakpoint_md) {
+    font-size: 45px;
+  }
 }
 
 h2 {
@@ -36,6 +39,7 @@ h2 {
     margin-bottom: 10px;
   }
   @media (max-width: $breakpoint_md) {
+    font-size: 40px;
     line-height: 50px;
   }
 }
