@@ -72,6 +72,9 @@
         border-radius: 30px;
         padding: 20px 30px;
         margin-bottom: 60px;
+        @media (min-width: $breakpoint_xl) {
+            margin-bottom: 135px;
+        }
         @media (max-width: $breakpoint_xl) {
             margin-bottom: 150px;
         }

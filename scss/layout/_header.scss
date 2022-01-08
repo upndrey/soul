@@ -21,6 +21,10 @@
             width: 100%;
             height: 1200px;
             @include image("header__bg.svg", cover);
+            @media (min-width: $breakpoint_xl) { 
+                top: -100px;
+                height: 1400px;
+            }
             @media (max-width: $breakpoint_xl) {
                 height: 800px;
             }
@@ -48,6 +52,10 @@
         padding: 0;
         width: 100%;
         height: 800px;
+        @media (min-width: $breakpoint_xl) { 
+            top: 200px;
+            left: -100px;
+        }
         @media (max-width: $breakpoint_xl) {
         }
         overflow: hidden;
