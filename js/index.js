@@ -506,6 +506,9 @@ Calc.prototype.transformLayers = function(stepsCount) {
         }
         else {
             this.domEndModification();
+            document.getElementById("calc__recalc").addEventListener("click", () => {
+                this.transformLayersBack(50);
+            }, {once: true});
         }
     }
 };
@@ -534,6 +537,7 @@ Calc.prototype.transformLayersBack = function(stepsCount) {
         }
         else {
             this.domStartModification();
+            this.eventButton.addEventListener("click", this.transformLayers.bind(this, 50), {once: true});
         }
     }
 };
