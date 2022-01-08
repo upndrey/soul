@@ -9,6 +9,9 @@
         @media (min-width: $breakpoint_xl) {
             overflow-x: visible;
         }
+        @media (max-width: $breakpoint_md) {
+            overflow-x: visible;
+        }
         &:before {
             content: '';
             position: absolute;

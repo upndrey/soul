@@ -45,6 +45,9 @@
         @media (max-width: $breakpoint_xl) {
             max-width: 550px;
         }
+        @media (max-width: $breakpoint_md) {
+            flex-direction: column;
+        }
 
         input {
             font-family: Lato-Regular;
@@ -79,6 +82,9 @@
             @media (max-width: $breakpoint_xl) {
                 max-width: 265px;
                 height: 50px;
+            }
+            @media (max-width: $breakpoint_md) {
+                max-width: 100%;
             }
         }
 
