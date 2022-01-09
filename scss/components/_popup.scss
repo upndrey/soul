@@ -13,6 +13,7 @@
         z-index: 999;
         @media (max-width: $breakpoint_md) {
             border-radius: 25px;
+            max-height: calc(100vh - 50px);
         }
 
         .close {
@@ -243,13 +244,19 @@
         border-radius: 150px;
     }
     @media (max-width: $breakpoint_md) {
-        max-width: 100%;
         border-radius: 25px;
-        height: fit-content;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        height: auto;
+        overflow-y: scroll;
+        box-sizing: border-box;
     }
     h3 {
         span {
             color: #EA9DC3;
+        }
+        @media (max-width: $breakpoint_md) {
+            margin-top: 100px;
         }
     }
 

@@ -57,6 +57,8 @@ Popup.prototype.openPopupHandler = function(linkId, popupDom) {
     popupLinkDom.addEventListener("click", (e) => {
         e.preventDefault();
         this.openPopup(popupDom);
+        const bodyDom = document.getElementsByTagName("body")[0];
+        bodyDom.classList.add("fixed");
     });
 };
 
@@ -71,11 +73,14 @@ Popup.prototype.openPopup = function(popupDom) {
 
 Popup.prototype.closePopupHandler = function() {
     document.querySelectorAll(".closePopup").forEach((closeDom) => {
+        
         closeDom.addEventListener("click", this.closePopup.bind(this));
     });
 };
 
 Popup.prototype.closePopup = function() {
+    const bodyDom = document.getElementsByTagName("body")[0];
+    bodyDom.classList.remove("fixed");
     this.activePopupDom.classList.remove("active");
     this.wrapperDom.classList.remove("active");
     this.activePopupDom = null;

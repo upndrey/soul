@@ -38,8 +38,9 @@ input {
   outline:none;
 }
 
-html {
-  @media (max-height: 700px) {
-    //zoom: 1;
+body {
+  overflow: auto;
+  &.fixed {
+    overflow: hidden;
   }
 }
