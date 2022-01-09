@@ -1003,10 +1003,7 @@ Details.prototype.drawMovingCircle = function(id) {
 };
 
 Details.prototype.editDom = function() {
-    mq = window.matchMedia( "(max-width: 1160px)" );
-    if (!mq.matches) {
-        document.getElementById("video__container").classList.add("active");
-    }
+    document.getElementById("video__container").classList.add("active");
 };
 
 Details.prototype.transform = function(drawInterval) {
@@ -1193,13 +1190,20 @@ Unique.prototype.setState = function(event, state) {
             break;
     }
 
-    if(this.state > this.lastState)
-        this.state = this.lastState;
-    else if(this.state < 0)
-        this.state = 0;
-    console.log(
-        this.state
-    );
+    mq = window.matchMedia( "(max-width: 1160px)" );
+    if (mq.matches) {
+        if(this.state > this.lastState)
+            this.state = 0;
+        else if(this.state < 0)
+            this.state = this.lastState;
+    }
+    else {
+        if(this.state > this.lastState)
+            this.state = this.lastState;
+        else if(this.state < 0)
+            this.state = 0;
+    }
+
     if(lastState != this.state)
         this.editContent(lastState);
 }
@@ -1253,17 +1257,20 @@ function Mission(staticId, dynamicId) {
 }
 
 Mission.prototype.init = function() {
-    for(let i = 0; i < this.radiusList.length; i++) {
-        this.angleList.push(0 + i * 50);
-        this.angleList.push(200 + i * 50);
-        this.angleList.push(400 + i * 50);
-        this.angleList.push(600 + i * 50);
-        this.angleList.push(800 + i * 50);
-        this.angleList.push(1000 + i * 50);
+    mq = window.matchMedia( "(max-width: 1160px)" );
+    if (!mq.matches) {
+        for(let i = 0; i < this.radiusList.length; i++) {
+            this.angleList.push(0 + i * 50);
+            this.angleList.push(200 + i * 50);
+            this.angleList.push(400 + i * 50);
+            this.angleList.push(600 + i * 50);
+            this.angleList.push(800 + i * 50);
+            this.angleList.push(1000 + i * 50);
+        }
+        let interval;
+        this.drawStatic();
+        interval = setInterval(this.drawDynamic.bind(this), 40);
     }
-    let interval;
-    this.drawStatic();
-    interval = setInterval(this.drawDynamic.bind(this), 40);
 }
 
 Mission.prototype.drawDynamic = function() {

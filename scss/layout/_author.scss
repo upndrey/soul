@@ -29,6 +29,24 @@
         }
     }
 
+    h2 {
+        &.mobile {
+            display: none;
+            @media (max-width: $breakpoint_md) {
+                display: block;
+                margin: auto;
+                text-align: center;
+                margin-bottom: 30px;
+            }
+        }
+        &:not(.mobile) {
+            display: block;
+            @media (max-width: $breakpoint_md) {
+                display: none;
+            }
+        }
+    }
+
     &__left {
         margin-right: 20px;
         canvas {

@@ -10,6 +10,7 @@
             z-index: auto;
         }
         @media (max-width: $breakpoint_md) {
+            padding-top: 100px;
             padding-bottom: 50px;
         }
         &:before {

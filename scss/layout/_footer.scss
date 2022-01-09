@@ -25,7 +25,7 @@
             @media (max-width: $breakpoint_md) {
                 top: auto;
                 bottom: 0;
-                height: 700px;
+                height: 400px;
             }
         }
     }
@@ -43,6 +43,22 @@
                 color: #EA9DC3;
             }
         }
+        &:not(&_mobile) {
+            @media (max-width: $breakpoint_md) {
+                p {
+                    display: none;
+                }
+            }
+
+        }
+
+        &_mobile {
+            display: none;
+            @media (max-width: $breakpoint_md) {
+                display: flex;
+                margin-top: 25px;
+            }
+        }
     }
     
 
@@ -51,6 +67,9 @@
         height: 67px;
         @include image("footer__logo.svg");
         margin-bottom: 20px;
+        @media (max-width: $breakpoint_md) {
+            margin-bottom: 0px;
+        }
     }
 
     &__links {
@@ -60,6 +79,9 @@
     ul {
         margin: 0;
         padding: 0;
+        @media (max-width: $breakpoint_md) {
+            display: none;
+        }
         li {
             list-style: none;
             font-family: Lato-Regular;
