@@ -114,17 +114,20 @@ function Header() {
 }
 
 Header.prototype.init = function() {   
-    setInterval(() => {
-        var x = this.centerX + this.radius * Math.cos(this.angle);
-        var y = this.centerY + this.radius * Math.sin(this.angle);
-        // x = Math.round(x);
-        // y = Math.round(y);
-    
-        this.mars.style.right = `${x}px`;
-        this.mars.style.top = `${y}px`;
+    mq = window.matchMedia( "(max-width: 1160px)" );
+    if (!mq.matches) {
+        setInterval(() => {
+            var x = this.centerX + this.radius * Math.cos(this.angle);
+            var y = this.centerY + this.radius * Math.sin(this.angle);
+            // x = Math.round(x);
+            // y = Math.round(y);
+        
+            this.mars.style.right = `${x}px`;
+            this.mars.style.top = `${y}px`;
 
-        this.angle -= Math.acos(1-Math.pow(3/this.radius,2)/2) / 2;
-    }, 30);
+            this.angle -= Math.acos(1-Math.pow(3/this.radius,2)/2) / 2;
+        }, 30);
+    }
 };
 
 // Calc
@@ -168,9 +171,19 @@ Calc.prototype.init = function() {
             list.push(40);
         }
         
-        var gradient3 = this.ctx.createLinearGradient(0, 0, 0, 900);
-        gradient3.addColorStop(0, "rgba(98, 102, 165, 1)");
-        gradient3.addColorStop(1, "rgba(189, 159, 211, 0)");
+        var gradient3;
+        mq = window.matchMedia( "(max-width: 1160px)" );
+        if (mq.matches) {
+            gradient3 = this.ctx.createLinearGradient(0, 0, 0, 900);
+            gradient3.addColorStop(0, "rgba(154, 189, 227, .5)");
+            gradient3.addColorStop(1, "rgba(154, 189, 227, .2)");
+            //gradient3 = "rgba(154, 189, 227, .4)";
+        }
+        else {
+            gradient3 = this.ctx.createLinearGradient(0, 0, 0, 900);
+            gradient3.addColorStop(0, "rgba(98, 102, 165, 1)");
+            gradient3.addColorStop(1, "rgba(189, 159, 211, 0)");
+        }
         this.setLayer3Params({
             centerX: 0,
             centerY: 0,
@@ -200,7 +213,13 @@ Calc.prototype.init = function() {
             radius: 10
         });
         this.setTemporaryParams();
-        this.ctx.translate(490, 550);
+        mq = window.matchMedia( "(max-width: 1160px)" );
+        if (mq.matches) {
+            this.ctx.translate(550, 550);
+        }
+        else {
+            this.ctx.translate(490, 550);
+        }
         this.drawLayers();
         this.stampsInit();
         this.inputHandler();

@@ -49,9 +49,12 @@
             left: -150px;
         }
         @media (max-width: $breakpoint_md) {
-            max-width: 100%;
-            top: -100px;
+            width: 100%;
+            max-width: 260px;
+            margin: auto;
+            top: -50px;
             left: 0px;
+            right: 0;
         }
     }
 
