@@ -167,17 +167,21 @@ Calc.prototype.init = function() {
         for(let i = 0; i < 8; i++) {
             list.push(40);
         }
+        
+        var gradient3 = this.ctx.createLinearGradient(0, 0, 0, 900);
+        gradient3.addColorStop(0, "rgba(98, 102, 165, 1)");
+        gradient3.addColorStop(1, "rgba(189, 159, 211, 0)");
         this.setLayer3Params({
             centerX: 0,
             centerY: 0,
-            color: "#ffffff55",
+            color: gradient3,
             count: 8,
             list: list,
             minRadiusX: 250,
             minRadiusY: 250,
             rotation: 0,
-            radiusSizeX: 40,
-            radiusSizeY: 40,
+            radiusSizeX: 35,
+            radiusSizeY: 35,
             moveSizeX: 0,
             moveSizeY: 0,
             lineWidth: 1,
@@ -428,15 +432,12 @@ Calc.prototype.drawLayer2Transformed = function() {
 
 Calc.prototype.drawLayer3Part1 = function() {
     params = this.layer3Params;
-    var gradient = this.ctx.createLinearGradient(0, 0, 0, 900);
-    gradient.addColorStop(0, "rgba(98, 102, 165, 1)");
-    gradient.addColorStop(1, "rgba(189, 159, 211, 0)");
     for(let i = 0; i < params.count; i++) {
         this.ctx.beginPath();
         this.ctx.moveTo(params.centerX - params.radius, params.centerY);
         this.ctx.ellipse(params.centerX + params.moveSizeX * i, params.centerY + params.moveSizeY * i * 2, params.minRadiusX + i * params.list[i], params.minRadiusY + params.radiusSizeY * i, params.rotation, 0, Math.PI);
         this.ctx.lineWidth = params.lineWidth;
-        this.ctx.strokeStyle = gradient;
+        this.ctx.strokeStyle = params.color;
         this.ctx.stroke();
         this.ctx.closePath();
     }
@@ -444,15 +445,12 @@ Calc.prototype.drawLayer3Part1 = function() {
 
 Calc.prototype.drawLayer3Part2 = function() {
     params = this.layer3Params;
-    var gradient = this.ctx.createLinearGradient(0, 0, 0, 900);
-    gradient.addColorStop(0, "rgba(98, 102, 165, 1)");
-    gradient.addColorStop(1, "rgba(189, 159, 211, 0)");
     for(let i = 0; i < params.count; i++) {
         this.ctx.beginPath();
         this.ctx.moveTo(params.centerX - params.radius, params.centerY);
         this.ctx.ellipse(params.centerX + params.moveSizeX * i, params.centerY + params.moveSizeY * i * 2, params.minRadiusX + i * params.list[i], params.minRadiusY + params.radiusSizeY * i, params.rotation, Math.PI, 2*Math.PI);
         this.ctx.lineWidth = params.lineWidth;
-        this.ctx.strokeStyle = gradient;
+        this.ctx.strokeStyle = params.color;
         this.ctx.stroke();
         this.ctx.closePath();
     }
@@ -512,7 +510,6 @@ Calc.prototype.transformLayers = function(stepsCount) {
         }
     }
 };
-
 
 Calc.prototype.transformLayersBack = function(stepsCount) {
     if(this.layer1Params && this.layer2Params && this.layer3Params) {
@@ -584,6 +581,9 @@ Calc.prototype.transformationBackHandler = function(stepsCount) {
     for(let i = 0; i < 8; i++) {
         list.push(40);
     }
+    var gradient3 = this.ctx.createLinearGradient(0, 0, 0, 900);
+    gradient3.addColorStop(0, "rgba(98, 102, 165, 1)");
+    gradient3.addColorStop(1, "rgba(189, 159, 211, 0)");
     this.layer3Transform(stepsCount, {
         centerX: 0,
         centerY: 0,
@@ -592,9 +592,10 @@ Calc.prototype.transformationBackHandler = function(stepsCount) {
         rotation: 0,
         moveSizeX: 0,
         moveSizeY: 0,
-        radiusSizeX: 40,
-        radiusSizeY: 40,
+        radiusSizeX: 35,
+        radiusSizeY: 35,
         lineWidth: 1,
+        color: gradient3,
         list: list
     });
     var mq = window.matchMedia( "(max-width: 1480px)" );
@@ -673,6 +674,19 @@ Calc.prototype.transformationHandler = function(stepsCount) {
     for(let i = 0; i < this.layer3Params.count; i++) {
         list.push(this.layer3Params.radiusSizeX - i);
     }
+    let color3;
+    if(this.gender == "Мужской") {
+        var gradient3 = this.ctx.createLinearGradient(0, 0, 0, 900);
+        gradient3.addColorStop(0, "rgba(98, 102, 165, 1)");
+        gradient3.addColorStop(1, "rgba(189, 159, 211, 0)");
+        color3 = gradient3;
+    }
+    else {
+        var gradient3 = this.ctx.createLinearGradient(0, 0, 0, 900);
+        gradient3.addColorStop(0, "rgba(237, 191, 213, .4)");
+        gradient3.addColorStop(1, "rgba(189, 159, 211, 0)");
+        color3 = gradient3;
+    }
     this.layer3Transform(stepsCount, {
         centerX: 0,
         centerY: 250,
@@ -684,6 +698,7 @@ Calc.prototype.transformationHandler = function(stepsCount) {
         radiusSizeX: 20,
         radiusSizeY: 5,
         lineWidth: 3,
+        color: color3,
         list: list
     });
     var mq = window.matchMedia( "(max-width: 1480px)" );
@@ -759,6 +774,7 @@ Calc.prototype.layer3Transform = function(stepsCount, endParams) {
     this.layer3Params.list = this.layer3Params.list.map((listElem, i) => {
         return tempParam.list[i] + (endParams.list[i] - tempParam.list[i]) * this.transformationStep / stepsCount;
     });
+    this.layer3Params.color = endParams.color;
     let tFunc = this.transformationFormulaGenerator(tempParam, endParams, stepsCount);
     this.setLayer3Params({
         minRadiusX: tFunc("minRadiusX"),
