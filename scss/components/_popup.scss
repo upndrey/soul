@@ -428,4 +428,12 @@
     p {
         text-align: center;
     }
+    @media (max-width: $breakpoint_md) {
+        border-radius: 25px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        height: auto;
+        overflow-y: scroll;
+        box-sizing: border-box;
+    }
 }

@@ -64,6 +64,9 @@
             max-height: 500px;
             overflow: hidden;
             transition: max-height 1s linear;
+            @media (max-width: $breakpoint_md) {
+                transition: none;
+            }
         }
 
         .hidden {
