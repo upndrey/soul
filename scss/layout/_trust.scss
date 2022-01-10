@@ -79,10 +79,18 @@
             margin-bottom: 150px;
         }
         @media (max-width: $breakpoint_md) {
+            font-family: 'Lato-Regular';
             margin-bottom: 20px;
+            padding: 10px 15px;
+            height: fit-content;
+            text-align: center;
+            align-items: center;
         }
         &>p {
             cursor: pointer;
+            @media (max-width: $breakpoint_md) {
+                font-family: 'Lato-Regular';
+            }
             &.active {
                 color: #EA9DC3;
             }
@@ -207,8 +215,7 @@
             justify-content: space-between;
             padding: 27px 30px;
             @media (max-width: $breakpoint_md) {
-                flex-direction: column;
-                padding: 20px;
+                display: none;
             }
             &>div {
                 &>span {

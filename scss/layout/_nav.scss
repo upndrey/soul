@@ -19,10 +19,10 @@
         width: 100%;
         height: 115px;
         &.scrolled {
-            background: rgba(0, 0, 0, .6);
+            background: rgba(58, 64, 110, .6);
             height: 85px;
             @media (max-width: $breakpoint_md) {
-                background: rgba(0, 0, 0, .95);
+                background: rgba(58, 64, 110, .95);
                 height: 80px;
                 .mobileNav__wrapper {
                     top: 80px;
@@ -51,7 +51,7 @@
     &__logo {
         width: 170px;
         height: 52px;
-        @include image("nav__logo.png");
+        @include image("nav__logo.svg");
     }
 
     &__menu {
@@ -99,7 +99,7 @@
         .inst {
             width: 24px;
             height: 24px;
-            @include image("nav__inst.png");
+            @include image("nav__inst.svg");
             @media (max-width: $breakpoint_xl) {
                 width: 20px;
                 height: 20px;
@@ -111,7 +111,7 @@
         .login {
             width: 21px;
             height: 24px;
-            @include image("nav__login.png");
+            @include image("nav__login.svg");
             @media (max-width: $breakpoint_xl) {
                 width: 18px;
                 height: 20px;
@@ -199,12 +199,12 @@
     right: 0;
     display: block;
     z-index: 10;
-    background: rgba(0, 0, 0, .6);
+    background: rgba(58, 64, 110, .6);
     &.hidden {
         display: none;
     }
     @media (max-width: $breakpoint_md) {
-        background: rgba(0, 0, 0, .95);
+        background: rgba(58, 64, 110, .95);
         top: 112px;
     }
     ul {

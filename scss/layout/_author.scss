@@ -144,6 +144,9 @@
 
             @media (max-width: $breakpoint_md) {
                 max-width: 100%;
+                width: 100%;
+                margin: auto;
+                margin-top: 15px;
             }
             &:hover {
                 background: transparent;

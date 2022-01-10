@@ -147,7 +147,7 @@
         .inst {
             width: 24px;
             height: 24px;
-            @include image("nav__inst.png");
+            @include image("nav__inst.svg");
             cursor: pointer;
             &:hover {
                 filter: brightness(0) invert(86%) sepia(95%) saturate(7128%) hue-rotate(282deg) brightness(94%) contrast(92%);
@@ -156,7 +156,7 @@
         .login {
             width: 21px;
             height: 24px;
-            @include image("nav__login.png");
+            @include image("nav__login.svg");
             cursor: pointer;
             &:hover {
                 filter: brightness(0) invert(86%) sepia(95%) saturate(7128%) hue-rotate(282deg) brightness(94%) contrast(92%);

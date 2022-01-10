@@ -12,6 +12,9 @@
         @media (max-width: $breakpoint_xl) {
             height: 700px;
         }
+        @media (max-width: $breakpoint_md) {
+            height: 500px;
+        }
         z-index: 5;
         &:before {
             content: '';
@@ -23,10 +26,10 @@
             @include image("header__bg.svg", cover);
             @media (min-width: $breakpoint_xl) { 
                 top: -100px;
-                height: 1400px;
-            }
-            @media (max-width: $breakpoint_xl) {
                 height: 800px;
+            }
+            @media (max-width: $breakpoint_md) {
+                height: 600px;
             }
             z-index: 1;
         }
@@ -45,6 +48,8 @@
         }
     }
 
+
+    
     &__imgWrapper {
         position: absolute;
         z-index: 2;
@@ -96,4 +101,20 @@
         height: 50px;
         @include image("header__marsDynamic.png");
     }
+
+    &__mobile {
+        display: none;
+        
+        @media (max-width: $breakpoint_md) {
+            display: block;
+            position: absolute;
+            top: 250px;
+            width: calc(100% - 20px);
+            height: 400px;
+            @include image("header__mobile.svg");
+            opacity: .5;
+            z-index: 10;
+        }
+    }
+
 }

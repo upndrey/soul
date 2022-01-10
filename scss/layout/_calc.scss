@@ -49,12 +49,7 @@
             left: -150px;
         }
         @media (max-width: $breakpoint_md) {
-            width: 100%;
-            max-width: 300px;
-            margin: auto;
-            top: -60px;
-            left: 0px;
-            right: 0;
+            display: none;
         }
     }
 
@@ -84,6 +79,9 @@
         &.hidden {
             opacity: 0;
             z-index: 1;
+            @media (max-width: $breakpoint_md) {
+                position: absolute;
+            }
         }
         @media (max-width: $breakpoint_xl) {
             max-width: 500px;
@@ -215,6 +213,9 @@
 
     h2 {
         margin-bottom: 20px;
+        @media (max-width: $breakpoint_md) {
+            text-align: center;
+        }
     }
 
     &__transformed {
@@ -230,12 +231,18 @@
         }
         @media (max-width: $breakpoint_md) {
             position: relative;
+            margin-top: 150px;
             height: fit-content;
         }
 
         h2 {
             text-align: center;
             margin-bottom: 50px;
+            @media (max-width: $breakpoint_md) {
+                margin-bottom: 20px;
+                font-family: 'Lato-Regular';
+                font-size: 24px;
+            }
         }
         @media (max-width: $breakpoint_md) {
             max-width: 100%;
@@ -247,7 +254,8 @@
                 display: flex;
                 justify-content: space-between;
                 @media (max-width: $breakpoint_md) {
-                    flex-direction: column;
+                    flex-wrap: wrap;
+                    justify-content: center;
                 }
                 &>div {
                     font-family: Lato-Regular;
@@ -267,9 +275,12 @@
                         height: 50px;
                     }
                     @media (max-width: $breakpoint_md) {
-                        width: 100%;
-                        margin-bottom: 10px;
-                        height: 50px;
+                        width: 100px;
+                        max-width: 100%;
+                        margin: 0 5px 10px 5px;
+                        height: 40px;
+                        font-size: 16px;
+                        border-radius: 15px;
                     }
                 }
             }
@@ -473,6 +484,7 @@
             margin-top: 40px;
             @media (max-width: $breakpoint_md) {
                 flex-direction: column;
+                margin-top: 20px;
             }
 
             &__links {
@@ -503,6 +515,11 @@
                             margin-right: 7px;
                             background: #EA9DC3;
                             border-radius: 50px;
+                        }
+                    }
+                    &:nth-child(1) {
+                        @media (max-width: $breakpoint_md) {
+                            font-family: 'Lato-Regular';
                         }
                     }
                 }

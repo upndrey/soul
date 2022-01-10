@@ -245,18 +245,22 @@
     }
     @media (max-width: $breakpoint_md) {
         border-radius: 25px;
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
         height: auto;
         overflow-y: scroll;
-        box-sizing: border-box;
     }
     h3 {
         span {
             color: #EA9DC3;
+            @media (max-width: $breakpoint_md) {
+                margin-right: 5px;
+            }
         }
         @media (max-width: $breakpoint_md) {
-            margin-top: 100px;
+            margin-top: 150px;
+            margin-bottom: 10px;
+            br {
+                display: none;
+            }
         }
     }
 
@@ -287,11 +291,11 @@
             margin-bottom: 10px;
             @media (max-width: $breakpoint_md) {
                 width: 100%;
+                height: 40px;
             }
         }
 
         label {
-            
             margin-left: 10px;
         }
 
@@ -331,8 +335,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            @media (max-width: $breakpoint_md) {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
 
             input[name=card] {
+                display: block;
                 max-width: 100%;
                 width: 250px;
                 margin-top: 10px;
@@ -340,8 +349,16 @@
                 border-right: 0;
                 border-top-right-radius: 0;
                 border-bottom-right-radius: 0;
+                @media (max-width: $breakpoint_md) {
+                    width: 100%;
+                    border-radius: 25px;
+                    border: 1px solid #364277;
+                    margin-top: 0;
+                    height: 40px;
+                }
             }
             input[name=cardDate] {
+                display: block;
                 max-width: 100%;
                 width: 100px;
                 margin-top: 10px;
@@ -350,6 +367,16 @@
                 border-left: 0;
                 border-top-left-radius: 0;
                 border-bottom-left-radius: 0;
+                @media (max-width: $breakpoint_md) {
+                    width: 100%;
+                    padding-left: 0 ;
+                    border: 1px solid #364277;
+                    border-radius: 25px;
+                    padding: 20px 27px;
+                    margin-top: 0;
+                    box-sizing: border-box;
+                    height: 40px;
+                }
             }
 
             input[type=submit] {
@@ -357,7 +384,10 @@
                 max-width: 100%;
                 width: 340px;
                 @media (max-width: $breakpoint_md) {
+                    margin-left: 0;
+                    margin-top: 10px;
                     width: 100%;
+                    height: 40px;
                 }
         
             }
@@ -430,8 +460,6 @@
     }
     @media (max-width: $breakpoint_md) {
         border-radius: 25px;
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
         height: auto;
         overflow-y: scroll;
         box-sizing: border-box;
