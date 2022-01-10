@@ -505,7 +505,7 @@ Calc.prototype.drawSmallCircles = function() {
 Calc.prototype.transformLayers = function(stepsCount) {
     if(this.layer1Params && this.layer2Params && this.layer3Params) {
         this.domStartModification();
-        window.scroll(0,findPos(document.getElementById("calc__transformed"), 100));
+        window.scroll(0,findPos(document.getElementById("calc__transformed"), -100));
         mq = window.matchMedia( "(max-width: 1160px)" );
         if (!mq.matches) {
             this.transformationStep = 0;
