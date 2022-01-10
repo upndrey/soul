@@ -22,6 +22,7 @@
             &:before {
                 height: 1700px;  
                 @include image("calc__bg_transformed.svg", cover);
+                will-change: transform;
             }
         }
 
@@ -33,6 +34,7 @@
             width: 100%;
             height: 900px;  
             @include image("calc__bg.svg", cover);
+            will-change: transform;
             z-index: 1;
         }
     }
