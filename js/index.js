@@ -237,14 +237,6 @@ Calc.prototype.init = function() {
 };
 
 Calc.prototype.inputHandler = function() {
-    document.getElementById("sex").addEventListener("click", (e) => {
-        if(e.target.value == "Мужской") {
-        }
-        else {
-
-        }
-        this.drawLayers();
-    })
 };
 
 Calc.prototype.stampsInit = function() {
@@ -521,7 +513,7 @@ Calc.prototype.transformLayers = function(stepsCount) {
                     this.setTemporaryParams();
                     this.transformationStep = 0;
                     document.getElementById("calc__recalc").addEventListener("click", () => {
-                        this.transformLayersBack(50);
+                        this.transformLayersBack(1);
                     }, {once: true});
                 }
             }, 30);
@@ -529,7 +521,7 @@ Calc.prototype.transformLayers = function(stepsCount) {
         else {
             this.domEndModification();
             document.getElementById("calc__recalc").addEventListener("click", () => {
-                this.transformLayersBack(50);
+                this.transformLayersBack(1);
             }, {once: true});
         }
     }
@@ -542,7 +534,7 @@ Calc.prototype.transformLayersBack = function(stepsCount) {
         mq = window.matchMedia( "(max-width: 1160px)" );
         if (!mq.matches) {
             this.transformationStep = 0;
-            this.rotation = -1 * 25 * 1/stepsCount;
+            this.rotation = -1 * 25 / 2;
 
             let interval = setInterval(() => {
                 this.transformationBackHandler(stepsCount);
