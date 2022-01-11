@@ -11,6 +11,7 @@
         }
         @media (max-width: $breakpoint_md) {
             overflow-x: visible;
+            padding-top: 100px;
         }
         &:before {
             content: '';

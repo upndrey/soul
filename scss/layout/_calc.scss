@@ -11,13 +11,16 @@
         position: relative;
         height: 770px;
         transition: 2s;
+        @media (max-width: $breakpoint_md) {
+            height: 700px;
+        }
 
         &.transformed {
             height: 1300px;
             margin-bottom: 150px;
             @media (max-width: $breakpoint_md) {
                 height: fit-content;
-                margin-bottom: 250px;
+                margin-bottom: 150px;
             }
             &:before {
                 height: 1700px;  

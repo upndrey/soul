@@ -10,6 +10,9 @@
         position: relative;
         //overflow: hidden;
         padding-top: 100px;
+        @media (max-width: $breakpoint_md) {
+            padding-top: 0;
+        }
         z-index: 4;
         &:before {
             content: '';
