@@ -13,7 +13,7 @@
             top: -400px;
             width: 100%;
             height: 1600px;
-            //@include image("unique__bg.svg", cover);
+            @include image("unique__bg.svg", cover);
             @media (max-width: $breakpoint_md) {
                 top: -100px;
             }

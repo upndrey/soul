@@ -23,7 +23,7 @@
             @media (min-width: $breakpoint_xl) {
                 height: 1650px;
             }
-            //@include image("unique__bg.svg", cover);
+            @include image("unique__bg.svg", cover);
         }
     }
 
