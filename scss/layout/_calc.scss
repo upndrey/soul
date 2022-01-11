@@ -10,7 +10,7 @@
     &__wrapper {
         position: relative;
         height: 770px;
-        transition: 2s;
+        //transition: 2s;
         @media (max-width: $breakpoint_md) {
             height: 700px;
         }
