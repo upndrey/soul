@@ -20,7 +20,7 @@
             top: -100px;
             width: 100%;
             height: 1100px;
-            @include image("mission__bg.svg", cover);
+            //@include image("mission__bg.svg", cover);
         }
 
         #mission__canvas, #mission__canvasStatic {
