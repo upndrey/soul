@@ -34,12 +34,15 @@ a {
   }
 }
 
+html {
+}
+
 input {
   outline:none;
 }
 
 body {
-  overflow: auto;
+  overflow-y: scroll;
   &.fixed {
     overflow: hidden;
   }

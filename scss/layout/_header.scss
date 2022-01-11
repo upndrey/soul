@@ -24,7 +24,6 @@
             width: 100%;
             height: 1200px;
             @include image("header__bg.svg", cover);
-            will-change: transform;
             @media (min-width: $breakpoint_xl) { 
                 top: -100px;
                 height: 1300px;

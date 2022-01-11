@@ -24,7 +24,6 @@
                 height: 1650px;
             }
             @include image("unique__bg.svg", cover);
-            will-change: transform;
         }
     }
 

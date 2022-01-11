@@ -21,7 +21,6 @@
             width: 100%;
             height: 1100px;
             @include image("mission__bg.svg", cover);
-            will-change: transform;
         }
 
         #mission__canvas, #mission__canvasStatic {

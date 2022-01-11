@@ -25,7 +25,6 @@
             &:before {
                 height: 1700px;  
                 @include image("calc__bg_transformed.svg", cover);
-                will-change: transform;
             }
         }
 
