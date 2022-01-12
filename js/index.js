@@ -124,8 +124,8 @@ Header.prototype.init = function() {
         setInterval(() => {
             var x = this.centerX + this.radius * Math.cos(this.angle);
             var y = this.centerY + this.radius * Math.sin(this.angle);
-            // x = Math.round(x);
-            // y = Math.round(y);
+            x = Math.floor(x);
+            y = Math.floor(y);
         
             this.mars.style.right = `${x}px`;
             this.mars.style.top = `${y}px`;
@@ -234,7 +234,7 @@ Calc.prototype.init = function() {
                 e.target.value = null;
             }, {once: true})
         });
-        this.eventButton.addEventListener("click", this.transformLayers.bind(this, 50), {once: true});
+        this.eventButton.addEventListener("click", this.transformLayers.bind(this, 40), {once: true});
 };
 
 Calc.prototype.inputHandler = function() {
@@ -756,7 +756,9 @@ Calc.prototype.transformationHandler = function(stepsCount) {
             colorB: colorB
         });
     }
-    this.drawLayers();
+    
+    window.requestAnimationFrame(this.drawLayers.bind(this));
+    //this.drawLayers();
     this.transformationStep += 1;
 };
 
@@ -846,7 +848,7 @@ function Details(canvasId = "canvas", videoId = "video") {
     this.transformX = 0;
     this.transformY = 0;
     this.step = 0;
-    this.stepsCount = 20;
+    this.stepsCount = 50;
     
     this.height = 700;
     var mq = window.matchMedia( "(max-width: 1480px)" );
@@ -1013,7 +1015,7 @@ Details.prototype.transform = function(drawInterval) {
             this.step = 0;
         }
         this.step++;
-    }, 30);
+    }, 20);
 };
 
 Details.prototype.transformationHandler = function(params) {
