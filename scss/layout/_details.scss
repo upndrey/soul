@@ -84,6 +84,7 @@
             position: absolute;
             width: 100%;
             border-radius: 500px;
+            -webkit-border-radius: 500px;
             height: inherit;
             @include image("video.png", cover);
             @media (max-width: $breakpoint_xl) {
