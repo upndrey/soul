@@ -152,6 +152,7 @@
                 background: transparent;
             }
             &#sex {
+                margin-right: 0;
                 @media (max-width: $breakpoint_xl) {
                     margin-right: 0;
                 }
@@ -163,18 +164,19 @@
             border: 0;
             padding: 0;
             &:after {
-                content: '\02C5';
+                content: '˅';
                 position: absolute;
-                font-family: Lato-Light;
                 right: 20px;
                 top: 10px;
-                font-size: 34px;
+                font-size: 26px;
                 font-weight: 300;
-                height: 34px;
                 pointer-events: none;
                 z-index: 10;
                 @media (max-width: $breakpoint_xl) {
-                    top: 8px;
+                    top: 5px;
+                }
+                @media (max-width: $breakpoint_md) {
+                    top: 7px;
                 }
            }
         }

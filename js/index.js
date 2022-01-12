@@ -129,9 +129,10 @@ Header.prototype.init = function() {
         
             this.mars.style.right = `${x}px`;
             this.mars.style.top = `${y}px`;
+            this.angle -= .0025;
 
-            this.angle -= Math.acos(1-Math.pow(3/this.radius,2)/2) / 2;
-        }, 30);
+            //this.angle -= Math.acos(1-Math.pow(3/this.radius,2)/2) / 2;
+        }, 20);
     }
 };
 
@@ -378,7 +379,6 @@ Calc.prototype.drawLayer2Part2 = function() {
         this.ctx.shadowOffsetY = 0;
         this.ctx.fill();
         this.ctx.closePath();
-
     }
 
     this.ctx.beginPath();

@@ -83,15 +83,20 @@
             content: '';
             position: absolute;
             width: 100%;
+            border-radius: 500px;
             height: inherit;
             @include image("video.png", cover);
+            @media (max-width: $breakpoint_xl) {
+            }
+            @media (max-width: $breakpoint_md) {
+                border-radius: 50px;
+            }
         }
 
         #details__video {
             display: inline-block;
             cursor: pointer;
             max-width: calc(100% - 155px);
-            border-radius: 400px;
             height: 590px;
             @media (max-width: $breakpoint_xl) {
                 height: 500px;
