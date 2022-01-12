@@ -848,7 +848,7 @@ function Details(canvasId = "canvas", videoId = "video") {
     this.transformX = 0;
     this.transformY = 0;
     this.step = 0;
-    this.stepsCount = 50;
+    this.stepsCount = 30;
     
     this.height = 700;
     var mq = window.matchMedia( "(max-width: 1480px)" );
@@ -1007,15 +1007,26 @@ Details.prototype.editDom = function() {
 
 Details.prototype.transform = function(drawInterval) {
     let params = JSON.parse(JSON.stringify(this));
-    let interval = setInterval(() => {
+    // let interval = setInterval(() => {
+    //     this.transformationHandler(params);
+    //     if(this.step == this.stepsCount) {
+    //         clearInterval(interval);
+    //         clearInterval(drawInterval);
+    //         this.step = 0;
+    //     }
+    //     this.step++;
+    // }, 40);
+    function stepFunc() {
         this.transformationHandler(params);
-        if(this.step == this.stepsCount) {
-            clearInterval(interval);
+        if(this.step >= this.stepsCount) {
+            //clearInterval(interval);
             clearInterval(drawInterval);
             this.step = 0;
         }
         this.step++;
-    }, 20);
+        window.requestAnimationFrame(stepFunc.bind(this));
+    }
+    stepFunc.call(this);
 };
 
 Details.prototype.transformationHandler = function(params) {
@@ -1042,7 +1053,7 @@ Details.prototype.transformCircle = function(params) {
     }
     mq = window.matchMedia( "(max-width: 760px)" );
     if (mq.matches) {
-        this.transformX = this.tFormula(params.transformX, );
+        //this.transformX = this.tFormula(params.transformX, );
     }
 }
 
