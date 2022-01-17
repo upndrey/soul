@@ -673,9 +673,9 @@ Calc.prototype.transformationHandler = function(stepsCount) {
         colorB = 210;
     }
     else {
-        colorR = 148;
-        colorG = 114;
-        colorB = 172;
+        colorR = 234;
+        colorG = 157;
+        colorB = 195;
     }
     this.layer2Transform(stepsCount, {
         centerX: 0,
@@ -699,8 +699,8 @@ Calc.prototype.transformationHandler = function(stepsCount) {
     }
     else {
         var gradient3 = this.ctx.createLinearGradient(0, 0, 0, 900);
-        gradient3.addColorStop(0, "#D76DA0");
-        gradient3.addColorStop(1, "#D76DA0");
+        gradient3.addColorStop(0, "rgba(98, 102, 165, 1)");
+        gradient3.addColorStop(1, "rgba(189, 159, 211, 0)");
         color3 = gradient3;
     }
     this.layer3Transform(stepsCount, {
