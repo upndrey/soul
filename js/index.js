@@ -699,8 +699,8 @@ Calc.prototype.transformationHandler = function(stepsCount) {
     }
     else {
         var gradient3 = this.ctx.createLinearGradient(0, 0, 0, 900);
-        gradient3.addColorStop(0, "rgba(237, 191, 213, 1)");
-        gradient3.addColorStop(1, "rgba(189, 159, 211, .5)");
+        gradient3.addColorStop(0, "#D76DA0");
+        gradient3.addColorStop(1, "#D76DA0");
         color3 = gradient3;
     }
     this.layer3Transform(stepsCount, {
