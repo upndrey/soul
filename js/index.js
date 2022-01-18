@@ -111,30 +111,38 @@ Nav.prototype.init = function() {
 
 // Header
 function Header() {
-    this.mars = document.querySelector(".header__marsDynamic");
-    this.centerX = 430;
-    this.centerY = 375;
+    this.marsCanvas = document.getElementById("header__marsDynamic");
+    this.centerX = 250;
+    this.centerY = 250;
     this.radius = 250;
-    this.angle = 700;
+    this.angle = 1000;
 }
 
 Header.prototype.init = function() {   
     mq = window.matchMedia( "(max-width: 1160px)" );
     if (!mq.matches) {
-        setInterval(() => {
-            var x = this.centerX + this.radius * Math.cos(this.angle);
-            var y = this.centerY + this.radius * Math.sin(this.angle);
-            x = Math.floor(x);
-            y = Math.floor(y);
-        
-            this.mars.style.right = `${x}px`;
-            this.mars.style.top = `${y}px`;
-            this.angle -= .0025;
+        var img = new Image();
+        img.addEventListener("load", () => {
+            const ctx = this.marsCanvas.getContext('2d');
+            setInterval(() => {
+                var x = this.centerX + this.radius * Math.cos(this.angle);
+                var y = this.centerY + this.radius * Math.sin(this.angle);
+                // x = Math.floor(x);
+                // y = Math.floor(y);
+                ctx.clearRect(0, 0, this.marsCanvas.width, this.marsCanvas.height);
 
-            //this.angle -= Math.acos(1-Math.pow(3/this.radius,2)/2) / 2;
-        }, 20);
+                ctx.beginPath();
+                ctx.drawImage(img, x, y, 50, 50);
+                ctx.closePath();
+                this.angle += .0035;
+                //this.angle -= Math.acos(1-Math.pow(3/this.radius,2)/2) / 2;
+            }, 20);
+        }, false);
+        img.src = './images/header__marsDynamic.png'; // Устанавливает источник файла
+        
     }
 };
+
 
 // Calc
 function Calc(canvasId = "canvas", buttonId = "someButton") {
