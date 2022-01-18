@@ -16,7 +16,7 @@
             top: -300px;
             width: 100%;
             height: 1440px;
-            @include image("courses__bg.svg", cover);
+            @include image("courses__bg.png", cover);
             @media (min-width: $breakpoint_xl) {
                 top: -600px;
                 height: 1740px;

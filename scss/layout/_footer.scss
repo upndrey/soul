@@ -24,7 +24,7 @@
             top: -86px;
             width: 100%;
             height: 400px;
-            @include image("footer__bg.svg", cover);
+            @include image("footer__bg.png", cover);
             @media (max-width: $breakpoint_md) {
                 top: auto;
                 bottom: 0;
