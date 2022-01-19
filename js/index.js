@@ -50,6 +50,7 @@ Popup.prototype.init = function() {
     this.openPopupHandler("step3PopupLink", this.step3Dom);
 
     this.closePopupHandler();
+    this.cardMasks();
 };
 
 Popup.prototype.openPopupHandler = function(linkId, popupDom) {
@@ -85,6 +86,61 @@ Popup.prototype.closePopup = function() {
     this.wrapperDom.classList.remove("active");
     this.activePopupDom = null;
 };
+
+Popup.prototype.cardMasks = function() {
+    const card = document.getElementById("card");
+    const cardDate = document.getElementById("card__date");
+    let prevLength = 0;
+    let nextLength = 0;
+
+    card.addEventListener("input", (e) => {
+        let regex = /^[0-9]+$/;
+        if (!e.target.value.slice(e.target.value.length - 1, e.target.value.length).match(regex))
+        {
+            e.target.value = e.target.value.slice(0, e.target.value.length - 1);
+        }
+        if(e.target.value.length > 12) {
+            e.target.value = e.target.value.slice(0, e.target.value.length - 1);
+            cardDate.focus();
+        }
+    });
+    
+    cardDate.addEventListener("input", (e) => {
+        prevLength = nextLength;
+        nextLength = e.target.value.length;
+        if(e.target.value.length == 0) {
+            card.focus();
+        }
+        let regex = /^[0-9]+$/;
+        if (!e.target.value.slice(e.target.value.length - 1, e.target.value.length).match(regex) && prevLength != 4 && nextLength != 3)
+        {
+            e.target.value = e.target.value.slice(0, e.target.value.length - 1);
+            return;
+        }
+        if(e.target.value.length == 2) {
+            let month = e.target.value[0] + e.target.value[1];
+            if(parseInt(month) > 12){
+                e.target.value = 12;
+            }
+        }
+        if(e.target.value.length == 2 && nextLength >= prevLength) {
+            e.target.value += "/";
+            nextLength++;
+        }
+        if(prevLength == 3 && nextLength == 2) {
+            e.target.value = e.target.value.slice(0, e.target.value.length - 1);
+            return;
+        }
+        if(prevLength == 2 && nextLength == 1 && e.target.value[e.target.value.length - 1] == "/") {
+            e.target.value = e.target.value.slice(0, e.target.value.length - 1);
+            nextLength = 1;
+            return;
+        }
+        if(e.target.value.length == 6) {
+            e.target.value = e.target.value.slice(0, e.target.value.length - 1);
+        }
+    });
+}
 
 // Nav
 function Nav() {
@@ -132,6 +188,9 @@ Header.prototype.init = function() {
                 ctx.clearRect(0, 0, this.marsCanvas.width, this.marsCanvas.height);
 
                 ctx.beginPath();
+                ctx.arc(x + 25, y + 25, 25, 0, 2 * Math.PI);
+                ctx.fillStyle = "#a5abce";
+                ctx.fill();
                 ctx.drawImage(img, x, y, 50, 50);
                 ctx.closePath();
                 this.angle += .0035;

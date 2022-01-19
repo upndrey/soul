@@ -50,7 +50,7 @@
         &>p {
             text-align: left;
             @media (max-width: $breakpoint_md) {
-                text-align: center;
+                text-align: left;
             }
             font-size: 18px;
         }

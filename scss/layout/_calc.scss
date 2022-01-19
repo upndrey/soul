@@ -513,7 +513,9 @@
                     position: relative;
                     display: flex;
                     align-items: center;
-                    cursor: pointer;
+                    &:not(:nth-child(1)) {
+                        cursor: pointer;
+                    }
                     &.active {
                         color: #EA9DC3;
                         &:before {
