@@ -273,7 +273,7 @@
         font-style: normal;
         font-weight: 300;
         letter-spacing: 0em;
-        text-align: center;
+        text-align: left;
         margin-bottom: 20px;
     }
 
@@ -457,7 +457,7 @@
 .step2__popup,
 .step3__popup {
     p {
-        text-align: center;
+        text-align: left;
     }
     @media (max-width: $breakpoint_md) {
         border-radius: 25px;
