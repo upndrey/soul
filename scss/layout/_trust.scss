@@ -86,17 +86,29 @@
             margin-bottom: 20px;
             padding: 10px 15px;
             height: fit-content;
-            text-align: center;
-            align-items: center;
+            padding-left: 30px;
         }
         &>p {
+            display: flex;
+            align-items: center;
+
             cursor: pointer;
             @media (max-width: $breakpoint_md) {
                 font-family: 'Lato-Regular';
             }
             &.active {
                 color: #EA9DC3;
+                &:before {
+                    content: '';
+                    display: inline-block;
+                    width: 5px;
+                    height: 5px;
+                    margin-right: 7px;
+                    background: #EA9DC3;
+                    border-radius: 50%;
+                }
             }
+
         }
     }
 
