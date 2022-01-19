@@ -99,7 +99,7 @@ Popup.prototype.cardMasks = function() {
         {
             e.target.value = e.target.value.slice(0, e.target.value.length - 1);
         }
-        if(e.target.value.length > 12) {
+        if(e.target.value.length > 16) {
             e.target.value = e.target.value.slice(0, e.target.value.length - 1);
             cardDate.focus();
         }
