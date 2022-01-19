@@ -141,6 +141,9 @@
                     @media (max-width: $breakpoint_xl) {
                         height: 40px;
                     }
+                    @media (max-width: $breakpoint_md) {
+                        filter: none;
+                    }
                     &:hover {
                         background: #EA9DC3;
                         color: #fff;

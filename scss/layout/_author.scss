@@ -97,6 +97,13 @@
                     font-family: Lato-Light;
                 }
             }
+            i {
+                
+                @media (max-width: $breakpoint_md) {
+                    display: inline-block;
+                    margin-bottom: 5px;
+                }
+            }
         }
 
         ul {
