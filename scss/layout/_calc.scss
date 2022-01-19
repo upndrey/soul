@@ -528,6 +528,8 @@
                         }
                     }
                     &:nth-child(1) {
+                        display: block;
+                        text-align: center;
                         @media (max-width: $breakpoint_md) {
                             display: block;
                             font-family: 'Lato-Regular';
