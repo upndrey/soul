@@ -242,8 +242,10 @@
         }
 
         h2 {
+            font-family: 'Lato-Regular';
+            font-size: 34px;
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 20px;
             @media (max-width: $breakpoint_md) {
                 margin-bottom: 20px;
                 font-family: 'Lato-Regular';
@@ -258,7 +260,7 @@
             &__data {
                 width: 100%;
                 display: flex;
-                justify-content: space-between;
+                justify-content: center;
                 @media (max-width: $breakpoint_md) {
                     flex-wrap: wrap;
                     justify-content: center;
@@ -277,8 +279,11 @@
                     box-sizing: border-box;
                     padding: 10px 20px;
                     @media (max-width: $breakpoint_xl) {
-                        width: 250px;
-                        height: 50px;
+                        margin: 0 5px 10px 5px;
+                        min-width: 200px;
+                        width: fit-content;
+                        max-width: 300px;
+                        height: 35px;
                     }
                     @media (max-width: $breakpoint_md) {
                         min-width: 150px;
@@ -489,7 +494,7 @@
         .stamp {
             display: flex;
             justify-content: space-between;
-            margin-top: 40px;
+            margin-top: 20px;
             @media (max-width: $breakpoint_md) {
                 flex-direction: column;
                 margin-top: 20px;
