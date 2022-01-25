@@ -309,7 +309,7 @@ Calc.prototype.init = function() {
     });
     this.inputTimeFormat();
     this.inputDateFormat();
-    this.eventButton.addEventListener("click", this.transformLayers.bind(this, 40));
+    this.eventButton.addEventListener("click", this.transformLayers.bind(this, 40), {once: true});
 };
 
 Calc.prototype.inputTimeFormat = function() {
