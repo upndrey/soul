@@ -722,6 +722,9 @@ Calc.prototype.transformLayers = function(stepsCount) {
                     this.setTemporaryParams();
                     this.transformationStep = 0;
                     document.getElementById("calc__recalc").addEventListener("click", () => {
+                        document.querySelectorAll(`#stamp1__text, #stamp2__text, #stamp3__text`).forEach((elem) => {
+                            elem.classList.remove("shown");
+                        });
                         this.transformLayersBack(1);
                     }, {once: true});
                 }
@@ -730,6 +733,9 @@ Calc.prototype.transformLayers = function(stepsCount) {
         else {
             this.domEndModification();
             document.getElementById("calc__recalc").addEventListener("click", () => {
+                document.querySelectorAll(`#stamp1__text, #stamp2__text, #stamp3__text`).forEach((elem) => {
+                    elem.classList.remove("shown");
+                });
                 this.transformLayersBack(1);
             }, {once: true});
         }
