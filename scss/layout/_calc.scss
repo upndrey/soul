@@ -736,6 +736,36 @@
                     display: none;
                 }
             }
+            
+            #stamp1__text,
+            #stamp2__text,
+            #stamp3__text {
+                max-height: 210px;
+                overflow-y: hidden;
+                @media (max-width: $breakpoint_md) {
+                    max-height: 1500px;
+                }
+                &.shown {
+                    max-height: 1000px;
+                    &>span+br {
+                        display: none;
+                    }
+                    &>span {
+                        display: none;
+                    }
+                }
+
+                &>span {
+                    cursor: pointer;
+                    color: #EA9DC3;
+                    text-decoration: underline;
+
+                    @media (max-width: $breakpoint_md) {
+                        display: none;
+                    }
+
+                }
+            }
         }
 
         .calc__recalc {
