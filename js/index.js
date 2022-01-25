@@ -935,7 +935,7 @@ Calc.prototype.yandexGeoAPI = function() {
 
 Calc.prototype.geonamesAPI = function(LangAndPos) {
     console.log(LangAndPos);
-    return fetch(`http://api.geonames.org/timezoneJSON?lat=${LangAndPos[1]}&lng=${LangAndPos[0]}&username=upndrey`)
+    return fetch(`https://secure.geonames.org/timezoneJSON?lat=${LangAndPos[1]}&lng=${LangAndPos[0]}&username=upndrey`)
     .then(
         (res)=> {
             return res.json();
