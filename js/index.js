@@ -698,8 +698,10 @@ Calc.prototype.drawSmallCircles = function() {
 };
 
 Calc.prototype.transformLayers = function(stepsCount) {
-    if(!this.isCorrectInput())
+    if(!this.isCorrectInput()){
+        this.eventButton.addEventListener("click", this.transformLayers.bind(this, 40), {once: true});
         return;
+    }
     if(this.layer1Params && this.layer2Params && this.layer3Params) {
         if(!this.API())
             return;
@@ -991,7 +993,7 @@ Calc.prototype.astroAPI = async function(ts) {
     let date = new Date(year, month, day, hour, minute);
     date.setTime(date.getTime() - ts.rawOffset*60*60*1000);
     console.log(ts.rawOffset*60*60*1000);
-    return fetch(`http://localhost:3000/test?d=${date.getDate()}&m=${date.getMonth() + 1}&y=${date.getYear()}&h=${date.getHours()}&mi=${date.getMinutes()}`)
+    return fetch(`https://vibracii-dushi.tmweb.ru/index.php?d=${date.getDate()}&m=${date.getMonth() + 1}&y=${date.getYear()}&h=${date.getHours()}&mi=${date.getMinutes()}`)
     .then(
         (res)=> {
             console.log(res);
