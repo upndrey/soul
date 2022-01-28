@@ -1007,7 +1007,7 @@ Calc.prototype.astroAPI = async function(ts) {
     let date = new Date(year, month, day, hour, minute);
     date.setTime(date.getTime() - ts.rawOffset*60*60*1000);
     console.log(ts.rawOffset*60*60*1000);
-    return fetch(`https://vibracii-dushi.tmweb.ru/server.php?d=${date.getDate()}&m=${date.getMonth() + 1}&y=${date.getYear()}&h=${("0" + date.getHours()).slice(-2)}&mi=${("0" + date.getMinutes()).slice(-2)}`)
+    return fetch(`https://vibracii-dushi.tmweb.ru/server.php?d=${date.getDate()}&m=${date.getMonth() + 1}&y=${date.getFullYear()}&h=${("0" + date.getHours()).slice(-2)}&mi=${("0" + date.getMinutes()).slice(-2)}`)
     .then(
         (res)=> {
             console.log(res);
