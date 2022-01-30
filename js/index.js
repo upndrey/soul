@@ -389,10 +389,6 @@ Calc.prototype.cityAutocompleteAPI = function() {
         while(cityAutocompleteDom.firstChild)
             cityAutocompleteDom.removeChild(cityAutocompleteDom.lastChild);
         var query = cityInputDom.value;
-        if(query.length)
-            cityAutocompleteDom.classList.add("active");
-        else
-            cityAutocompleteDom.classList.remove("active");
     
         var options = {
             method: "POST",
@@ -425,6 +421,11 @@ Calc.prototype.cityAutocompleteAPI = function() {
                 city.push(elem.data.city);
         });
         console.log(city);
+        
+        if(city.length)
+            cityAutocompleteDom.classList.add("active");
+        else
+            cityAutocompleteDom.classList.remove("active");
         city.forEach((elem) => {
             let autocompleteSuggestion = document.createElement("div");
             autocompleteSuggestion.innerText = elem;
