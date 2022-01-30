@@ -777,7 +777,7 @@ Calc.prototype.API = async function() {
         <br>Пожалуйста, проверьте правильность написания, или попробуйте указать соседний крупный город для расчёта (из одного часового пояса)`);
         return false;
     }
-    let ts = await this.geonamesAPI(LangAndPos.split(" "));
+    let ts = await this.ipgeoAPI(LangAndPos.split(" "));
     console.log(ts);
     let astroResult = await this.astroAPI(ts);
     console.log(astroResult);
@@ -979,7 +979,19 @@ Calc.prototype.bingAPI = function(LangAndPos) {
 };
 
 Calc.prototype.ipgeoAPI = function(LangAndPos) {
-    return fetch(`https://api.ipgeolocation.io/timezone?apiKey=207212f0704e43d480fb5b6625e2f1e8&lat=${LangAndPos[1]}&long=${LangAndPos[0]}`)
+    const dateArr = this.birthdayDom.value.split(".");
+    const day = dateArr[0];
+    const month = dateArr[1];
+    const year = dateArr[2];
+    let time = "00:00";
+    if(this.birthtimeDom.value)
+        time = this.birthtimeDom.value;
+    const timeArr = time.split(":");
+    const hour = timeArr[0];
+    const minute = timeArr[1];
+    console.log(hour, minute);
+    console.log(`https://api.ipgeolocation.io/timezone/convert?apiKey=207212f0704e43d480fb5b6625e2f1e8&lang=ru&time=${year}-${month}-${day}%20${hour}:${minute}&lat_from=${LangAndPos[1]}&long_from=${LangAndPos[0]}&lat_to=0&long_to=0`);
+    return fetch(`https://api.ipgeolocation.io/timezone/convert?apiKey=207212f0704e43d480fb5b6625e2f1e8&lang=ru&time=${year}-${month}-${day}%20${hour}:${minute}&lat_from=${LangAndPos[1]}&long_from=${LangAndPos[0]}&lat_to=0&long_to=0`)
     .then(
         (res)=> {
             return res.json();
@@ -994,19 +1006,8 @@ Calc.prototype.ipgeoAPI = function(LangAndPos) {
 };
 
 Calc.prototype.astroAPI = async function(ts) {
-    const dateArr = this.birthdayDom.value.split(".");
-    const day = dateArr[0];
-    const month = dateArr[1] - 1;
-    const year = dateArr[2];
-    let time = "00:00";
-    if(this.birthtimeDom.value)
-        time = this.birthtimeDom.value;
-    const timeArr = time.split(":");
-    const hour = timeArr[0];
-    const minute = timeArr[1];
-    let date = new Date(year, month, day, hour, minute);
-    date.setTime(date.getTime() - ts.rawOffset*60*60*1000);
-    console.log(ts.rawOffset*60*60*1000);
+    let date = new Date(ts.converted_time);
+    console.log(date);
     return fetch(`https://vibracii-dushi.tmweb.ru/server.php?d=${date.getDate()}&m=${date.getMonth() + 1}&y=${date.getFullYear()}&h=${("0" + date.getHours()).slice(-2)}&mi=${("0" + date.getMinutes()).slice(-2)}`)
     .then(
         (res)=> {
