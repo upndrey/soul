@@ -90,8 +90,6 @@ Popup.prototype.closePopup = function() {
 Popup.prototype.cardMasks = function() {
     const card = document.getElementById("card");
     const cardDate = document.getElementById("card__date");
-    let prevLength = 0;
-    let nextLength = 0;
 
     card.addEventListener("input", (e) => {
         let regex = /^[0-9]+$/;
@@ -105,42 +103,72 @@ Popup.prototype.cardMasks = function() {
             cardDate.focus();
         }
     });
-    
-    cardDate.addEventListener("input", (e) => {
-        prevLength = nextLength;
-        nextLength = e.target.value.length;
-        if(e.target.value.length == 0) {
-            card.focus();
+    $('#card__date').inputmask({
+        mask: "D/M",
+        placeholder: "дд.мм",
+        definitions: {
+          "M": {
+            validator: function (chrs, buffer, pos, strict, opts) {
+              var valExp = new RegExp("0[1-9]|1[0-2]");
+              return valExp.test(chrs);
+            },
+            cardinality: 2,
+            prevalidator: [
+              { validator: "[01]", cardinality: 1 },
+              { validator: "0[1-9]", cardinality: 2 },
+              { validator: "1[012]", cardinality: 2 },
+            ]
+          },
+          "D": {
+            validator: function (chrs, buffer, pos, strict, opts) {
+              var valExp2 = new RegExp("0[1-9]|[12][0-9]|3[01]");
+              return valExp2.test(chrs);
+            },
+            cardinality: 2,
+            prevalidator: [
+              { validator: "[0-3]", cardinality: 1 },
+              { validator: "0[1-9]", cardinality: 2 },
+              { validator: "(1|2)[0-9]", cardinality: 2 },
+              { validator: "3[01]", cardinality: 2 },
+            ]
+          },
         }
-        let regex = /^[0-9]+$/;
-        if (!e.target.value.slice(e.target.value.length - 1, e.target.value.length).match(regex) && prevLength != 4 && nextLength != 3)
-        {
-            e.target.value = e.target.value.slice(0, e.target.value.length - 1);
-            return;
-        }
-        if(e.target.value.length == 2) {
-            let month = e.target.value[0] + e.target.value[1];
-            if(parseInt(month) > 12){
-                e.target.value = 12;
-            }
-        }
-        if(e.target.value.length == 2 && nextLength >= prevLength) {
-            e.target.value += "/";
-            nextLength++;
-        }
-        if(prevLength == 3 && nextLength == 2) {
-            e.target.value = e.target.value.slice(0, e.target.value.length - 1);
-            return;
-        }
-        if(prevLength == 2 && nextLength == 1 && e.target.value[e.target.value.length - 1] == "/") {
-            e.target.value = e.target.value.slice(0, e.target.value.length - 1);
-            nextLength = 1;
-            return;
-        }
-        if(e.target.value.length == 6) {
-            e.target.value = e.target.value.slice(0, e.target.value.length - 1);
-        }
-    });
+      });
+    // cardDate.addEventListener("input", (e) => {
+    //     prevLength = nextLength;
+    //     nextLength = e.target.value.length;
+    //     if(e.target.value.length == 0) {
+    //         card.focus();
+    //     }
+    //     let regex = /^[0-9]+$/;
+    //     if (!e.target.value.slice(e.target.value.length - 1, e.target.value.length).match(regex) && prevLength != 4 && nextLength != 3)
+    //     {
+    //         e.target.value = e.target.value.slice(0, e.target.value.length - 1);
+    //         return;
+    //     }
+    //     if(e.target.value.length == 2) {
+    //         let month = e.target.value[0] + e.target.value[1];
+    //         if(parseInt(month) > 12){
+    //             e.target.value = 12;
+    //         }
+    //     }
+    //     if(e.target.value.length == 2 && nextLength >= prevLength) {
+    //         e.target.value += "/";
+    //         nextLength++;
+    //     }
+    //     if(prevLength == 3 && nextLength == 2) {
+    //         e.target.value = e.target.value.slice(0, e.target.value.length - 1);
+    //         return;
+    //     }
+    //     if(prevLength == 2 && nextLength == 1 && e.target.value[e.target.value.length - 1] == "/") {
+    //         e.target.value = e.target.value.slice(0, e.target.value.length - 1);
+    //         nextLength = 1;
+    //         return;
+    //     }
+    //     if(e.target.value.length == 6) {
+    //         e.target.value = e.target.value.slice(0, e.target.value.length - 1);
+    //     }
+    // });
 }
 
 // Nav
