@@ -61,12 +61,12 @@
             <div class="calc__block " id="calc__block">
                 <h2>Рассчитать карту</h2>
                 <div class="calc__inputs">
-                    <input type="text" value="Дата рождения" id="birthday">
+                    <input type="text" placeholder="Дата рождения" id="birthday">
                     <div class="birthplace__wrapper">
-                        <input type="text" value="Место рождения" id="birthplace">
+                        <input type="text" placeholder="Место рождения" id="birthplace">
                         <div id="birthplace__autocomplete"></div>
                     </div>
-                    <input type="text" value="Время рождения" id="birthtime">
+                    <input type="text" placeholder="Время рождения" id="birthtime">
                     <div class="select__wrapper">
                         <select id="sex">
                             <option >Женский</option>
@@ -526,5 +526,7 @@
         </div>
     </div>
 </body>
+<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+<script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
 <script src="./js/index.js"></script>
 </html>

@@ -301,82 +301,31 @@ Calc.prototype.init = function() {
     this.drawLayers();
     this.stampsInit();
     this.inputHandler();
-    document.querySelectorAll(".calc__inputs input[type=text]").forEach((inputDom) => {
-        inputDom.addEventListener("click", (e) => {
-            console.log(1);
-            e.target.value = null;
-        }, {once: true})
-    });
     this.inputTimeFormat();
     this.inputDateFormat();
     this.eventButton.addEventListener("click", this.transformLayers.bind(this, 40), {once: true});
 };
 
 Calc.prototype.inputTimeFormat = function() {
-    let prevLength = 0;
-    let currLength = 0;
-    this.birthtimeDom.addEventListener("input", () => {
-        var v = this.birthtimeDom.value;
-        currLength = this.birthtimeDom.value.length;
-        if (v.match(/^\d{2}$/) !== null) {
-            if(currLength > prevLength) {
-                this.birthtimeDom.value = v + ':';
-            }
-            else {
-                this.birthtimeDom.value = this.birthtimeDom.value.substring(0, this.birthtimeDom.value.length - 1);
-                currLength--;
-            }
-        } 
-        else if (!this.birthtimeDom.value.slice(this.birthtimeDom.value.length - 1, this.birthtimeDom.value.length).match(/^[0-9]+$/)) {
-            this.birthtimeDom.value = this.birthtimeDom.value.substring(0, this.birthtimeDom.value.length - 1);
-        }
-        else if(this.birthtimeDom.value.length > 5) {
-            this.birthtimeDom.value = this.birthtimeDom.value.substring(0, this.birthtimeDom.value.length - 1);
-        }
-        prevLength = currLength;
-    })
+    $(this.birthtimeDom).inputmask(
+        "hh:mm", {
+        placeholder: "ЧЧ:ММ", 
+        insertMode: false, 
+        showMaskOnHover: false,
+        hourFormat: "24"
+      }
+    );
 };
 
 Calc.prototype.inputDateFormat = function() {
-    let prevLength = 0;
-    let currLength = 0;
-    this.birthdayDom.addEventListener("input", () => {
-        var v = this.birthdayDom.value;
-        currLength = this.birthdayDom.value.length;
-        if (v.match(/^\d{2}$/) !== null) {
-            if(currLength > prevLength) {
-                this.birthdayDom.value = v + '.';
-            }
-            else {
-                this.birthdayDom.value = this.birthdayDom.value.substring(0, this.birthdayDom.value.length - 1);
-                currLength--;
-            }
-        } 
-        else if (v.match(/^\d{2}\.\d{2}$/) !== null) {
-            if(currLength > prevLength) {
-                this.birthdayDom.value = v + '.';
-            }
-            else {
-                this.birthdayDom.value = this.birthdayDom.value.substring(0, this.birthdayDom.value.length - 1);
-                currLength--;
-            }
-        }
-        else if (v.match(/^\d{2}\.\d{2}\.\d{4}$/) !== null) {
-            this.birthplaceDom.focus();
-            if(this.birthplaceDom.value == "Место рождения")
-                this.birthplaceDom.value = "";
-        }
-        else if (!this.birthdayDom.value.slice(this.birthdayDom.value.length - 1, this.birthdayDom.value.length).match(/^[0-9]+$/)) {
-            this.birthdayDom.value = this.birthdayDom.value.substring(0, this.birthdayDom.value.length - 1);
-        }
-        else if(this.birthdayDom.value.length > 10) {
-            this.birthdayDom.value = this.birthdayDom.value.substring(0, this.birthdayDom.value.length - 1);
-            this.birthplaceDom.focus();
-            if(this.birthplaceDom.value == "Место рождения")
-                this.birthplaceDom.value = "";
-        }
-        prevLength = currLength;
-    })
+    $(this.birthdayDom).inputmask(
+        "dd.mm.yyyy", {
+        inputFormat: "dd.mm.yyyy",
+        placeholder: "ДД.ММ.ГГГГ", 
+        insertMode: false, 
+        showMaskOnHover: false,
+      }
+    );
 };
 
 Calc.prototype.cityAutocompleteAPI2 = function() {
