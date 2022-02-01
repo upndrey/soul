@@ -225,7 +225,7 @@ function Calc(canvasId = "canvas", buttonId = "someButton") {
 }
 
 Calc.prototype.init = function() {
-    this.cityAutocompleteAPI();
+    this.cityAutocompleteAPI2();
     this.setLayer1Params({
         centerX: 100,
         centerY: -100,
@@ -379,7 +379,48 @@ Calc.prototype.inputDateFormat = function() {
     })
 };
 
+Calc.prototype.cityAutocompleteAPI2 = function() {
+    let cityInputDom = document.getElementById("birthplace");
+    let cityAutocompleteDom = document.getElementById("birthplace__autocomplete");
+    let city = [];
+    cityInputDom.addEventListener("input", async () => {
+        let result = await fetch(`http://autocomplete.travelpayouts.com/places2?term=${cityInputDom.value}&locale=ru&types[]=city`)
+        .then(response => response.json())
+        .then((result) => {
+            return result;
+        })
+        .catch((err) => {
+            return err;
+        })
+        city = [];
+        if(!result.error)
+            result.forEach((elem) => {
+                console.log(elem.name);
+                if(elem.name && city.length < 5)
+                    city.push(elem.name);
+            });
+        cityAutocompleteDom.innerHTML = '';
+        if(city.length)
+            cityAutocompleteDom.classList.add("active");
+        else
+            cityAutocompleteDom.classList.remove("active");
+        city.forEach((elem) => {
+            let autocompleteSuggestion = document.createElement("div");
+            autocompleteSuggestion.innerText = elem;
+            autocompleteSuggestion.addEventListener("click", () => {
+                cityInputDom.value = elem;
+                cityAutocompleteDom.classList.remove("active");
+            }, 
+            {
+                once: true
+            });
+            cityAutocompleteDom.appendChild(autocompleteSuggestion);
+        });
+    });
+    
+}
 Calc.prototype.cityAutocompleteAPI = function() {
+    // 
     //434a686dcdfee8a75c60316b3fc6dbf2a124df2d
     var url = "https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address";
     var token = "434a686dcdfee8a75c60316b3fc6dbf2a124df2d";
