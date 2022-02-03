@@ -361,7 +361,7 @@ Calc.prototype.cityAutocompleteAPI2 = function() {
     let cityAutocompleteDom = document.getElementById("birthplace__autocomplete");
     let city = [];
     cityInputDom.addEventListener("input", async () => {
-        let result = await fetch(`http://autocomplete.travelpayouts.com/places2?term=${cityInputDom.value}&locale=ru&types[]=city`)
+        let result = await fetch(`https://autocomplete.travelpayouts.com/places2?term=${cityInputDom.value}&locale=ru&types[]=city`)
         .then(response => response.json())
         .then((result) => {
             return result;
