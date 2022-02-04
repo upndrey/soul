@@ -1020,6 +1020,10 @@ Calc.prototype.ipgeoAPI = function(LangAndPos) {
         (data) => {
             console.log(data);
             return data;
+        },
+        (error) => {
+            console.log(error);
+            return error;
         }
     );
 };
