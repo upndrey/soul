@@ -1032,9 +1032,10 @@ Calc.prototype.astroAPI = async function(ts) {
     let dateArr = ts.converted_time.split(" ");
     let timeArr = dateArr[1].split(":");
     dateArr = dateArr[0].split("-");
-    let dateString = `${dateArr[1]}-${dateArr[2]}-${dateArr[0]} ${timeArr[0]}:${timeArr[1]}`;
-    console.log(dateString);
-    let date = new Date(dateString);
+    let date = new Date();
+    date.setFullYear(dateArr[0], dateArr[1] - 1, dateArr[2]);
+    date.setHours(timeArr[0]);
+    date.setMinutes(timeArr[1]);
     console.log(date);
     return fetch(`https://vibracii-dushi.tmweb.ru/server.php?d=${date.getDate()}&m=${date.getMonth() + 1}&y=${date.getFullYear()}&h=${("0" + date.getHours()).slice(-2)}&mi=${("0" + date.getMinutes()).slice(-2)}`)
     .then(
