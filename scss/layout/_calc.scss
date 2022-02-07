@@ -383,7 +383,7 @@
                     min-width: 200px;
                     width: fit-content;
                     max-width: 300px;
-                    height: 35px;
+                    min-height: 35px;
 
                     @media (max-width: $breakpoint_md) {
                         min-width: 150px;
