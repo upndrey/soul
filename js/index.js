@@ -191,7 +191,139 @@ Nav.prototype.init = function() {
             this.navWrapperDom.classList.remove("scrolled");
         }
     });
+    this.redirect();
 };
+
+Nav.prototype.redirect = function() {
+    let currentActiveLink = ".calcLink";
+  $(".calcLink").click(function(e) {
+    e.preventDefault();
+    if(currentActiveLink && currentActiveLink !== ".calcLink")
+      document.querySelectorAll(currentActiveLink).forEach((elem) => {
+        elem.classList.remove("active");
+      });
+    currentActiveLink = ".calcLink";
+    $(".calcLink").addClass("active");
+    $(".mobileNav__wrapper").addClass("hidden");
+    $(".nav__social .burger").removeClass("active");
+
+    $([document.documentElement, document.body]).animate({
+      scrollTop: $("#calc__wrapper").offset().top - 100
+    }, 2000);
+  });
+
+  $(".aboutLink").click(function(e) {
+    e.preventDefault();
+    if(currentActiveLink && currentActiveLink !== ".aboutLink")
+      document.querySelectorAll(currentActiveLink).forEach((elem) => {
+        elem.classList.remove("active");
+      });
+    currentActiveLink = ".aboutLink";
+    $(".aboutLink").addClass("active");
+    $(".mobileNav__wrapper").addClass("hidden");
+    $(".nav__social .burger").removeClass("active");
+
+    $([document.documentElement, document.body]).animate({
+      scrollTop: $("#details__wrapper").offset().top - 100
+    }, 2000);
+  });
+
+  $(".whyLink").click(function(e) {
+    e.preventDefault();
+    if(currentActiveLink && currentActiveLink !== ".whyLink")
+      document.querySelectorAll(currentActiveLink).forEach((elem) => {
+        elem.classList.remove("active");
+      });
+    currentActiveLink = ".whyLink";
+    $(".whyLink").addClass("active");
+    $(".mobileNav__wrapper").addClass("hidden");
+    $(".nav__social .burger").removeClass("active");
+
+    $([document.documentElement, document.body]).animate({
+      scrollTop: $("#why").offset().top - 100
+    }, 2000);
+  });
+
+  $(".uniqueLink").click(function(e) {
+    e.preventDefault();
+    if(currentActiveLink && currentActiveLink !== ".uniqueLink")
+      document.querySelectorAll(currentActiveLink).forEach((elem) => {
+        elem.classList.remove("active");
+      });
+    currentActiveLink = ".uniqueLink";
+    $(".uniqueLink").addClass("active");
+    $(".mobileNav__wrapper").addClass("hidden");
+    $(".nav__social .burger").removeClass("active");
+
+    mq = window.matchMedia( "(max-width: 1160px)" );
+    if (!mq.matches) {
+        $([document.documentElement, document.body]).animate({
+          scrollTop: $("#unique").offset().top + 100
+        }, 2000);
+    }
+    else {
+        $([document.documentElement, document.body]).animate({
+          scrollTop: $("#unique").offset().top
+        }, 2000);
+    }
+  });
+
+  $(".authorLink").click(function(e) {
+    e.preventDefault();
+    if(currentActiveLink && currentActiveLink !== ".authorLink")
+      document.querySelectorAll(currentActiveLink).forEach((elem) => {
+        elem.classList.remove("active");
+      });
+    currentActiveLink = ".authorLink";
+    $(".authorLink").addClass("active");
+    $(".mobileNav__wrapper").addClass("hidden");
+    $(".nav__social .burger").removeClass("active");
+
+    mq = window.matchMedia( "(max-width: 1160px)" );
+    if (!mq.matches) {
+        $([document.documentElement, document.body]).animate({
+        scrollTop: $("#author").offset().top
+        }, 2000);
+    }
+    else {
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $("#author").offset().top - 100
+            }, 2000);
+    }
+  });
+
+  $(".coursesLink").click(function(e) {
+    e.preventDefault();
+    if(currentActiveLink && currentActiveLink !== ".coursesLink")
+      document.querySelectorAll(currentActiveLink).forEach((elem) => {
+        elem.classList.remove("active");
+      });
+    currentActiveLink = ".coursesLink";
+    $(".coursesLink").addClass("active");
+    $(".mobileNav__wrapper").addClass("hidden");
+    $(".nav__social .burger").removeClass("active");
+
+    $([document.documentElement, document.body]).animate({
+      scrollTop: $("#courses").offset().top - 100
+    }, 2000);
+  });
+
+  $(".questionsLink").click(function(e) {
+    e.preventDefault();
+    if(currentActiveLink && currentActiveLink !== ".questionsLink")
+      document.querySelectorAll(currentActiveLink).forEach((elem) => {
+        elem.classList.remove("active");
+      });
+    currentActiveLink = ".questionsLink";
+    $(".questionsLink").addClass("active");
+    $(".mobileNav__wrapper").addClass("hidden");
+    $(".nav__social .burger").removeClass("active");
+
+    $([document.documentElement, document.body]).animate({
+      scrollTop: $("#questions").offset().top
+    }, 2000);
+  });
+}
 
 // Header
 function Header() {
