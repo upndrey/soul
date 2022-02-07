@@ -97,7 +97,6 @@ Popup.prototype.cardMasks = function() {
         {
             e.target.value = e.target.value.slice(0, e.target.value.length - 1);
         }
-        console.log(e.target.value.length);
         if(e.target.value.length > 16) {
             e.target.value = e.target.value.slice(0, e.target.value.length - 1);
             cardDate.focus();
@@ -360,8 +359,62 @@ Calc.prototype.cityAutocompleteAPI2 = function() {
     let cityInputDom = document.getElementById("birthplace");
     let cityAutocompleteDom = document.getElementById("birthplace__autocomplete");
     let city = [];
+    
+    document.addEventListener("click", this.closeAutocomplete);
     cityInputDom.addEventListener("input", async () => {
-        let result = await fetch(`https://autocomplete.travelpayouts.com/places2?term=${cityInputDom.value}&locale=ru&types[]=city`)
+        // let result = await fetch(`https://autocomplete.travelpayouts.com/places2?term=${cityInputDom.value}&locale=ru&types[]=city`)
+        // .then(response => response.json())
+        // .then((result) => {
+        //     return result;
+        // })
+        // .catch((err) => {
+        //     return err;
+        // })
+        
+        let result = await ymaps.suggest(cityInputDom.value, {
+            results: 5
+        })
+        city = [];
+        if(!result.error)
+            result.forEach((elem) => {
+                if(elem.displayName)
+                    city.push(elem.displayName);
+            });
+        cityAutocompleteDom.innerHTML = '';
+        if(city.length)
+            cityAutocompleteDom.classList.add("active");
+        else
+            cityAutocompleteDom.classList.remove("active");
+        city.forEach((elem) => {
+            let autocompleteSuggestion = document.createElement("div");
+            autocompleteSuggestion.innerText = elem;
+            autocompleteSuggestion.addEventListener("click", () => {
+                cityInputDom.value = elem;
+                cityAutocompleteDom.classList.remove("active");
+            }, 
+            {
+                once: true
+            });
+            cityAutocompleteDom.appendChild(autocompleteSuggestion);
+        });
+    });
+    
+}
+
+Calc.prototype.closeAutocomplete = function(e) {
+    let cityAutocompleteDom = document.getElementById("birthplace__autocomplete");
+    if(cityAutocompleteDom.classList.contains("active") && e.target.id !== "birthplace" && e.target.id !== "birthplace__autocomplete") {
+        cityAutocompleteDom.classList.remove("active");
+    }
+};
+
+
+Calc.prototype.cityAutocompleteAPI = function() {
+    let cityInputDom = document.getElementById("birthplace");
+    let cityAutocompleteDom = document.getElementById("birthplace__autocomplete");
+    let city = [];
+    cityInputDom.addEventListener("input", async () => {
+        let result = await fetch(`https://api.geotree.ru/address.php?term=${cityInputDom.value}:&types=places`)
         .then(response => response.json())
         .then((result) => {
             return result;
@@ -372,7 +425,6 @@ Calc.prototype.cityAutocompleteAPI2 = function() {
         city = [];
         if(!result.error)
             result.forEach((elem) => {
-                console.log(elem.name);
                 if(elem.name && city.length < 5)
                     city.push(elem.name);
             });
@@ -396,68 +448,6 @@ Calc.prototype.cityAutocompleteAPI2 = function() {
     });
     
 }
-Calc.prototype.cityAutocompleteAPI = function() {
-    // 
-    //434a686dcdfee8a75c60316b3fc6dbf2a124df2d
-    var url = "https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address";
-    var token = "434a686dcdfee8a75c60316b3fc6dbf2a124df2d";
-    let cityInputDom = document.getElementById("birthplace");
-    let cityAutocompleteDom = document.getElementById("birthplace__autocomplete");
-    cityInputDom.addEventListener("input", async () => {
-        while(cityAutocompleteDom.firstChild)
-            cityAutocompleteDom.removeChild(cityAutocompleteDom.lastChild);
-        var query = cityInputDom.value;
-    
-        var options = {
-            method: "POST",
-            mode: "cors",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-                "Authorization": "Token " + token
-            },
-            body: JSON.stringify({
-                query: query,
-                count: 5,
-                from_bound: { value: "city" },
-                to_bound: { value: "city" }
-            })
-        }
-    
-        let result = await fetch(url, options)
-        .then(response => response.json())
-        .then((result) => {
-            return result;
-        })
-        .catch((error) => {
-            return error;
-        });
-        console.log(result);
-        let city = [];
-        result.suggestions.forEach((elem) => {
-            if(elem.data.city)
-                city.push(elem.data.city);
-        });
-        console.log(city);
-        
-        if(city.length)
-            cityAutocompleteDom.classList.add("active");
-        else
-            cityAutocompleteDom.classList.remove("active");
-        city.forEach((elem) => {
-            let autocompleteSuggestion = document.createElement("div");
-            autocompleteSuggestion.innerText = elem;
-            autocompleteSuggestion.addEventListener("click", () => {
-                cityInputDom.value = elem;
-                cityAutocompleteDom.classList.remove("active");
-            }, 
-            {
-                once: true
-            });
-            cityAutocompleteDom.appendChild(autocompleteSuggestion);
-        });
-    });
-};
 
 Calc.prototype.inputHandler = function() {
 };
@@ -765,7 +755,6 @@ Calc.prototype.isCorrectInput = function() {
     let dateDom = document.getElementById("birthday");
     let dateRegex = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
     if(!dateDom.value.match(dateRegex)) {
-        console.log("Введите корректную дату");
         alert("Введите корректную дату");
         return false;
     }
@@ -774,7 +763,6 @@ Calc.prototype.isCorrectInput = function() {
         timeDom.value = "00:00";
     let timeRegex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
     if(!timeDom.value.match(timeRegex)) {
-        console.log("Введите корректное время");
         alert("Введите корректное время");
         return false;
     }
@@ -789,7 +777,6 @@ Calc.prototype.isCorrectInput = function() {
 Calc.prototype.API = async function() {
     this.changeDataDom();
     let LangAndPos = await this.yandexGeoAPI();
-    console.log(LangAndPos);
     if(LangAndPos == "0 0") {
         alert(`
         Ваш город рождения не найден
@@ -797,9 +784,7 @@ Calc.prototype.API = async function() {
         return false;
     }
     let ts = await this.ipgeoAPI(LangAndPos.split(" "));
-    console.log(ts);
     let astroResult = await this.astroAPI(ts);
-    console.log(astroResult);
     this.changeStampDom(astroResult);
     return true;
 };
@@ -945,7 +930,6 @@ Calc.prototype.changeStampDom = function(id) {
     document.getElementById("stamp__number").innerHTML = stamp__number;
     document.querySelectorAll(".stamp__hidden").forEach((elem) => {
         elem.addEventListener("click", (e) => {
-            console.log(1);
             e.target.parentNode.classList.add("shown");
         });
     });
@@ -967,7 +951,6 @@ Calc.prototype.yandexGeoAPI = function() {
 }
 
 Calc.prototype.geonamesAPI = function(LangAndPos) {
-    console.log(LangAndPos);
     return fetch(`https://secure.geonames.org/timezoneJSON?lat=${LangAndPos[1]}&lng=${LangAndPos[0]}&username=upndrey`)
     .then(
         (res)=> {
@@ -976,7 +959,6 @@ Calc.prototype.geonamesAPI = function(LangAndPos) {
     )
     .then(
         (data) => {
-            console.log(data);
             return data;
         }
     );
@@ -991,7 +973,6 @@ Calc.prototype.bingAPI = function(LangAndPos) {
     )
     .then(
         (data) => {
-            console.log(data);
             return data.resourceSets[0].resources[0].timeZone;
         }
     );
@@ -1008,8 +989,6 @@ Calc.prototype.ipgeoAPI = function(LangAndPos) {
     const timeArr = time.split(":");
     const hour = timeArr[0];
     const minute = timeArr[1];
-    console.log(hour, minute);
-    console.log(`https://api.ipgeolocation.io/timezone/convert?apiKey=207212f0704e43d480fb5b6625e2f1e8&lang=ru&time=${year}-${month}-${day}%20${hour}:${minute}&lat_from=${LangAndPos[1]}&long_from=${LangAndPos[0]}&lat_to=0&long_to=0`);
     return fetch(`https://api.ipgeolocation.io/timezone/convert?apiKey=207212f0704e43d480fb5b6625e2f1e8&lang=ru&time=${year}-${month}-${day}%20${hour}:${minute}&lat_from=${LangAndPos[1]}&long_from=${LangAndPos[0]}&lat_to=0&long_to=0`)
     .then(
         (res)=> {
@@ -1018,11 +997,9 @@ Calc.prototype.ipgeoAPI = function(LangAndPos) {
     )
     .then(
         (data) => {
-            console.log(data);
             return data;
         },
         (error) => {
-            console.log(error);
             return error;
         }
     );
@@ -1036,17 +1013,14 @@ Calc.prototype.astroAPI = async function(ts) {
     date.setFullYear(dateArr[0], dateArr[1] - 1, dateArr[2]);
     date.setHours(timeArr[0]);
     date.setMinutes(timeArr[1]);
-    console.log(date);
     return fetch(`https://vibracii-dushi.tmweb.ru/server.php?d=${date.getDate()}&m=${date.getMonth() + 1}&y=${date.getFullYear()}&h=${("0" + date.getHours()).slice(-2)}&mi=${("0" + date.getMinutes()).slice(-2)}`)
     .then(
         (res)=> {
-            console.log(res);
             return res.json();
         }
     )
     .then(
         (data) => {
-            console.log(data.D.data.MARS.gate.line);
             return data.D.data.MARS.gate.line;
         }
     );
@@ -1413,7 +1387,6 @@ Details.prototype.init = function() {
             this.video.setAttribute("controls", "controls");
             this.transform(interval);
             this.editDom();
-            console.log(this.video.onpause);
             if(this.video.onpause) {
                 this.video.play();
             }
@@ -1424,7 +1397,6 @@ Details.prototype.init = function() {
             this.video.setAttribute("controls", "controls");
             this.transform(interval);
             this.editDom();
-            console.log(this.video.onpause);
             this.video.play();
             if(this.video.onpause) {
                 this.video.play();
